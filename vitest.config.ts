@@ -5,7 +5,14 @@ export default defineConfig({
     environment: 'node',
     coverage: {
       provider: 'v8',
-      thresholds: { lines: 80 }
+      include: ['src/lib/**/*.ts'],
+      exclude: ['src/env.d.ts'],
+      thresholds: {
+        lines: 80,
+        branches: 80,
+        functions: 80,
+        statements: 80
+      }
     }
   }
 })
