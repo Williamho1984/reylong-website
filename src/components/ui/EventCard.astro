@@ -8,9 +8,11 @@ interface Props {
 
 const { event, lang = 'en' } = Astro.props
 const title = lang === 'es' ? event.title_es : event.title_en
-const startDate = new Date(event.date_start + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-const endDate = new Date(event.date_end + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-const [month, day] = startDate.split(' ')
+const locale = lang === 'es' ? 'es-ES' : 'en-US'
+const startDateDisplay = new Date(event.date_start + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+const endDateDisplay = new Date(event.date_end + 'T00:00:00').toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
+const startDateLocalized = new Date(event.date_start + 'T00:00:00').toLocaleDateString(locale, { month: 'short', day: 'numeric' })
+const [month, day] = startDateDisplay.split(' ')
 ---
 
 <article class="flex gap-4 py-3 border-b border-gray-200 last:border-0">
@@ -22,6 +24,6 @@ const [month, day] = startDate.split(' ')
     <h3 class="font-semibold">{title}</h3>
     <p class="text-sm text-gray-500">{event.location}</p>
     {event.booth_number && <p class="text-sm text-brand-blue">Booth: {event.booth_number}</p>}
-    <p class="text-xs text-gray-400 mt-0.5">{startDate} – {endDate}</p>
+    <p class="text-xs text-gray-400 mt-0.5">{startDateLocalized} – {endDateDisplay}</p>
   </div>
 </article>

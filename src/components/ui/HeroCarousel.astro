@@ -17,7 +17,7 @@ const { slides } = Astro.props
 <section
   aria-label="Featured highlights"
   x-data={`{ current: 0, total: ${slides.length} }`}
-  x-init="setInterval(() => { current = (current + 1) % total }, 5000)"
+  x-init="() => { const id = setInterval(() => { current = (current + 1) % total }, 5000); return () => clearInterval(id) }"
   class="relative overflow-hidden bg-gray-900"
 >
   <div class="relative h-[60vh] md:h-[70vh] min-h-[400px]">
@@ -30,8 +30,8 @@ const { slides } = Astro.props
         x-transition:leave="transition-opacity duration-300"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
+        :aria-hidden={`current !== ${i}`}
         class:list={['absolute inset-0 flex items-center', slide.bgClass]}
-        aria-hidden={i !== 0 ? 'true' : undefined}
       >
         <div class="container-wide text-white">
           <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</h1>

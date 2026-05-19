@@ -8,7 +8,8 @@ interface Props {
 
 const { article, lang = 'en' } = Astro.props
 const title = lang === 'es' ? article.title_es : article.title_en
-const date = new Date(article.published_at).toLocaleDateString('en-US', {
+const locale = lang === 'es' ? 'es-ES' : 'en-US'
+const date = new Date(article.published_at).toLocaleDateString(locale, {
   year: 'numeric', month: 'long', day: 'numeric'
 })
 ---
