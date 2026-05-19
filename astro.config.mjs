@@ -4,6 +4,7 @@ import alpinejs from '@astrojs/alpinejs'
 import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
+  site: 'https://reylong.com',
   output: 'static',
   adapter: cloudflare(),
   integrations: [tailwind(), alpinejs()],

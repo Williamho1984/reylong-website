@@ -15,6 +15,12 @@ const {
   ogImage = '/og-default.jpg'
 } = Astro.props
 
+const resolvedOgImage = ogImage && ogImage.startsWith('http')
+  ? ogImage
+  : Astro.site
+    ? new URL(ogImage ?? '/og-default.jpg', Astro.site).toString()
+    : ogImage ?? '/og-default.jpg'
+
 const fullTitle = title.includes('Reylong') ? title : `${title} | Reylong`
 ---
 
@@ -28,7 +34,7 @@ const fullTitle = title.includes('Reylong') ? title : `${title} | Reylong`
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:image" content={ogImage} />
+<meta property="og:image" content={resolvedOgImage} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />

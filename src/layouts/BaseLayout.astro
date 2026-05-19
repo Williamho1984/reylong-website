@@ -24,8 +24,14 @@ const { title, description, ogImage } = Astro.props
     <slot name="head" />
   </head>
   <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:text-brand-blue focus:px-4 focus:py-2 focus:font-semibold"
+    >
+      Skip to content
+    </a>
     <Header />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer />

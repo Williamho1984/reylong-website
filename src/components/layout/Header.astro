@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-6">
+      <nav aria-label="Main navigation" class="hidden lg:flex items-center gap-6">
         {navLinks.map(link => (
           <a
             href={link.href}
@@ -41,8 +41,10 @@ const currentPath = Astro.url.pathname
 
       <!-- Mobile menu button -->
       <button
-        x-data
-        @click="$dispatch('toggle-menu')"
+        x-data="{ open: false }"
+        @click="open = !open; $dispatch('toggle-menu')"
+        :aria-expanded="open.toString()"
+        aria-controls="mobile-menu"
         class="lg:hidden p-2 text-gray-700"
         aria-label="Toggle menu"
       >
@@ -55,13 +57,14 @@ const currentPath = Astro.url.pathname
 
   <!-- Mobile Nav -->
   <div
+    id="mobile-menu"
     x-data="{ open: false }"
     @toggle-menu.window="open = !open"
     x-show="open"
     x-transition
     class="lg:hidden bg-white border-t border-gray-100"
   >
-    <nav class="container-wide py-4 flex flex-col gap-2">
+    <nav aria-label="Mobile navigation" class="container-wide py-4 flex flex-col gap-2">
       {navLinks.map(link => (
         <a
           href={link.href}

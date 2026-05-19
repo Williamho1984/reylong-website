@@ -7,6 +7,7 @@ export default {
         brand: {
           red: '#E8001C',
           blue: '#0033CC',
+          'blue-light': '#4d88ff',
         }
       },
       fontFamily: {
