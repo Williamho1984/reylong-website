@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import InquiryForm from '../components/ui/InquiryForm.astro'
+---
+
+<BaseLayout
+  title="Contact Us — Reylong"
+  description="Contact Reylong for product inquiries, pricing, technical support, or factory visits. Our team responds within 1 business day."
+>
+  <div class="container-wide py-12">
+    <div class="max-w-3xl">
+      <h1>Get in Touch</h1>
+      <p class="text-gray-600 mt-2 text-lg">
+        Ready to discuss your production needs? Fill in the form and we'll get back to you promptly.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-10">
+      <div class="lg:col-span-2">
+        <InquiryForm />
+      </div>
+
+      <aside aria-label="Contact information">
+        <div class="space-y-6">
+          <div>
+            <h2 class="text-base font-semibold">Response Time</h2>
+            <p class="text-gray-600 text-sm mt-1">Within 1 business day for general inquiries. Technical questions may take 2–3 days.</p>
+          </div>
+          <div>
+            <h2 class="text-base font-semibold">Sales Office</h2>
+            <p class="text-gray-600 text-sm mt-1">Available Monday–Friday, 09:00–18:00 CST.</p>
+          </div>
+          <div>
+            <h2 class="text-base font-semibold">Email</h2>
+            <a href="mailto:info@reylong.com" class="text-brand-blue text-sm hover:underline">info@reylong.com</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

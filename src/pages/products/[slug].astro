@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import ImageGallery from '../../components/ui/ImageGallery.astro'
 import SpecsTable from '../../components/ui/SpecsTable.astro'
 import ProductSchema from '../../components/seo/ProductSchema.astro'
+import InquiryForm from '../../components/ui/InquiryForm.astro'
 import { getAllProductSlugs, getProductBySlug, getProductMedia } from '../../lib/db/products'
 
 export async function getStaticPaths() {
@@ -61,7 +62,7 @@ const pageUrl = Astro.site
         <p class="text-gray-600 mt-4 leading-relaxed">{product.description_en}</p>
 
         <div class="flex flex-wrap gap-3 mt-6">
-          <a href={`/contact?product=${product.slug}`} class="btn-primary">Request a Quote</a>
+          <a href="#inquiry" class="btn-primary">Request a Quote</a>
           <a href="/contact" class="btn-secondary">Contact Us</a>
         </div>
       </div>
@@ -112,13 +113,11 @@ const pageUrl = Astro.site
       </div>
     </section>
 
-    <!-- Inquiry CTA (placeholder — full form added in Task 6) -->
-    <section class="mt-12 bg-gray-50 p-8" aria-label="Request a quote">
+    <!-- Inquiry Form -->
+    <section id="inquiry" class="mt-12 bg-gray-50 p-8" aria-label="Request a quote">
       <h2 class="mb-2">Request a Quote for {product.name_en}</h2>
-      <p class="text-gray-600 mb-6">
-        Fill in the form on our <a href="/contact" class="text-brand-blue hover:underline">contact page</a> and our team will respond within 1 business day.
-      </p>
-      <a href={`/contact?product=${product.slug}`} class="btn-primary">Go to Contact Form</a>
+      <p class="text-gray-600 mb-6">Fill in the form below and our team will respond within 1 business day.</p>
+      <InquiryForm productId={product.id} productName={product.name_en} />
     </section>
   </div>
 </BaseLayout>

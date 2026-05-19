@@ -1,0 +1,186 @@
+---
+interface Props {
+  productId?: string
+  productName?: string
+}
+
+const { productId, productName } = Astro.props
+---
+
+<div
+  x-data={`{
+    form: { name: '', email: '', company: '', country: '', phone: '', message: '' },
+    status: 'idle',
+    errorMsg: '',
+    async submit() {
+      this.status = 'loading'
+      this.errorMsg = ''
+      try {
+        const res = await fetch('/api/inquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...this.form,
+            product_id: ${productId ? `'${productId}'` : 'null'}
+          })
+        })
+        const data = await res.json()
+        if (data.success) {
+          this.status = 'success'
+        } else {
+          this.status = 'error'
+          this.errorMsg = data.error || 'Submission failed. Please try again.'
+        }
+      } catch {
+        this.status = 'error'
+        this.errorMsg = 'Network error. Please check your connection and try again.'
+      }
+    }
+  }`}
+>
+  <!-- Success state -->
+  <div
+    x-show="status === 'success'"
+    x-cloak
+    data-testid="form-success"
+    class="bg-green-50 border border-green-200 p-6 text-center"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="text-green-600 text-4xl mb-3" aria-hidden="true">&#10003;</div>
+    <h3 class="text-green-800 font-semibold text-lg">Message Sent!</h3>
+    <p class="text-green-700 mt-1">Thank you for your inquiry. We'll respond within 1 business day.</p>
+  </div>
+
+  <!-- Error message -->
+  <div
+    x-show="status === 'error'"
+    x-cloak
+    data-testid="form-error"
+    class="bg-red-50 border border-red-200 p-3 mb-4 text-red-700 text-sm"
+    role="alert"
+    aria-live="assertive"
+  >
+    <span x-text="errorMsg"></span>
+  </div>
+
+  <!-- Form -->
+  <form
+    x-show="status !== 'success'"
+    @submit.prevent="submit"
+    class="space-y-4"
+    novalidate
+    aria-label="Inquiry form"
+  >
+    {productName && (
+      <p class="text-sm text-gray-500">
+        Inquiring about: <strong class="text-gray-800">{productName}</strong>
+      </p>
+    )}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-name">
+          Full Name <span class="text-brand-red" aria-label="required">*</span>
+        </label>
+        <input
+          id="inq-name"
+          name="name"
+          type="text"
+          x-model="form.name"
+          required
+          autocomplete="name"
+          class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue"
+          placeholder="John Smith"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-email">
+          Email <span class="text-brand-red" aria-label="required">*</span>
+        </label>
+        <input
+          id="inq-email"
+          name="email"
+          type="email"
+          x-model="form.email"
+          required
+          autocomplete="email"
+          class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue"
+          placeholder="john@company.com"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-company">
+          Company <span class="text-brand-red" aria-label="required">*</span>
+        </label>
+        <input
+          id="inq-company"
+          name="company"
+          type="text"
+          x-model="form.company"
+          required
+          autocomplete="organization"
+          class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue"
+          placeholder="Your Company Name"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-country">
+          Country <span class="text-brand-red" aria-label="required">*</span>
+        </label>
+        <input
+          id="inq-country"
+          name="country"
+          type="text"
+          x-model="form.country"
+          required
+          autocomplete="country-name"
+          class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue"
+          placeholder="United States"
+        />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-phone">
+          Phone (optional)
+        </label>
+        <input
+          id="inq-phone"
+          name="phone"
+          type="tel"
+          x-model="form.phone"
+          autocomplete="tel"
+          class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue"
+          placeholder="+1 555 000 0000"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="inq-message">
+        Message <span class="text-brand-red" aria-label="required">*</span>
+      </label>
+      <textarea
+        id="inq-message"
+        name="message"
+        x-model="form.message"
+        required
+        rows="4"
+        class="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue resize-none"
+        placeholder="Describe what you need — machine type, quantity, application..."
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      :disabled="status === 'loading'"
+      class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <span x-show="status !== 'loading'">Send Inquiry</span>
+      <span x-show="status === 'loading'" x-cloak>Sending&#8230;</span>
+    </button>
+  </form>
+</div>
