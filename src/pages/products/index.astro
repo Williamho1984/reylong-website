@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ProductCard from '../../components/ui/ProductCard.astro'
+import { getAllProducts } from '../../lib/db/products'
+
+const products = await getAllProducts().catch(() => [])
+const categories = [...new Set(products.map(p => p.category))]
+---
+
+<BaseLayout
+  title="Products — Reylong Woven Bag Machines"
+  description="Browse Reylong's full range of woven bag machines including circular looms, tape stretching lines, and complete production systems."
+>
+  <div class="container-wide py-12">
+    <h1>Our Products</h1>
+    <p class="text-gray-600 mt-2 text-lg">Industrial woven bag machinery engineered for performance.</p>
+
+    {categories.map(category => {
+      const categoryProducts = products.filter(p => p.category === category)
+      return (
+        <section class="mt-12" id={category} aria-label={category.replace(/-/g, ' ')}>
+          <h2 class="capitalize border-b-2 border-brand-red pb-2 inline-block">
+            {category.replace(/-/g, ' ')}
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {categoryProducts.map(product => (
+              <ProductCard product={product} lang="en" />
+            ))}
+          </div>
+        </section>
+      )
+    })}
+
+    {products.length === 0 && (
+      <p class="text-gray-500 mt-12 text-center">Products coming soon.</p>
+    )}
+  </div>
+</BaseLayout>

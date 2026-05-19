@@ -1,0 +1,30 @@
+---
+interface Props {
+  specs: Record<string, string>
+}
+
+const { specs } = Astro.props
+const entries = Object.entries(specs)
+---
+
+{entries.length > 0 && (
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm border-collapse">
+      <caption class="sr-only">Technical specifications</caption>
+      <thead>
+        <tr class="bg-gray-800 text-white">
+          <th scope="col" class="text-left px-4 py-2 font-semibold">Specification</th>
+          <th scope="col" class="text-left px-4 py-2 font-semibold">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {entries.map(([key, value], i) => (
+          <tr class:list={['border-b border-gray-200', i % 2 === 1 ? 'bg-gray-50' : 'bg-white']}>
+            <th scope="row" class="px-4 py-2 font-medium capitalize text-left">{key.replace(/_/g, ' ')}</th>
+            <td class="px-4 py-2 text-gray-700">{value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}

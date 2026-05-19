@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ImageGallery from '../../components/ui/ImageGallery.astro'
+import SpecsTable from '../../components/ui/SpecsTable.astro'
+import ProductSchema from '../../components/seo/ProductSchema.astro'
+import { getAllProductSlugs, getProductBySlug, getProductMedia } from '../../lib/db/products'
+
+export async function getStaticPaths() {
+  const slugs = await getAllProductSlugs().catch(() => [])
+  return slugs.map(slug => ({ params: { slug } }))
+}
+
+const { slug } = Astro.params
+const product = await getProductBySlug(slug)
+if (!product) return Astro.redirect('/products')
+
+const media = await getProductMedia(product.id).catch(() => [])
+const mainImageUrl = media.find(m => m.type === 'image')?.url
+const pageUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : `https://reylong.com${Astro.url.pathname}`
+---
+
+<BaseLayout
+  title={`${product.name_en} — Reylong`}
+  description={product.description_en}
+  ogImage={mainImageUrl}
+>
+  <Fragment slot="head">
+    <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} />
+  </Fragment>
+
+  <div class="container-wide py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-brand-blue">Home</a></li>
+        <li aria-hidden="true">›</li>
+        <li><a href="/products" class="hover:text-brand-blue">Products</a></li>
+        <li aria-hidden="true">›</li>
+        <li aria-current="page" class="text-gray-800">{product.name_en}</li>
+      </ol>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Media Gallery -->
+      <div>
+        <ImageGallery media={media} productName={product.name_en} />
+      </div>
+
+      <!-- Product Info -->
+      <div>
+        <p class="text-sm text-gray-500 uppercase tracking-wide mb-1 capitalize">
+          {product.category.replace(/-/g, ' ')}
+        </p>
+        <h1>{product.name_en}</h1>
+        <p class="text-gray-600 mt-4 leading-relaxed">{product.description_en}</p>
+
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a href="#inquiry" class="btn-primary">Request a Quote</a>
+          <a href="/contact" class="btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Specs -->
+    {Object.keys(product.specs ?? {}).length > 0 && (
+      <section class="mt-12" aria-label="Technical specifications">
+        <h2 class="mb-4">Technical Specifications</h2>
+        <SpecsTable specs={product.specs} />
+      </section>
+    )}
+
+    <!-- FAQ Section (AEO) -->
+    <section class="mt-12" aria-label="Frequently asked questions">
+      <h2 class="mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <details class="border border-gray-200 p-4 group">
+          <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+            What materials can the {product.name_en} process?
+            <span class="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+          </summary>
+          <p class="mt-3 text-gray-600">
+            The {product.name_en} is designed for processing polypropylene (PP) and polyethylene (PE) materials,
+            which are standard in woven bag production. Please contact us for specific material requirements.
+          </p>
+        </details>
+        <details class="border border-gray-200 p-4 group">
+          <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+            What after-sales support does Reylong provide?
+            <span class="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+          </summary>
+          <p class="mt-3 text-gray-600">
+            Reylong provides full technical documentation, remote support, and on-site installation assistance.
+            Spare parts are available globally with fast delivery.
+          </p>
+        </details>
+        <details class="border border-gray-200 p-4 group">
+          <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+            Can machines be customized for specific production requirements?
+            <span class="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+          </summary>
+          <p class="mt-3 text-gray-600">
+            Yes, Reylong offers customization options for most machine models. Contact our engineering team
+            with your specific requirements for a customized solution.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Inquiry CTA (placeholder — full form added in Task 6) -->
+    <section id="inquiry" class="mt-12 bg-gray-50 p-8" aria-label="Request a quote">
+      <h2 class="mb-2">Request a Quote for {product.name_en}</h2>
+      <p class="text-gray-600 mb-6">
+        Fill in the form on our <a href="/contact" class="text-brand-blue hover:underline">contact page</a> and our team will respond within 1 business day.
+      </p>
+      <a href={`/contact?product=${product.slug}`} class="btn-primary">Go to Contact Form</a>
+    </section>
+  </div>
+</BaseLayout>

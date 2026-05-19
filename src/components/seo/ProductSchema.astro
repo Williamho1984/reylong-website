@@ -1,0 +1,36 @@
+---
+import type { Product } from '../../lib/db/products'
+
+interface Props {
+  product: Product
+  imageUrl?: string
+  pageUrl: string
+}
+
+const { product, imageUrl, pageUrl } = Astro.props
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name_en,
+  description: product.description_en,
+  url: pageUrl,
+  brand: {
+    '@type': 'Brand',
+    name: 'Reylong'
+  },
+  manufacturer: {
+    '@type': 'Organization',
+    name: 'Reylong Machinery Co., Ltd.',
+    url: 'https://reylong.com'
+  },
+  ...(imageUrl ? { image: imageUrl } : {}),
+  additionalProperty: Object.entries(product.specs ?? {}).map(([name, value]) => ({
+    '@type': 'PropertyValue',
+    name,
+    value
+  }))
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
