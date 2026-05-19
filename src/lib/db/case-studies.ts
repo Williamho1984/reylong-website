@@ -39,7 +39,10 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
     .select('*')
     .eq('slug', slug)
     .single()
-  if (error) return null
+  if (error) {
+    if (error.code === 'PGRST116') return null
+    throw new Error(`Failed to fetch case study: ${error.message}`)
+  }
   return data
 }
 

@@ -6,7 +6,8 @@ vi.mock('../../src/lib/supabase', () => ({
   }
 }))
 
-import { inquirySchema } from '../../src/lib/db/inquiries'
+import { supabase } from '../../src/lib/supabase'
+import { inquirySchema, createInquiry } from '../../src/lib/db/inquiries'
 
 describe('inquirySchema', () => {
   it('validates a complete valid inquiry', () => {
@@ -53,5 +54,45 @@ describe('inquirySchema', () => {
       message: 'We need 5 machines for our new factory.'
     }
     expect(() => inquirySchema.parse(input)).not.toThrow()
+  })
+})
+
+describe('createInquiry', () => {
+  it('inserts inquiry with status new', async () => {
+    const mockChain = {
+      insert: vi.fn().mockResolvedValue({ error: null })
+    }
+    vi.mocked(supabase.from).mockReturnValue(mockChain as never)
+
+    await expect(createInquiry({
+      name: 'Test User',
+      email: 'test@example.com',
+      company: 'Test Corp',
+      country: 'USA',
+      phone: '',
+      product_id: null,
+      message: 'This is a test inquiry message.'
+    })).resolves.toBeUndefined()
+
+    expect(mockChain.insert).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'new' })
+    )
+  })
+
+  it('throws when DB insert fails', async () => {
+    const mockChain = {
+      insert: vi.fn().mockResolvedValue({ error: { message: 'Insert failed' } })
+    }
+    vi.mocked(supabase.from).mockReturnValue(mockChain as never)
+
+    await expect(createInquiry({
+      name: 'Test User',
+      email: 'test@example.com',
+      company: 'Test Corp',
+      country: 'USA',
+      phone: '',
+      product_id: null,
+      message: 'This is a test inquiry message.'
+    })).rejects.toThrow('Failed to submit inquiry: Insert failed')
   })
 })

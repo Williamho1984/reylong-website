@@ -51,7 +51,10 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     .select('*')
     .eq('slug', slug)
     .single()
-  if (error) return null
+  if (error) {
+    if (error.code === 'PGRST116') return null
+    throw new Error(`Failed to fetch product: ${error.message}`)
+  }
   return data
 }
 
@@ -61,7 +64,10 @@ export async function getProductById(id: string): Promise<Product | null> {
     .select('*')
     .eq('id', id)
     .single()
-  if (error) return null
+  if (error) {
+    if (error.code === 'PGRST116') return null
+    throw new Error(`Failed to fetch product: ${error.message}`)
+  }
   return data
 }
 
