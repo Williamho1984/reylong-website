@@ -12,16 +12,26 @@ const videos = media.filter(m => m.type === 'video')
 const pdfs = media.filter(m => m.type === 'catalog_pdf')
 
 function getEmbedUrl(url: string): string {
-  if (url.includes('youtube.com/watch')) {
-    return url.replace('watch?v=', 'embed/')
-  }
-  if (url.includes('youtu.be/')) {
-    const id = url.split('youtu.be/')[1]?.split('?')[0]
-    return `https://www.youtube.com/embed/${id}`
+  if (url.includes('youtube.com/watch') || url.includes('youtu.be/')) {
+    try {
+      const parsed = new URL(url)
+      const id = url.includes('youtu.be/')
+        ? parsed.pathname.slice(1).split('/')[0]
+        : parsed.searchParams.get('v')
+      if (id) return `https://www.youtube.com/embed/${id}`
+    } catch {}
   }
   if (url.includes('vimeo.com/')) {
-    const id = url.split('vimeo.com/')[1]?.split('?')[0]
-    return `https://player.vimeo.com/video/${id}`
+    try {
+      const parsed = new URL(url)
+      const parts = parsed.pathname.split('/').filter(Boolean)
+      const numericId = parts.find(p => /^\d+$/.test(p))
+      if (numericId) {
+        const hash = parts[parts.indexOf(numericId) + 1]
+        const embedUrl = `https://player.vimeo.com/video/${numericId}`
+        return hash && /^[a-f0-9]+$/.test(hash) ? `${embedUrl}?h=${hash}` : embedUrl
+      }
+    } catch {}
   }
   return url
 }
@@ -49,20 +59,21 @@ function getEmbedUrl(url: string): string {
 
   <!-- Thumbnails -->
   {images.length > 1 && (
-    <div class="flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Product image thumbnails">
+    <ul class="flex gap-2 overflow-x-auto pb-2 list-none" aria-label="Product image thumbnails">
       {images.map((img, i) => (
-        <button
-          role="listitem"
-          @click={`activeImage = ${i}`}
-          :aria-pressed={`activeImage === ${i}`}
-          :aria-label="`View image ${i + 1}: ${img.caption_en || productName}`"
-          class="flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
-          :class={`activeImage === ${i} ? 'border-brand-blue' : 'border-gray-200'`}
-        >
-          <img src={img.url} alt="" class="w-full h-full object-cover" />
-        </button>
+        <li>
+          <button
+            @click={`activeImage = ${i}`}
+            :aria-pressed={`activeImage === ${i}`}
+            :aria-label={`'View image ${i + 1}'`}
+            class="flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+            :class={`activeImage === ${i} ? 'border-brand-blue' : 'border-gray-200'`}
+          >
+            <img src={img.url} alt="" class="w-full h-full object-cover" />
+          </button>
+        </li>
       ))}
-    </div>
+    </ul>
   )}
 
   <!-- Videos -->
