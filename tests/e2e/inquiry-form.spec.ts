@@ -15,7 +15,7 @@ test.describe('Inquiry Form', () => {
     await expect(page.locator('[data-testid="form-success"]')).toBeVisible({ timeout: 10000 })
   })
 
-  test('shows error state for invalid email', async ({ page }) => {
+  test('shows validation error for invalid email', async ({ page }) => {
     await page.goto('/contact')
 
     await page.fill('[name="name"]', 'Test User')
