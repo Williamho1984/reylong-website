@@ -14,9 +14,8 @@ export const inquirySchema = z.object({
 export type InquiryInput = z.infer<typeof inquirySchema>
 
 export async function createInquiry(input: InquiryInput): Promise<void> {
-  const validated = inquirySchema.parse(input)
   const { error } = await supabase.from('inquiries').insert({
-    ...validated,
+    ...input,
     status: 'new'
   })
   if (error) throw new Error(`Failed to submit inquiry: ${error.message}`)

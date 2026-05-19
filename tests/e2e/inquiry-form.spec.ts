@@ -2,6 +2,14 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Inquiry Form', () => {
   test('submits successfully with valid data', async ({ page }) => {
+    await page.route('/api/inquiries', route =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true })
+      })
+    )
+
     await page.goto('/contact')
 
     await page.fill('[name="name"]', 'Carlos Mendez')
