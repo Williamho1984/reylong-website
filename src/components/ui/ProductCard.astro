@@ -1,0 +1,32 @@
+---
+import type { Product } from '../../lib/db/products'
+
+interface Props {
+  product: Product
+  lang?: 'en' | 'es'
+}
+
+const { product, lang = 'en' } = Astro.props
+const name = lang === 'es' ? product.name_es : product.name_en
+const description = lang === 'es' ? product.description_es : product.description_en
+---
+
+<article class="bg-white border border-gray-200 hover:border-brand-blue transition-colors group">
+  <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
+    <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+      Product Image
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-semibold text-lg group-hover:text-brand-blue transition-colors line-clamp-2">
+      {name}
+    </h3>
+    <p class="text-gray-600 text-sm mt-2 line-clamp-3">{description}</p>
+    <a
+      href={`/products/${product.slug}`}
+      class="inline-block mt-4 text-brand-blue text-sm font-medium hover:underline"
+    >
+      Learn More →
+    </a>
+  </div>
+</article>

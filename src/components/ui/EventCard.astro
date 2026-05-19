@@ -1,0 +1,27 @@
+---
+import type { Event } from '../../lib/db/events'
+
+interface Props {
+  event: Event
+  lang?: 'en' | 'es'
+}
+
+const { event, lang = 'en' } = Astro.props
+const title = lang === 'es' ? event.title_es : event.title_en
+const startDate = new Date(event.date_start + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+const endDate = new Date(event.date_end + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+const [month, day] = startDate.split(' ')
+---
+
+<article class="flex gap-4 py-3 border-b border-gray-200 last:border-0">
+  <div class="text-center min-w-[50px] shrink-0">
+    <div class="text-brand-red font-bold text-xs uppercase">{month}</div>
+    <div class="text-2xl font-bold leading-none">{day}</div>
+  </div>
+  <div>
+    <h3 class="font-semibold">{title}</h3>
+    <p class="text-sm text-gray-500">{event.location}</p>
+    {event.booth_number && <p class="text-sm text-brand-blue">Booth: {event.booth_number}</p>}
+    <p class="text-xs text-gray-400 mt-0.5">{startDate} – {endDate}</p>
+  </div>
+</article>

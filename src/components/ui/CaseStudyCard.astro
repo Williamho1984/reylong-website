@@ -1,0 +1,25 @@
+---
+import type { CaseStudy } from '../../lib/db/case-studies'
+
+interface Props {
+  caseStudy: CaseStudy
+  lang?: 'en' | 'es'
+}
+
+const { caseStudy, lang = 'en' } = Astro.props
+const title = lang === 'es' ? caseStudy.title_es : caseStudy.title_en
+---
+
+<article class="bg-white border border-gray-200 p-4 hover:border-brand-blue transition-colors">
+  <div class="flex items-start gap-3">
+    <div class="shrink-0 w-8 h-8 bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-sm rounded">
+      CS
+    </div>
+    <div>
+      <h3 class="font-semibold hover:text-brand-blue transition-colors">
+        <a href={`/case-studies/${caseStudy.slug}`}>{title}</a>
+      </h3>
+      <p class="text-sm text-gray-500 mt-1">{caseStudy.client} · {caseStudy.country}</p>
+    </div>
+  </div>
+</article>
