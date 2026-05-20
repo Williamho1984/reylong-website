@@ -1,0 +1,42 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EventCard from '../../components/ui/EventCard.astro'
+import { getAllEvents } from '../../lib/db/events'
+
+const events = await getAllEvents().catch((err) => { console.error('Failed to fetch events:', err); return [] })
+const today = new Date().toISOString().split('T')[0]
+const upcoming = events.filter(e => e.date_end >= today)
+const past = events.filter(e => e.date_end < today)
+---
+
+<BaseLayout
+  title="Events & Exhibitions — Reylong"
+  description="Meet Reylong at international trade shows and exhibitions. See our latest machines live."
+>
+  <div class="container-wide py-12">
+    <h1>Events & Exhibitions</h1>
+    <p class="text-gray-600 mt-2">Find us at international trade shows around the world.</p>
+
+    {upcoming.length > 0 && (
+      <section class="mt-10">
+        <h2 class="text-xl font-bold border-b pb-2 mb-4">Upcoming</h2>
+        <div class="max-w-xl">
+          {upcoming.map(event => <EventCard event={event} lang="en" />)}
+        </div>
+      </section>
+    )}
+
+    {past.length > 0 && (
+      <section class="mt-10">
+        <h2 class="text-xl font-bold border-b pb-2 mb-4 text-gray-500">Past Events</h2>
+        <div class="max-w-xl opacity-60">
+          {past.map(event => <EventCard event={event} lang="en" />)}
+        </div>
+      </section>
+    )}
+
+    {events.length === 0 && <p class="text-gray-500 mt-8">No events scheduled.</p>}
+  </div>
+</BaseLayout>
