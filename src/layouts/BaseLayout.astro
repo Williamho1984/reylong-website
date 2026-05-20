@@ -8,13 +8,14 @@ interface Props {
   title: string
   description: string
   ogImage?: string
+  lang?: 'en' | 'es'
 }
 
-const { title, description, ogImage } = Astro.props
+const { title, description, ogImage, lang = 'en' } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <SEOHead title={title} description={description} ogImage={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

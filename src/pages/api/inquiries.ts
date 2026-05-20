@@ -5,8 +5,17 @@ import { createInquiry, inquirySchema } from '../../lib/db/inquiries'
 import { ZodError } from 'zod'
 
 export const POST: APIRoute = async ({ request }) => {
+  let body: unknown
   try {
-    const body = await request.json()
+    body = await request.json()
+  } catch {
+    return new Response(
+      JSON.stringify({ success: false, error: 'Invalid request body.' }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
+
+  try {
     const validated = inquirySchema.parse(body)
     await createInquiry(validated)
     return new Response(JSON.stringify({ success: true }), {

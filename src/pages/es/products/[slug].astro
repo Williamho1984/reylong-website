@@ -18,7 +18,7 @@ if (!slug) return Astro.redirect('/es/products')
 const product = await getProductBySlug(slug)
 if (!product) return Astro.redirect('/es/products')
 
-const media = await getProductMedia(product.id)
+const media = await getProductMedia(product.id).catch(() => [])
 const mainImageUrl = media.find(m => m.type === 'image')?.url
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString()
 ---
@@ -27,6 +27,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString()
   title={`${product.name_es} — Reylong`}
   description={product.description_es}
   ogImage={mainImageUrl}
+  lang="es"
 >
   <Fragment slot="head">
     <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} />

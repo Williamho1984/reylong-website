@@ -4,23 +4,18 @@ export const prerender = true
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import ProductCard from '../../components/ui/ProductCard.astro'
 import { getFeaturedProducts } from '../../lib/db/products'
-import { getLatestNews } from '../../lib/db/news'
-import { getUpcomingEvents } from '../../lib/db/events'
 import { t } from '../../lib/i18n/utils'
 
 const lang = 'es'
 const tr = t(lang)
 
-const [featuredProducts] = await Promise.all([
-  getFeaturedProducts().catch(() => []),
-  getLatestNews(3).catch(() => []),
-  getUpcomingEvents().catch(() => [])
-])
+const featuredProducts = await getFeaturedProducts().catch(() => [])
 ---
 
 <BaseLayout
   title="Reylong — Fabricante de Máquinas para Sacos Tejidos"
   description="Reylong fabrica máquinas circulares de alta velocidad y equipos completos para producción de sacos tejidos PP/PE."
+  lang="es"
 >
   <div class="container-wide py-12">
     <h1>{tr.home.heroTitle}</h1>
