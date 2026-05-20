@@ -1,0 +1,23 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ProductCard from '../../../components/ui/ProductCard.astro'
+import { getAllProducts } from '../../../lib/db/products'
+
+const products = await getAllProducts().catch(() => [])
+---
+
+<BaseLayout
+  title="Productos — Reylong"
+  description="Catálogo completo de máquinas Reylong para sacos tejidos: telares circulares, líneas de cinta y más."
+>
+  <div class="container-wide py-12">
+    <h1>Nuestros Productos</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {products.map(product => (
+        <ProductCard product={product} lang="es" />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

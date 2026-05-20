@@ -1,0 +1,57 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ImageGallery from '../../../components/ui/ImageGallery.astro'
+import SpecsTable from '../../../components/ui/SpecsTable.astro'
+import ProductSchema from '../../../components/seo/ProductSchema.astro'
+import InquiryForm from '../../../components/ui/InquiryForm.astro'
+import { getAllProductSlugs, getProductBySlug, getProductMedia } from '../../../lib/db/products'
+
+export async function getStaticPaths() {
+  const slugs = await getAllProductSlugs().catch((err) => { console.error('Failed to fetch product slugs for ES:', err); return [] })
+  return slugs.map(slug => ({ params: { slug } }))
+}
+
+const { slug } = Astro.params
+if (!slug) return Astro.redirect('/es/products')
+const product = await getProductBySlug(slug)
+if (!product) return Astro.redirect('/es/products')
+
+const media = await getProductMedia(product.id)
+const mainImageUrl = media.find(m => m.type === 'image')?.url
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString()
+---
+
+<BaseLayout
+  title={`${product.name_es} — Reylong`}
+  description={product.description_es}
+  ogImage={mainImageUrl}
+>
+  <Fragment slot="head">
+    <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} />
+  </Fragment>
+
+  <div class="container-wide py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <ImageGallery media={media} productName={product.name_es} />
+      <div>
+        <h1>{product.name_es}</h1>
+        <p class="text-gray-600 mt-4 leading-relaxed">{product.description_es}</p>
+        <a href="#inquiry" class="btn-primary mt-6 inline-block">Solicitar Cotización</a>
+      </div>
+    </div>
+
+    {Object.keys(product.specs ?? {}).length > 0 && (
+      <section class="mt-12">
+        <h2 class="mb-4">Especificaciones Técnicas</h2>
+        <SpecsTable specs={product.specs} />
+      </section>
+    )}
+
+    <section id="inquiry" class="mt-12 bg-gray-50 p-8">
+      <h2 class="mb-6">Solicitar Cotización — {product.name_es}</h2>
+      <InquiryForm productId={product.id} productName={product.name_es} />
+    </section>
+  </div>
+</BaseLayout>
