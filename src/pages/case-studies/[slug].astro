@@ -1,0 +1,66 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getAllCaseStudySlugs, getCaseStudyBySlug } from '../../lib/db/case-studies'
+import { getProductById } from '../../lib/db/products'
+
+export async function getStaticPaths() {
+  const slugs = await getAllCaseStudySlugs().catch((err) => { console.error('Failed to fetch case study slugs:', err); return [] })
+  return slugs.map(slug => ({ params: { slug } }))
+}
+
+const { slug } = Astro.params
+if (!slug) return Astro.redirect('/case-studies')
+const caseStudy = await getCaseStudyBySlug(slug)
+if (!caseStudy) return Astro.redirect('/case-studies')
+
+const relatedProduct = caseStudy.product_id ? await getProductById(caseStudy.product_id) : null
+
+const date = new Date(caseStudy.published_at).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric'
+})
+---
+
+<BaseLayout title={`${caseStudy.title_en} — Reylong`} description={caseStudy.title_en}>
+  <article class="container-wide py-12 max-w-3xl">
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
+      <a href="/" class="hover:text-brand-blue">Home</a>
+      <span class="mx-2" aria-hidden="true">›</span>
+      <a href="/case-studies" class="hover:text-brand-blue">Case Studies</a>
+      <span class="mx-2" aria-hidden="true">›</span>
+      <span class="text-gray-800">{caseStudy.title_en}</span>
+    </nav>
+
+    <div class="flex flex-wrap gap-4 text-sm text-gray-500 mb-2">
+      <span>Client: <strong class="text-gray-800">{caseStudy.client}</strong></span>
+      <span aria-hidden="true">·</span>
+      <span>{caseStudy.country}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime={caseStudy.published_at}>{date}</time>
+    </div>
+
+    <h1>{caseStudy.title_en}</h1>
+
+    {caseStudy.cover_image_url && (
+      <img
+        src={caseStudy.cover_image_url}
+        alt={caseStudy.title_en}
+        class="w-full aspect-video object-cover mt-6"
+      />
+    )}
+
+    <div class="prose prose-gray max-w-none mt-8" set:html={caseStudy.content_en} />
+
+    {relatedProduct && (
+      <div class="mt-8 p-6 bg-gray-50 border border-gray-200">
+        <p class="text-sm text-gray-600">
+          Machine used in this project:
+          <a href={`/products/${relatedProduct.slug}`} class="text-brand-blue hover:underline ml-1">
+            {relatedProduct.name_en} →
+          </a>
+        </p>
+      </div>
+    )}
+  </article>
+</BaseLayout>

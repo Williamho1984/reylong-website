@@ -1,0 +1,26 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import CaseStudyCard from '../../components/ui/CaseStudyCard.astro'
+import { getAllCaseStudies } from '../../lib/db/case-studies'
+
+const caseStudies = await getAllCaseStudies().catch((err) => { console.error('Failed to fetch case studies:', err); return [] })
+---
+
+<BaseLayout
+  title="Case Studies — Reylong"
+  description="See how Reylong machines power woven bag factories around the world. Real implementations, real results."
+>
+  <div class="container-wide py-12">
+    <h1>Case Studies</h1>
+    <p class="text-gray-600 mt-2">Real-world implementations from our global client base.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {caseStudies.map(cs => <CaseStudyCard caseStudy={cs} lang="en" />)}
+      {caseStudies.length === 0 && (
+        <p class="text-gray-500 col-span-3">No case studies yet.</p>
+      )}
+    </div>
+  </div>
+</BaseLayout>
