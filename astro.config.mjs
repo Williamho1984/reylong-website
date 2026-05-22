@@ -5,7 +5,7 @@ import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   site: 'https://reylong.com',
-  output: 'static',
+  output: 'server',
   adapter: cloudflare(),
   integrations: [tailwind(), alpinejs()],
   i18n: {

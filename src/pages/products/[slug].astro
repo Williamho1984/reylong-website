@@ -1,20 +1,10 @@
 ---
-export const prerender = true
-
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import ImageGallery from '../../components/ui/ImageGallery.astro'
 import SpecsTable from '../../components/ui/SpecsTable.astro'
 import ProductSchema from '../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../components/ui/InquiryForm.astro'
-import { getAllProductSlugs, getProductBySlug, getProductMedia } from '../../lib/db/products'
-
-export async function getStaticPaths() {
-  const slugs = await getAllProductSlugs().catch((err: Error) => {
-    console.error('[products/getStaticPaths] Failed to fetch slugs:', err.message)
-    return []
-  })
-  return slugs.map(slug => ({ params: { slug } }))
-}
+import { getProductBySlug, getProductMedia } from '../../lib/db/products'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/products')

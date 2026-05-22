@@ -1,13 +1,6 @@
 ---
-export const prerender = true
-
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getAllNewsSlugs, getNewsBySlug } from '../../lib/db/news'
-
-export async function getStaticPaths() {
-  const slugs = await getAllNewsSlugs().catch((err) => { console.error('Failed to fetch news slugs:', err); return [] })
-  return slugs.map(slug => ({ params: { slug } }))
-}
+import { getNewsBySlug } from '../../lib/db/news'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/news')

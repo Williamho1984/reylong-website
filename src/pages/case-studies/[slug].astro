@@ -1,14 +1,7 @@
 ---
-export const prerender = true
-
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getAllCaseStudySlugs, getCaseStudyBySlug } from '../../lib/db/case-studies'
+import { getCaseStudyBySlug } from '../../lib/db/case-studies'
 import { getProductById } from '../../lib/db/products'
-
-export async function getStaticPaths() {
-  const slugs = await getAllCaseStudySlugs().catch((err) => { console.error('Failed to fetch case study slugs:', err); return [] })
-  return slugs.map(slug => ({ params: { slug } }))
-}
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/case-studies')
