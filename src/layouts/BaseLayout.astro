@@ -23,6 +23,31 @@ const { title, description, ogImage, lang = 'en' } = Astro.props
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <slot name="head" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Reylong Machinery Co., Ltd.",
+      "alternateName": ["REY LONG MACHINERY INDUSTRIAL CO., LTD.", "瑞隆機械工業股份有限公司"],
+      "url": "https://www.reylong.com",
+      "logo": "https://www.reylong.com/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+886-5-5511888",
+        "contactType": "sales",
+        "availableLanguage": ["English", "Chinese"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No. 3 Chu-Wei Road, Shi-Chou Li",
+        "addressLocality": "Dou-Liu City",
+        "addressRegion": "Yunlin County",
+        "addressCountry": "TW"
+      },
+      "email": "t6960638@ms45.hinet.net",
+      "telephone": "+886-5-5511888",
+      "foundingLocation": "Taiwan",
+      "knowsAbout": ["plastic machinery", "woven bag machines", "flexographic printing machines", "packaging machinery"]
+    })} />
   </head>
   <body>
     <a

@@ -1,0 +1,35 @@
+# Reylong Machinery Co., Ltd.
+# REY LONG MACHINERY INDUSTRIAL CO., LTD.
+# 瑞隆機械工業股份有限公司
+
+## About
+Reylong Machinery is a Taiwan-based manufacturer specializing in plastic and packaging machinery, including woven bag making machines, flexographic printing machines, and related industrial equipment. Founded and headquartered in Dou-Liu City, Yunlin County, Taiwan.
+
+## Products
+Reylong manufactures industrial machinery for the plastic woven bag and packaging industry:
+- Flexographic printing machines (roll-to-roll, multi-color)
+- Woven bag making machines
+- Lamination machines
+- Cutting and sewing machines
+- Circular looms and related equipment
+
+All machines are designed for high-speed, continuous production in B2B industrial environments.
+
+## Contact
+- Website: https://www.reylong.com
+- Email: t6960638@ms45.hinet.net
+- Phone: +886-5-5511888 / +886-5-5517111
+- Fax: +886-5-5518969
+- Address: No. 3 Chu-Wei Road, Shi-Chou Li, Dou-Liu City, Yunlin County, Taiwan R.O.C.
+
+## Language
+This website is available in English (default) and Spanish (es).
+
+## Pages
+- / : Homepage with featured products and company overview
+- /products : Full product catalog
+- /products/[slug] : Individual product detail pages with specifications
+- /about : Company history and manufacturing capabilities
+- /contact : Inquiry form and contact information
+- /news : Industry news and company announcements
+- /case-studies : Customer case studies by region
