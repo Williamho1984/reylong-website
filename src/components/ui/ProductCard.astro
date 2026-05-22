@@ -15,9 +15,18 @@ const learnMoreLabel = lang === 'es' ? 'Más Información' : 'Learn More'
 
 <article class="bg-white border border-gray-200 hover:border-brand-blue transition-colors group">
   <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
-    <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm" aria-hidden="true">
-      Product Image
-    </div>
+    {product.cover_image_url ? (
+      <img
+        src={product.cover_image_url}
+        alt={name}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm" aria-hidden="true">
+        Product Image
+      </div>
+    )}
   </div>
   <div class="p-4">
     <h3 class="font-semibold text-lg group-hover:text-brand-blue transition-colors line-clamp-2">

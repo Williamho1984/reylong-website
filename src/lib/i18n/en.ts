@@ -9,8 +9,8 @@ export const en = {
     getQuote: 'Get a Quote',
   },
   home: {
-    heroTitle: 'High-Performance Woven Bag Machines',
-    heroSubtitle: 'Circular looms, tape lines, and complete production solutions for PP/PE woven bags.',
+    heroTitle: 'Plastic & Packaging Machinery',
+    heroSubtitle: 'Woven bag lines, recycling systems, and flexible packaging solutions — engineered for industrial production.',
     heroCta: 'View Products',
   },
   products: {

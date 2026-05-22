@@ -9,8 +9,8 @@ export const es = {
     getQuote: 'Solicitar Cotización',
   },
   home: {
-    heroTitle: 'Máquinas de Alto Rendimiento para Sacos Tejidos',
-    heroSubtitle: 'Telares circulares, líneas de cinta y soluciones completas de producción para sacos tejidos PP/PE.',
+    heroTitle: 'Maquinaria Plástica y de Embalaje',
+    heroSubtitle: 'Líneas para sacos tejidos, sistemas de reciclaje y soluciones de empaque flexible — diseñados para producción industrial.',
     heroCta: 'Ver Productos',
   },
   products: {

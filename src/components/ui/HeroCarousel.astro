@@ -35,23 +35,23 @@ const { slides } = Astro.props
       >
         <div class="container-wide text-white">
           <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</h1>
-          <p class="text-xl mt-4 text-gray-300 max-w-xl">{slide.subtitle}</p>
-          <a href={slide.ctaHref} class="btn-primary mt-8 inline-block text-lg">{slide.ctaText}</a>
+          <p class="text-xl mt-6 text-[#E0E0E0] max-w-xl leading-relaxed">{slide.subtitle}</p>
+          <a href={slide.ctaHref} class="btn-primary mt-10 inline-block text-lg">{slide.ctaText}</a>
         </div>
       </div>
     ))}
   </div>
 
   <!-- Dot controls -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2" role="tablist" aria-label="Carousel slides">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2" role="tablist" aria-label="Carousel slides">
     {slides.map((slide, i) => (
       <button
         role="tab"
         :aria-selected={`current === ${i}`}
         :aria-label="`${slide.title} slide`"
         @click={`current = ${i}`}
-        class="w-3 h-3 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-        :class={`current === ${i} ? 'bg-white' : 'bg-white/40'`}
+        class="h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        :class={`current === ${i} ? 'w-6 bg-white' : 'w-2 bg-white/40'`}
       />
     ))}
   </div>

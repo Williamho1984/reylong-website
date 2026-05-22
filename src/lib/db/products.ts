@@ -13,6 +13,7 @@ export type Product = {
   specs: Record<string, string>
   created_at: string
   updated_at: string
+  cover_image_url?: string
 }
 
 export type ProductMedia = {
@@ -25,24 +26,36 @@ export type ProductMedia = {
   sort_order: number
 }
 
+type ProductRow = Omit<Product, 'cover_image_url'> & {
+  product_media: { url: string; type: string; sort_order: number }[]
+}
+
+function attachCoverImage(row: ProductRow): Product {
+  const first = row.product_media
+    ?.filter(m => m.type === 'image')
+    .sort((a, b) => a.sort_order - b.sort_order)[0]
+  const { product_media: _, ...product } = row
+  return { ...product, cover_image_url: first?.url }
+}
+
 export async function getAllProducts(): Promise<Product[]> {
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select('*, product_media(url, type, sort_order)')
     .order('sort_order', { ascending: true })
   if (error) throw new Error(`Failed to fetch products: ${error.message}`)
-  return data ?? []
+  return (data ?? []).map(r => attachCoverImage(r as ProductRow))
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select('*, product_media(url, type, sort_order)')
     .eq('is_featured', true)
     .order('sort_order', { ascending: true })
     .limit(6)
   if (error) throw new Error(`Failed to fetch featured products: ${error.message}`)
-  return data ?? []
+  return (data ?? []).map(r => attachCoverImage(r as ProductRow))
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {

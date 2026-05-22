@@ -10,12 +10,12 @@ const categories = [...new Set(products.map(p => p.category))]
 ---
 
 <BaseLayout
-  title="Products — Reylong Woven Bag Machines"
-  description="Browse Reylong's full range of woven bag machines including circular looms, tape stretching lines, and complete production systems."
+  title="Products — Reylong Industrial Machinery"
+  description="Browse Reylong's full range of plastic and packaging machinery — woven bag production lines, eddy current separators, pouch making machines, and more."
 >
   <div class="container-wide py-12">
     <h1>Our Products</h1>
-    <p class="text-gray-600 mt-2 text-lg">Industrial woven bag machinery engineered for performance.</p>
+    <p class="text-gray-600 mt-2 text-lg">Industrial plastic and packaging machinery engineered for performance.</p>
 
     {categories.map(category => {
       const categoryProducts = products.filter(p => p.category === category)
