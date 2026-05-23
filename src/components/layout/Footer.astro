@@ -1,5 +1,36 @@
 ---
 const year = new Date().getFullYear()
+const isEs = Astro.url.pathname.startsWith('/es')
+
+const t = isEs
+  ? {
+      tagline: 'Fabricante profesional de maquinaria plástica y de embalaje.<br />Atendemos clientes en todo el mundo.',
+      productsHeading: 'Productos',
+      allProducts: 'Todos los Productos',
+      circularLooms: 'Telares Circulares',
+      tapeLines: 'Líneas de Cinta',
+      companyHeading: 'Empresa',
+      about: 'Nosotros',
+      caseStudies: 'Casos de Éxito',
+      events: 'Eventos',
+      contact: 'Contacto',
+      copyright: `© ${year} Reylong Machinery Co., Ltd. Todos los derechos reservados.`,
+    }
+  : {
+      tagline: 'Professional manufacturer of plastic and packaging machinery.<br />Serving clients worldwide.',
+      productsHeading: 'Products',
+      allProducts: 'All Products',
+      circularLooms: 'Circular Looms',
+      tapeLines: 'Tape Lines',
+      companyHeading: 'Company',
+      about: 'About Us',
+      caseStudies: 'Case Studies',
+      events: 'Events',
+      contact: 'Contact',
+      copyright: `© ${year} Reylong Machinery Co., Ltd. All rights reserved.`,
+    }
+
+const productsHref = isEs ? '/es/products' : '/products'
 ---
 
 <footer class="bg-gray-900 text-gray-300 mt-20">
@@ -9,34 +40,31 @@ const year = new Date().getFullYear()
         <div class="text-2xl font-bold mb-3">
           <span class="text-brand-red">Rey</span><span class="text-brand-blue-light">long</span>
         </div>
-        <p class="text-sm text-gray-400 leading-relaxed">
-          Professional manufacturer of plastic and packaging machinery.<br />
-          Serving clients worldwide.
-        </p>
+        <p class="text-sm text-gray-400 leading-relaxed" set:html={t.tagline} />
       </div>
 
       <div>
-        <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Products</h3>
+        <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">{t.productsHeading}</h3>
         <ul class="space-y-1 text-sm">
-          <li><a href="/products" class="hover:text-white transition-colors">All Products</a></li>
-          <li><a href="/products#circular-loom" class="hover:text-white transition-colors">Circular Looms</a></li>
-          <li><a href="/products#tape-line" class="hover:text-white transition-colors">Tape Lines</a></li>
+          <li><a href={productsHref} class="hover:text-white transition-colors">{t.allProducts}</a></li>
+          <li><a href={`${productsHref}#circular-loom`} class="hover:text-white transition-colors">{t.circularLooms}</a></li>
+          <li><a href={`${productsHref}#tape-line`} class="hover:text-white transition-colors">{t.tapeLines}</a></li>
         </ul>
       </div>
 
       <div>
-        <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Company</h3>
+        <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">{t.companyHeading}</h3>
         <ul class="space-y-1 text-sm">
-          <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
-          <li><a href="/case-studies" class="hover:text-white transition-colors">Case Studies</a></li>
-          <li><a href="/events" class="hover:text-white transition-colors">Events</a></li>
-          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="/about" class="hover:text-white transition-colors">{t.about}</a></li>
+          <li><a href="/case-studies" class="hover:text-white transition-colors">{t.caseStudies}</a></li>
+          <li><a href="/events" class="hover:text-white transition-colors">{t.events}</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">{t.contact}</a></li>
         </ul>
       </div>
     </div>
 
     <div class="border-t border-gray-800 mt-8 pt-6 text-sm text-gray-500 flex flex-col md:flex-row justify-between gap-2">
-      <span>© {year} Reylong Machinery Co., Ltd. All rights reserved.</span>
+      <span>{t.copyright}</span>
       <span>reylong.com</span>
     </div>
   </div>
