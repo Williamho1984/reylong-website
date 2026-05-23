@@ -8,6 +8,7 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   session: { driver: 'memory' },
+  image: { service: { entrypoint: 'astro/assets/services/noop' } },
   integrations: [tailwind(), alpinejs()],
   i18n: {
     defaultLocale: 'en',
