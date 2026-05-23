@@ -6,7 +6,8 @@ import cloudflare from '@astrojs/cloudflare'
 export default defineConfig({
   site: 'https://reylong.com',
   output: 'server',
-  adapter: cloudflare({ sessions: false }),
+  adapter: cloudflare(),
+  session: { driver: 'memory' },
   integrations: [tailwind(), alpinejs()],
   i18n: {
     defaultLocale: 'en',
