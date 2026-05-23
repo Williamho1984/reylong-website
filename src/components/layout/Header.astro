@@ -1,14 +1,27 @@
 ---
-const navLinks = [
-  { href: '/products', label: 'Products' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/news', label: 'News' },
-  { href: '/events', label: 'Events' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-]
-
 const currentPath = Astro.url.pathname
+const isEs = currentPath.startsWith('/es')
+const prefix = isEs ? '/es' : ''
+
+const navLinks = isEs
+  ? [
+      { href: `${prefix}/products`, label: 'Productos' },
+      { href: '/case-studies', label: 'Casos de Éxito' },
+      { href: '/news', label: 'Noticias' },
+      { href: '/events', label: 'Eventos' },
+      { href: '/about', label: 'Nosotros' },
+      { href: '/contact', label: 'Contacto' },
+    ]
+  : [
+      { href: '/products', label: 'Products' },
+      { href: '/case-studies', label: 'Case Studies' },
+      { href: '/news', label: 'News' },
+      { href: '/events', label: 'Events' },
+      { href: '/about', label: 'About' },
+      { href: '/contact', label: 'Contact' },
+    ]
+
+const ctaLabel = isEs ? 'Cotizar' : 'Get a Quote'
 ---
 
 <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -36,7 +49,7 @@ const currentPath = Astro.url.pathname
             {link.label}
           </a>
         ))}
-        <a href="/contact" class="btn-primary text-sm px-4 py-2">Get a Quote</a>
+        <a href="/contact" class="btn-primary text-sm px-4 py-2">{ctaLabel}</a>
       </nav>
 
       <!-- Mobile menu button -->
@@ -73,7 +86,7 @@ const currentPath = Astro.url.pathname
           {link.label}
         </a>
       ))}
-      <a href="/contact" class="btn-primary text-center mt-2">Get a Quote</a>
+      <a href="/contact" class="btn-primary text-center mt-2">{ctaLabel}</a>
     </nav>
   </div>
 </header>
