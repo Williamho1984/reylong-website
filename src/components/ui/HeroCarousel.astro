@@ -32,6 +32,7 @@ const { slides } = Astro.props
         x-transition:leave-end="opacity-0"
         :aria-hidden={`current !== ${i}`}
         class:list={['absolute inset-0 flex items-center', slide.bgClass]}
+        {...(i > 0 ? { 'x-cloak': '' } : {})}
       >
         <div class="container-wide text-white">
           <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</h1>
