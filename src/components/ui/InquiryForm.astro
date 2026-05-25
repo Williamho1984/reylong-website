@@ -9,7 +9,7 @@ const { productId, productName } = Astro.props
 
 <div
   x-data={`{
-    form: { name: '', email: '', company: '', country: '', phone: '', message: '' },
+    form: { name: '', email: '', company: '', country: '', phone: '', message: '', website: '' },
     status: 'idle',
     errorMsg: '',
     async submit() {
@@ -72,6 +72,10 @@ const { productId, productName } = Astro.props
     novalidate
     aria-label="Inquiry form"
   >
+    <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+      <label for="inq-website">Website</label>
+      <input id="inq-website" name="website" type="text" x-model="form.website" tabindex="-1" autocomplete="off" />
+    </div>
     {productName && (
       <p class="text-sm text-gray-500">
         Inquiring about: <strong class="text-gray-800">{productName}</strong>

@@ -17,6 +17,12 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const validated = inquirySchema.parse(body)
+    if (validated.website) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
     await createInquiry(validated)
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
