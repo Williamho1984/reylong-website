@@ -21,6 +21,12 @@ const SECURITY_HEADERS: Record<string, string> = {
 }
 
 export const onRequest = defineMiddleware(async (_ctx, next) => {
+  if (_ctx.url.pathname === '/google080cb8be1b7a8c3b.html') {
+    return new Response('google-site-verification: google080cb8be1b7a8c3b.html', {
+      headers: { 'Content-Type': 'text/html; charset=utf-8' }
+    })
+  }
+
   const response = await next()
   const headers = new Headers(response.headers)
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
