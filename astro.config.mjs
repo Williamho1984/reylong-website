@@ -4,7 +4,7 @@ import alpinejs from '@astrojs/alpinejs'
 import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
-  site: 'https://reylong.com',
+  site: 'https://www.reylong.com',
   output: 'server',
   adapter: cloudflare(),
   session: { driver: 'memory' },
