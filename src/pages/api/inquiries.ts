@@ -43,11 +43,8 @@ async function sendNotificationEmail(
   })
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  // Read RESEND_API_KEY from Cloudflare runtime env (set in CF Pages dashboard)
-  const runtime = (locals as any).runtime
-  const apiKey: string | undefined =
-    runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY
+export const POST: APIRoute = async ({ request }) => {
+  const apiKey: string | undefined = import.meta.env.RESEND_API_KEY
 
   let body: unknown
   try {
