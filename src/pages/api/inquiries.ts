@@ -36,7 +36,7 @@ async function sendNotificationEmail(
     },
     body: JSON.stringify({
       from: 'Reylong Website <noreply@reylong.com>',
-      to: 't6960638@ms45.hinet.net',
+      to: ['t6960638@ms45.hinet.net', 'william19840805@gmail.com'],
       subject: `New Inquiry: ${data.name} (${data.company})`,
       text,
     }),
