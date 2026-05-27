@@ -71,16 +71,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       })
     }
     await createInquiry(validated)
-    // DEBUG: remove after fix confirmed
-    return new Response(JSON.stringify({
-      success: true,
-      _debug: {
-        hasRuntime: !!(locals as any)?.runtime,
-        hasRuntimeEnv: !!(locals as any)?.runtime?.env,
-        hasApiKey: !!apiKey,
-        apiKeySource: apiKey ? (((locals as any)?.runtime?.env?.RESEND_API_KEY) ? 'runtime' : 'build') : 'none'
-      }
-    }), { status: 200, headers: { 'Content-Type': 'application/json' } })
     if (apiKey) {
       await sendNotificationEmail(validated, apiKey).catch(err =>
         console.error('Email notification failed:', err)
