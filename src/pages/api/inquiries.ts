@@ -4,6 +4,45 @@ import type { APIRoute } from 'astro'
 import { createInquiry, inquirySchema } from '../../lib/db/inquiries'
 import { ZodError } from 'zod'
 
+async function sendNotificationEmail(data: {
+  name: string
+  company: string
+  email: string
+  country: string
+  phone?: string
+  message: string
+}) {
+  const apiKey = import.meta.env.RESEND_API_KEY
+  if (!apiKey) return
+
+  const text = [
+    `New inquiry received on reylong.com`,
+    ``,
+    `Name:    ${data.name}`,
+    `Company: ${data.company}`,
+    `Email:   ${data.email}`,
+    `Country: ${data.country}`,
+    `Phone:   ${data.phone || '—'}`,
+    ``,
+    `Message:`,
+    data.message,
+  ].join('\n')
+
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: 'Reylong Website <onboarding@resend.dev>',
+      to: 't6960638@ms45.hinet.net',
+      subject: `New Inquiry: ${data.name} (${data.company})`,
+      text,
+    }),
+  })
+}
+
 export const POST: APIRoute = async ({ request }) => {
   let body: unknown
   try {
@@ -24,6 +63,9 @@ export const POST: APIRoute = async ({ request }) => {
       })
     }
     await createInquiry(validated)
+    await sendNotificationEmail(validated).catch(err =>
+      console.error('Email notification failed:', err)
+    )
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
