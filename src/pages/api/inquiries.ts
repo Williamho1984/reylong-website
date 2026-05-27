@@ -71,14 +71,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
       })
     }
     await createInquiry(validated)
+    let emailResult = 'not_attempted'
     if (apiKey) {
       try {
         await sendNotificationEmail(validated, apiKey)
+        emailResult = 'sent'
       } catch (err) {
-        console.error('Email notification failed:', err)
+        emailResult = String(err)
       }
+    } else {
+      emailResult = `no_api_key (env keys: ${Object.keys((locals as any)?.runtime?.env ?? {}).join(',')})`
     }
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, _email: emailResult }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     })
