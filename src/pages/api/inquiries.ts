@@ -28,23 +28,29 @@ async function sendNotificationEmail(
     data.message,
   ].join('\n')
 
-  await fetch('https://api.resend.com/emails', {
+  const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Reylong Website <onboarding@resend.dev>',
-      to: 'william19840805@gmail.com',
+      from: 'Reylong Website <noreply@reylong.com>',
+      to: 't6960638@ms45.hinet.net',
       subject: `New Inquiry: ${data.name} (${data.company})`,
       text,
     }),
   })
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`Resend error ${res.status}: ${err}`)
+  }
 }
 
-export const POST: APIRoute = async ({ request }) => {
-  const apiKey: string | undefined = import.meta.env.RESEND_API_KEY
+export const POST: APIRoute = async ({ request, locals }) => {
+  // Try Cloudflare runtime env first, fall back to build-time env
+  const env = (locals as any)?.runtime?.env ?? {}
+  const apiKey: string | undefined = env.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY
 
   let body: unknown
   try {
@@ -69,6 +75,8 @@ export const POST: APIRoute = async ({ request }) => {
       await sendNotificationEmail(validated, apiKey).catch(err =>
         console.error('Email notification failed:', err)
       )
+    } else {
+      console.error('RESEND_API_KEY not configured')
     }
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
