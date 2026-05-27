@@ -4,17 +4,17 @@ import type { APIRoute } from 'astro'
 import { createInquiry, inquirySchema } from '../../lib/db/inquiries'
 import { ZodError } from 'zod'
 
-async function sendNotificationEmail(data: {
-  name: string
-  company: string
-  email: string
-  country: string
-  phone?: string
-  message: string
-}) {
-  const apiKey = import.meta.env.RESEND_API_KEY
-  if (!apiKey) return
-
+async function sendNotificationEmail(
+  data: {
+    name: string
+    company: string
+    email: string
+    country: string
+    phone?: string
+    message: string
+  },
+  apiKey: string
+) {
   const text = [
     `New inquiry received on reylong.com`,
     ``,
@@ -43,7 +43,12 @@ async function sendNotificationEmail(data: {
   })
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
+  // Read RESEND_API_KEY from Cloudflare runtime env (set in CF Pages dashboard)
+  const runtime = (locals as any).runtime
+  const apiKey: string | undefined =
+    runtime?.env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY
+
   let body: unknown
   try {
     body = await request.json()
@@ -63,9 +68,11 @@ export const POST: APIRoute = async ({ request }) => {
       })
     }
     await createInquiry(validated)
-    await sendNotificationEmail(validated).catch(err =>
-      console.error('Email notification failed:', err)
-    )
+    if (apiKey) {
+      await sendNotificationEmail(validated, apiKey).catch(err =>
+        console.error('Email notification failed:', err)
+      )
+    }
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
