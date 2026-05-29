@@ -26,8 +26,8 @@ const PRODUCT = {
   sort_order: 20,
   name_en: 'High-Speed Multi-Function Stand-Up Zipper Pouch Bag Making Machine',
   name_es: 'Máquina de Alta Velocidad Multifunción para Fabricar Bolsas Doypack con Cierre Zip',
-  description_en: `The HP-L-2TZP600 is Rey Long's flagship high-speed, multi-function pouch bag making machine, capable of producing five bag styles — three-side sealing bags, three-side sealing zipper bags, four-side sealing bags, stand-up doypack pouches (with or without zipper) — on a single platform. Built with a 10 mm steel-plate frame, full servo-motor control (Panasonic), and a PLC touch-screen interface, the machine delivers positional accuracy of ≤0.3 mm and speeds up to 220 pcs/min for three-side sealing bags. Zipper sealing is achieved via ultrasonic wave technology, eliminating heat damage to film. Optional double-unwinding and non-stop accumulator modules maximize uptime for continuous production.`,
-  description_es: `La HP-L-2TZP600 es la máquina insignia de Rey Long para fabricación de bolsas flexibles de alta velocidad y múltiples funciones, capaz de producir cinco estilos de bolsa — bolsa de tres sellos, bolsa de tres sellos con cierre zip, bolsa de cuatro sellos, doypack sin cierre y doypack con cierre — en una sola plataforma. Construida con estructura de acero de 10 mm, control completo por servomotores (Panasonic) e interfaz táctil PLC, la máquina ofrece una precisión posicional de ≤0,3 mm y velocidades de hasta 220 bolsas/min para bolsas de tres sellos. El sellado del cierre se realiza mediante tecnología ultrasónica, eliminando el daño por calor al film. Los módulos opcionales de doble desbobinado y acumulador de parada cero maximizan el tiempo de funcionamiento en producción continua.`,
+  description_en: `The JL-L-2TZP600 is Rey Long's flagship high-speed, multi-function pouch bag making machine, capable of producing five bag styles — three-side sealing bags, three-side sealing zipper bags, four-side sealing bags, stand-up doypack pouches (with or without zipper) — on a single platform. Built with a 10 mm steel-plate frame, full servo-motor control (Panasonic), and a PLC touch-screen interface, the machine delivers positional accuracy of ≤0.3 mm and speeds up to 220 pcs/min for three-side sealing bags. Zipper sealing is achieved via ultrasonic wave technology, eliminating heat damage to film. Optional double-unwinding and non-stop accumulator modules maximize uptime for continuous production.`,
+  description_es: `La JL-L-2TZP600 es la máquina insignia de Rey Long para fabricación de bolsas flexibles de alta velocidad y múltiples funciones, capaz de producir cinco estilos de bolsa — bolsa de tres sellos, bolsa de tres sellos con cierre zip, bolsa de cuatro sellos, doypack sin cierre y doypack con cierre — en una sola plataforma. Construida con estructura de acero de 10 mm, control completo por servomotores (Panasonic) e interfaz táctil PLC, la máquina ofrece una precisión posicional de ≤0,3 mm y velocidades de hasta 220 bolsas/min para bolsas de tres sellos. El sellado del cierre se realiza mediante tecnología ultrasónica, eliminando el daño por calor al film. Los módulos opcionales de doble desbobinado y acumulador de parada cero maximizan el tiempo de funcionamiento en producción continua.`,
   specs: {
     'Model':                        'JL-L-2TZP600',
     'Bag Types':                    'Three-side seal / Three-side seal + zipper / Four-side seal / Doypack / Doypack with zipper',
@@ -81,7 +81,7 @@ async function uploadFile(localPath, storagePath, mimeType) {
 }
 
 async function main() {
-  console.log('=== Seeding: HP-L-2TZP600 Stand-Up Zipper Pouch Machine ===\n')
+  console.log('=== Seeding: JL-L-2TZP600 Stand-Up Zipper Pouch Machine ===\n')
 
   await ensureBucket()
 
@@ -117,8 +117,8 @@ async function main() {
       product_id: product.id,
       type:        'image',
       url:         imageUrl,
-      caption_en:  'HP-L-2TZP600 Stand-Up Zipper Pouch Bag Making Machine',
-      caption_es:  'Máquina HP-L-2TZP600 para Fabricar Bolsas Doypack con Cierre Zip',
+      caption_en:  'JL-L-2TZP600 Stand-Up Zipper Pouch Bag Making Machine',
+      caption_es:  'Máquina JL-L-2TZP600 para Fabricar Bolsas Doypack con Cierre Zip',
       sort_order:  1,
     },
   ]
