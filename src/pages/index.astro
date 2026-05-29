@@ -17,21 +17,45 @@ const [featuredProducts, latestNews, latestCases, upcomingEvents] = await Promis
   getUpcomingEvents().catch(() => [])
 ])
 
+const STORAGE = 'https://lqgrvkhrbsgbatzhzgvy.supabase.co/storage/v1/object/public/product-media'
+
 const heroSlides = [
   {
-    title: 'Plastic & Packaging Machinery',
-    subtitle: 'Woven bag lines, recycling systems, and flexible packaging solutions — engineered for industrial production.',
-    ctaText: 'View Products',
-    ctaHref: '/products',
-    bgClass: 'bg-gradient-to-r from-gray-900 to-brand-blue/80'
+    title: 'Flexographic Printing Machine',
+    subtitle: 'High-speed roll-to-roll flexographic printing for PP woven fabric, BOPP film, and kraft paper.',
+    ctaText: 'View Machine',
+    ctaHref: '/products/flexographic-printing-machine-6c',
+    bgClass: 'bg-gray-900',
+    image: 'https://lqgrvkhrbsgbatzhzgvy.supabase.co/storage/v1/object/public/product%20image/printing.jpg',
+    imageAlt: 'Flexographic Roll-to-Roll Printing Machine',
   },
   {
-    title: 'Global Manufacturing Partner',
-    subtitle: 'Trusted by plastic processing manufacturers in 30+ countries. Built to last.',
-    ctaText: 'Our Case Studies',
-    ctaHref: '/case-studies',
-    bgClass: 'bg-gradient-to-r from-brand-red/90 to-gray-900'
-  }
+    title: 'Automatic Bag-Making Convention Line',
+    subtitle: 'Printing, tubing, cutting, sewing — four stages in one continuous PP woven bag production line.',
+    ctaText: 'View Machine',
+    ctaHref: '/products/automatic-printing-tubing-cutting-sewing-line',
+    bgClass: 'bg-gray-900',
+    image: `${STORAGE}/automatic-printing-tubing-cutting-sewing-line/cover.jpg`,
+    imageAlt: 'Automatic Printing-Tubing-Cutting-Sewing-Overtape Convention Line',
+  },
+  {
+    title: 'Eddy Current Separator',
+    subtitle: 'Precision non-ferrous metal recovery — copper, aluminum, and zinc — from mixed recycling streams.',
+    ctaText: 'View Machine',
+    ctaHref: '/products/eddy-current-non-ferrous-separator',
+    bgClass: 'bg-gray-900',
+    image: `${STORAGE}/eddy-current-non-ferrous-separator/cover.jpg`,
+    imageAlt: 'Eddy Current Separator for non-ferrous metal recovery',
+  },
+  {
+    title: 'Stand-Up Zipper Pouch Bag Machine',
+    subtitle: 'Five bag styles on one platform — doypack, zipper, three-side and four-side sealing at up to 220 pcs/min.',
+    ctaText: 'View Machine',
+    ctaHref: '/products/hp-l-2tzp600-stand-up-zipper-pouch-machine',
+    bgClass: 'bg-gray-900',
+    image: `${STORAGE}/hp-l-2tzp600-stand-up-zipper-pouch-machine/cover.jpg`,
+    imageAlt: 'HP-L-2TZP600 Stand-Up Zipper Pouch Bag Making Machine',
+  },
 ]
 ---
 
