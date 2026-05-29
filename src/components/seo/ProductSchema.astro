@@ -25,11 +25,17 @@ const schema = {
     url: 'https://reylong.com'
   },
   ...(imageUrl ? { image: imageUrl } : {}),
-  additionalProperty: Object.entries(product.specs ?? {}).map(([name, value]) => ({
-    '@type': 'PropertyValue',
-    name,
-    value
-  }))
+  additionalProperty: Array.isArray(product.specs)
+    ? (product.specs as Array<{key: string; value: string}>).map(({ key, value }) => ({
+        '@type': 'PropertyValue',
+        name: key,
+        value
+      }))
+    : Object.entries(product.specs ?? {}).map(([name, value]) => ({
+        '@type': 'PropertyValue',
+        name,
+        value
+      }))
 }
 
 function safeJson(obj: unknown): string {

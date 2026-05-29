@@ -61,7 +61,7 @@ const pageUrl = Astro.site
     </div>
 
     <!-- Technical Specs -->
-    {Object.keys(product.specs ?? {}).length > 0 && (
+    {(Array.isArray(product.specs) ? product.specs.length : Object.keys(product.specs ?? {}).length) > 0 && (
       <section class="mt-12" aria-label="Technical specifications">
         <h2 class="mb-4">Technical Specifications</h2>
         <SpecsTable specs={product.specs} />

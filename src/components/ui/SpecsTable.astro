@@ -4,9 +4,11 @@ interface Props {
 }
 
 const { specs } = Astro.props
-const entries = Array.isArray(specs)
-  ? specs.map(({ key, value }) => [key, value] as [string, string])
-  : Object.entries(specs)
+const firstVal = Object.values(specs as any)[0]
+const isSpecsArray = typeof firstVal === 'object' && firstVal !== null && 'key' in firstVal
+const entries: [string, string][] = isSpecsArray
+  ? Object.values(specs as any).map((item: any) => [item.key, item.value])
+  : Object.entries(specs as Record<string, string>)
 ---
 
 {entries.length > 0 && (

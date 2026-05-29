@@ -10,7 +10,7 @@ export type Product = {
   name_es: string
   description_en: string
   description_es: string
-  specs: Record<string, string>
+  specs: Array<{ key: string; value: string }> | Record<string, string>
   created_at: string
   updated_at: string
   cover_image_url?: string
