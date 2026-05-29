@@ -1,10 +1,12 @@
 ---
 interface Props {
-  specs: Record<string, string>
+  specs: Array<{ key: string; value: string }> | Record<string, string>
 }
 
 const { specs } = Astro.props
-const entries = Object.entries(specs)
+const entries = Array.isArray(specs)
+  ? specs.map(({ key, value }) => [key, value] as [string, string])
+  : Object.entries(specs)
 ---
 
 {entries.length > 0 && (
