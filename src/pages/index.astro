@@ -103,8 +103,29 @@ const heroSlides = [
         </ul>
         <a href="/about" class="btn-primary mt-8 inline-block">Learn About Us</a>
       </div>
-      <div class="aspect-video overflow-hidden">
-        <img src="/factory.png" alt="Reylong factory production line" class="w-full h-full object-cover" loading="lazy" />
+      <div
+        class="relative aspect-video overflow-hidden bg-gray-200"
+        x-data="{ current: 0, images: ['/factory.png'], total: 1 }"
+        x-init="() => { if (total > 1) { const id = setInterval(() => { current = (current + 1) % total }, 4000); return () => clearInterval(id) } }"
+      >
+        <template x-for="(src, i) in images" :key="i">
+          <img
+            :src="src"
+            alt="Reylong factory"
+            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+            :class="current === i ? 'opacity-100' : 'opacity-0'"
+            loading="lazy"
+          />
+        </template>
+        <div x-show="total > 1" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          <template x-for="(_, i) in images" :key="i">
+            <button
+              @click="current = i"
+              class="h-1.5 rounded-full transition-all duration-300"
+              :class="current === i ? 'w-5 bg-white' : 'w-1.5 bg-white/50'"
+            />
+          </template>
+        </div>
       </div>
     </div>
   </section>
