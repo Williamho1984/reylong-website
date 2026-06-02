@@ -1,5 +1,12 @@
 import { supabase } from '../supabase'
 
+export type ApplicationField = {
+  domain_en: string
+  domain_zh: string
+  domain_es: string
+  image_url: string
+}
+
 export type Product = {
   id: string
   slug: string
@@ -11,6 +18,7 @@ export type Product = {
   description_en: string
   description_es: string
   specs: Array<{ key: string; value: string }> | Record<string, string>
+  applications: ApplicationField[]
   created_at: string
   updated_at: string
   cover_image_url?: string

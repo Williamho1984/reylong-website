@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import ImageGallery from '../../components/ui/ImageGallery.astro'
 import SpecsTable from '../../components/ui/SpecsTable.astro'
+import ApplicationsGrid from '../../components/ui/ApplicationsGrid.astro'
 import ProductSchema from '../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../components/ui/InquiryForm.astro'
 import { getProductBySlug, getProductMedia } from '../../lib/db/products'
@@ -59,6 +60,9 @@ const pageUrl = Astro.site
         </div>
       </div>
     </div>
+
+    <!-- Application Fields -->
+    <ApplicationsGrid applications={product.applications ?? []} lang="en" />
 
     <!-- Technical Specs -->
     {(Array.isArray(product.specs) ? product.specs.length : Object.keys(product.specs ?? {}).length) > 0 && (

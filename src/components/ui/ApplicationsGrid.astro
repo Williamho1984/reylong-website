@@ -1,0 +1,51 @@
+---
+interface Application {
+  domain_en: string
+  domain_zh: string
+  domain_es: string
+  image_url: string
+}
+
+interface Props {
+  applications: Application[]
+  lang?: 'en' | 'es' | 'zh'
+}
+
+const { applications, lang = 'en' } = Astro.props
+
+const sectionTitle: Record<string, string> = {
+  en: 'Application Fields',
+  es: 'Campos de Aplicación',
+  zh: '應用領域',
+}
+
+function getDomainName(app: Application, lang: string): string {
+  if (lang === 'zh') return app.domain_zh
+  if (lang === 'es') return app.domain_es
+  return app.domain_en
+}
+---
+
+{applications.length > 0 && (
+  <section class="mt-12" aria-label="Application fields">
+    <h2 class="mb-6">{sectionTitle[lang]}</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+      {applications.map((app) => (
+        <div class="flex flex-col items-center gap-2 p-3 border border-gray-100 rounded-lg bg-white hover:border-brand-blue hover:shadow-sm transition-all group">
+          <div class="w-full aspect-[4/3] overflow-hidden rounded flex items-center justify-center bg-gray-50">
+            <img
+              src={app.image_url}
+              alt={app.domain_en}
+              class="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-200"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p class="text-xs text-center text-gray-700 font-medium leading-tight">
+            {getDomainName(app, lang)}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
