@@ -82,6 +82,46 @@ const categories = [
         q: 'Can it run retort or high-temperature packaging films?',
         a: 'Yes. Temperature range up to 300°C. Suitable for NY/CPP, AL/CPP retort-grade films.',
       },
+      {
+        q: 'What is the heat-seal window and why does it matter?',
+        a: 'The heat-seal window is the narrow temperature range where a film fuses correctly — above it the laminate burns or sticks to the sealing jaws; below it the seal fails to bond. As eco-friendly mono-material films become more common, this window becomes extremely narrow, making precise temperature control critical.',
+      },
+      {
+        q: 'Why does the JL-L-2TZP600 use multi-stage progressive heating?',
+        a: 'Progressive heating divides the sealing process across 8–20 independent heating blocks. This accumulates thermal energy gradually, allowing deep heat penetration into thick areas (corners, gussets) without burning thin film layers — all while maintaining speeds up to 220 pcs/min.',
+      },
+      {
+        q: 'What three variables control heat seal quality?',
+        a: '(1) Temperature — controlled up to 300°C via PID controllers and Solid State Relays with 2-second feedback; (2) Dwell time — how long the sealing jaws remain in contact; (3) Pressure — the clamping force applied to fuse the layers. All adjusted via the PLC touch-screen HMI.',
+      },
+      {
+        q: 'Why must zippers be sealed with ultrasonic technology rather than heat sealing?',
+        a: 'A plastic zipper has far greater thermal mass than the surrounding 30–180 μm film. External heat would burn the thin film before the zipper reaches fusion temperature. Ultrasonic technology generates heat internally through high-frequency molecular friction only at the zipper-to-film interface, bonding the zipper without damaging the surrounding bag.',
+      },
+      {
+        q: 'What is the difference between sealing a gusset and sealing a zipper?',
+        a: 'A gusset is multiple layers of the same film — handled with heat sealing by extending dwell time or reducing speed. A zipper is a different material (solid plastic strip) with much higher thermal mass, requiring ultrasonic vibration. Applying heat sealing to a zipper would destroy the surrounding film.',
+      },
+      {
+        q: 'What are common heat sealing defects and their causes?',
+        a: '(1) Thermal shrinkage/wrinkling — excessive heat on thin film areas; (2) Burn-through/melting — temperature exceeds the seal window; (3) Weak seals/leakage — insufficient heat penetration in thick overlap areas; (4) Stretching and breakage — overheated material loses structural tension under motor pull.',
+      },
+      {
+        q: 'What is the role of the cooling bar in high-speed bag making?',
+        a: 'After sealing, film is soft and vulnerable. Cooling bars (water-cooled plates at 15–20°C) solidify the fused plastic to achieve full seal strength, prevent residual heat from warping the bag, and allow the film to withstand servo motor tension at up to 220 pcs/min.',
+      },
+      {
+        q: 'How does zoned temperature control work on the JL-L-2TZP600?',
+        a: 'Up to 20 independent heating blocks are individually controlled via the PLC-managed HMI. Each block applies specific thermal energy to a precise coordinate of the bag — high heat to thick gusset corners, lower heat to thin film areas — preventing burn-through while ensuring full fusion at thick overlap points.',
+      },
+      {
+        q: 'What is Edge Position Control (EPC)?',
+        a: 'EPC uses a CCD camera combined with photoelectric sensors to track registration marks and film edges in real-time. When film drift is detected, correction motors instantly re-center the film path, maintaining positional accuracy within ≤0.3 mm without stopping the line — essential for pre-printed films at 220 pcs/min.',
+      },
+      {
+        q: 'Can the JL-L-2TZP600 handle eco-friendly mono-material films?',
+        a: 'Yes. Mono-material films (all-PE or all-PP) have a narrower heat-seal window than traditional laminates. The machine handles them through zoned independent temperature control, PID/SSR feedback every 2 seconds, and progressive multi-stage heating — providing the precision needed to stay within the narrow sealing window.',
+      },
     ],
   },
   {
