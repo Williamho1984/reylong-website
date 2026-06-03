@@ -61,16 +61,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
             apikey: supabaseKey,
             Authorization: `Bearer ${supabaseKey}`,
           },
-          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.3, match_count: 4 }),
+          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.1, match_count: 4 }),
         })
         if (searchRes.ok) {
-          const matches = await searchRes.json() as Array<{ question: string; answer: string }>
+          const matches = await searchRes.json() as Array<{ question: string; answer: string; similarity?: number }>
           if (Array.isArray(matches) && matches.length > 0) {
             context = matches.map(m => `Q: ${m.question}\nA: ${m.answer}`).join('\n\n')
           }
+        } else {
+          console.error('[chat] RPC error:', searchRes.status, await searchRes.text())
         }
-      } catch {
-        // continue without context
+      } catch (searchErr) {
+        console.error('[chat] search failed:', searchErr)
       }
     }
 
