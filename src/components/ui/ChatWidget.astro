@@ -14,7 +14,7 @@
     x-transition:leave-start="opacity-100 translate-y-0 scale-100"
     x-transition:leave-end="opacity-0 translate-y-3 scale-95"
     class="absolute bottom-16 right-0 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
-    style="height: 500px; transform-origin: bottom right;"
+    style="height: 500px; transform-origin: bottom right; min-width: 320px;"
   >
     <!-- Header -->
     <div class="bg-brand-blue text-white px-4 py-3 flex items-center gap-3 shrink-0">
@@ -91,11 +91,11 @@
   <button
     @click="toggleChat()"
     :aria-label="isOpen ? 'Close chat' : 'Open product assistant'"
-    class="w-14 h-14 bg-brand-blue text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center relative"
+    class="flex items-center gap-2 bg-brand-blue text-white pl-4 pr-5 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200"
   >
     <svg
       x-show="!isOpen"
-      class="w-6 h-6"
+      class="w-7 h-7 shrink-0"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -106,7 +106,7 @@
     <svg
       x-show="isOpen"
       x-cloak
-      class="w-6 h-6"
+      class="w-7 h-7 shrink-0"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -114,6 +114,8 @@
     >
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
+    <span x-show="!isOpen" class="text-sm font-semibold leading-tight whitespace-nowrap">AI Chatbot</span>
+    <span x-show="isOpen" x-cloak class="text-sm font-semibold leading-tight whitespace-nowrap">Close</span>
   </button>
 </div>
 
