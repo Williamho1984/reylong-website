@@ -162,7 +162,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
     })
   }
 
-  const supabaseUrl: string = env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? ''
+  const supabaseUrl: string = (env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? '').trim()
   const supabaseServiceKey: string = env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
 
   if (!supabaseUrl || !supabaseServiceKey) {
