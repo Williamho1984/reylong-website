@@ -1,0 +1,170 @@
+export const prerender = false
+
+import type { APIRoute } from 'astro'
+
+interface QAEntry {
+  category: string
+  question: string
+  answer: string
+  related_product: string
+  priority: string
+}
+
+const QA: QAEntry[] = [
+  // Product Selection
+  { category: 'Product Selection', question: 'Which machine should I choose for making stand-up doypack pouches?', answer: 'The JL-L-2TZP600 is the right choice. It produces stand-up doypack pouches — both plain and with zipper — at 35–120 pcs/min, using heat-seal laminated film (30–180 μm). It handles five bag styles on a single platform so you can switch formats without changing machines.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Product Selection', question: 'Can one machine make both flat three-side seal bags and doypack pouches?', answer: 'Yes. The JL-L-2TZP600 is a multi-function platform that produces three-side seal bags, three-side seal zipper bags, four-side seal bags, doypack pouches, and doypack with zipper — all on one machine. Switching between bag styles requires a format changeover but no separate machine.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Product Selection', question: 'I need to produce coffee bags with a degassing valve. Which machine is suitable?', answer: 'The JL-L-2TZP600 supports coffee packaging (both center-seal and doypack formats) and can accommodate degassing valve insertion. Please contact us with your specific valve type and bag dimensions for a configuration confirmation.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Product Selection', question: 'Do you have a machine for PP woven bags?', answer: 'Yes. The JLPTCSM-1300W is a fully integrated convention line for high-volume PP woven bag production, combining flexographic printing, tube forming, cutting & sewing, and overtape application in one continuous process at 25–40 bags/min.', related_product: 'JLPTCSM-1300W', priority: 'H' },
+  { category: 'Product Selection', question: 'What machine makes medical packaging bags or sterilization pouches?', answer: 'The JL-L-2TZP600 supports medical packaging applications, including individual bags and flat pouches. For specialized medical bag types such as gusseted tube bags or four-layer header bags, please contact our engineering team with your specifications.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Product Selection', question: 'I need to package pet food. What bag machine do you recommend?', answer: 'The JL-L-2TZP600 handles pet food packaging in doypack, stand-up zipper, and three-side seal formats using high-barrier laminated film. This is a common application — please share your target bag dimensions and production speed for a detailed recommendation.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Product Selection', question: 'Which machine is best for facial mask or cosmetic packaging?', answer: 'The JL-L-2TZP600 produces three-side seal and doypack bags commonly used for facial masks, skincare, and cosmetic products. It supports printed laminated films with ≤0.3 mm positional accuracy for precise register printing alignment.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Product Selection', question: 'Can your machines handle anti-static packaging for electronics?', answer: 'Yes. The JL-L-2TZP600 can process anti-static laminated films suitable for electronic component packaging. The applicable film thickness range is 30–180 μm. Please specify your film type so we can confirm compatibility.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  // Technical – JL-L-2TZP600
+  { category: 'Technical – JL-L-2TZP600', question: 'What is the maximum production speed of the JL-L-2TZP600?', answer: 'The JL-L-2TZP600 runs at up to 220 pcs/min for three-side seal bags, 150 pcs/min for three-side seal with zipper bags, and 120 pcs/min for doypack pouches. Minimum speed is 35 pcs/min across all formats.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – JL-L-2TZP600', question: 'What bag sizes can the JL-L-2TZP600 produce?', answer: 'Bag width ranges from 100 to 580 mm, and bag length from 50 to 420 mm. A skip function extends the effective length up to 6× for longer bags. Bottom seal width is adjustable from 5 to 60 mm.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – JL-L-2TZP600', question: 'What materials can the JL-L-2TZP600 process?', answer: 'The machine is designed for heat-seal laminated films with a thickness of 30–180 μm. Common structures include NY/PE, PET/PE, AL/PE, OPP/CPP, and BOPP/LLDPE. Please confirm your specific film structure for compatibility.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – JL-L-2TZP600', question: 'What power supply does the JL-L-2TZP600 require?', answer: '220 V / 3-phase / 60 Hz, with a total power consumption of 60 kW. If your facility operates at 50 Hz, please inform us — the machine can be configured for 50 Hz with appropriate servo adjustments.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – JL-L-2TZP600', question: 'How precise is the sealing and registration on the JL-L-2TZP600?', answer: 'Positional accuracy is ≤0.3 mm, achieved through full servo-motor control (Panasonic). The sealing system uses 4 groups of heating + 2 groups of cooling for both vertical and horizontal seals, ensuring consistent seal quality.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – JL-L-2TZP600', question: 'How is the zipper sealed on the zipper bag format?', answer: 'Zipper sealing uses ultrasonic technology (1 group), which provides a clean, consistent seal without heat damage to the zipper track. Standard zipper width is 13 mm.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – JL-L-2TZP600', question: 'What is the machine weight and footprint of the JL-L-2TZP600?', answer: 'The machine weighs 9,000 kg. Please contact us for the full installation drawing with exact footprint dimensions and recommended clearance space for your facility planning.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – JL-L-2TZP600', question: 'What control system does the JL-L-2TZP600 use?', answer: 'The machine uses a PLC touch-screen interface with full servo-motor control (Panasonic servo drives). The 10 mm steel-plate frame provides vibration resistance for high-speed continuous operation.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – JL-L-2TZP600', question: 'Can the JL-L-2TZP600 run retort or high-temperature packaging films?', answer: 'Yes. The temperature range reaches up to 300°C, making it suitable for retort packaging films (NY/CPP, AL/CPP retort-grade) used in cooked food and sterilized product packaging.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  // Technical – JLPTCSM-1300W
+  { category: 'Technical – JLPTCSM-1300W', question: 'What is the production speed of the PP woven bag convention line?', answer: 'The JLPTCSM-1300W produces 25–40 bags/min. It integrates four stages — flexographic printing, tube forming, cutting & sewing, and overtape application — in a single continuous process.', related_product: 'JLPTCSM-1300W', priority: 'H' },
+  { category: 'Technical – JLPTCSM-1300W', question: 'What bag dimensions does the JLPTCSM-1300W handle?', answer: 'The line handles fabric widths of 700–1300 mm (before tubing), resulting in finished bag widths of 430–660 mm. Cutting length ranges from 550–1250 mm. Gusset depth is adjustable from 40–90 mm.', related_product: 'JLPTCSM-1300W', priority: 'M' },
+  { category: 'Technical – JLPTCSM-1300W', question: 'How many print colors does the woven bag convention line support?', answer: 'The JLPTCSM-1300W supports 4-color flexographic printing (4+0 configuration) with a printing repeat length of 450–1200 mm and max printing width of 1300 mm.', related_product: 'JLPTCSM-1300W', priority: 'M' },
+  // Technical – Printing Machine
+  { category: 'Technical – Printing Machine', question: 'What materials can the 6-color flexographic printing machine print on?', answer: 'The JLRPM-6800BO/6C is designed for PP woven fabric and PP laminated fabric, with a max web width of 800 mm and max machine speed of 120 m/min (printing speed up to 100 m/min).', related_product: 'JLRPM-6800BO/6C', priority: 'M' },
+  { category: 'Technical – Printing Machine', question: 'How many colors can the flexographic printing machine print?', answer: '6 colors, using 6 independent printing stations with ceramic anilox rollers. Configurations supported: 0+6, 1+5, 2+4, 3+3 (front/back). An inter-color drying system ensures clean separation between stations.', related_product: 'JLRPM-6800BO/6C', priority: 'M' },
+  // Technical – Recycling
+  { category: 'Technical – Recycling', question: 'What materials does the eddy current separator recover?', answer: 'The JLECS-1000W recovers non-ferrous metals (aluminum, copper, brass) from mixed material streams such as e-waste, shredded plastic, and mixed scrap. It combines magnetic drum separation (ferrous removal) with eddy current separation (non-ferrous recovery) at 1,000 kg/h capacity.', related_product: 'JLECS-1000W', priority: 'M' },
+  // AI Solutions
+  { category: 'AI Solutions', question: 'What is the AI Machine Intelligence solution?', answer: "Rey Long's AI Machine Intelligence embeds edge computing and industrial IoT into existing production lines. It provides real-time decisions at the machine level — including computer vision quality inspection, predictive maintenance, and process optimization — without relying on cloud connectivity.", related_product: 'AI Solutions', priority: 'M' },
+  { category: 'AI Solutions', question: 'Can AI be retrofitted onto an existing machine?', answer: 'Yes. The AI program is designed case-by-case for specific machines and processes. It can be integrated into existing production lines without requiring a full machine replacement. Contact us with your machine type and target application for an assessment.', related_product: 'AI Solutions', priority: 'M' },
+  // Procurement
+  { category: 'Procurement', question: 'How do I get a price quote?', answer: 'Pricing depends on your specific configuration — bag type, dimensions, speed, and options. Use the "Request a Quote" button on any product page or visit our Contact page. Our team responds within 1 business day with a tailored quotation.', related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'How much does the JL-L-2TZP600 cost?', answer: 'Machine pricing varies based on configuration, options, and destination. To receive an accurate quote for your requirements, please use the Request a Quote form on the product page — our team will respond within 1 business day.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Procurement', question: 'What is the price of the PP woven bag convention line?', answer: 'Pricing for the JLPTCSM-1300W depends on your production specifications. Please fill in the inquiry form on the product page and our sales team will provide a detailed quotation promptly.', related_product: 'JLPTCSM-1300W', priority: 'H' },
+  { category: 'Procurement', question: 'Can you give me a ballpark price or price range?', answer: "We quote based on your exact requirements to ensure the price reflects your configuration accurately. Please submit an inquiry with your target bag type, dimensions, and speed — we'll get back to you within 1 business day with a specific figure.", related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'What is the typical lead time for machine delivery?', answer: 'Standard lead time is 2–3 months from order confirmation. This covers manufacturing, quality testing, and pre-shipment inspection. Complex customizations may require additional time — we will confirm the exact schedule at order stage.', related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'Do you offer machine customization?', answer: 'Yes. Rey Long offers customization for most machine models — including bag size range, speed configuration, optional accessories, and special film compatibility. Please provide your production requirements and our engineering team will advise on feasibility.', related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'What payment terms do you offer?', answer: 'Payment terms are discussed on a per-order basis. Please submit an inquiry and our sales team will include payment options in the quotation response.', related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'Do you export to the United States / Japan?', answer: 'Yes. Rey Long supplies machinery to customers in the United States, Japan, and globally. We have experience with export documentation, container loading, and international shipping coordination.', related_product: 'All', priority: 'H' },
+  { category: 'Procurement', question: 'What voltage and frequency options are available?', answer: 'Machines are configurable for different power standards. The JL-L-2TZP600 default is 220V/3P/60Hz. 50 Hz configurations are available — please specify your local power standard when requesting a quote.', related_product: 'All', priority: 'H' },
+  // After-Sales
+  { category: 'After-Sales', question: 'What warranty does Rey Long provide?', answer: 'Rey Long provides warranty coverage on parts and workmanship. Specific warranty terms are stated in the sales contract. Please contact us for details applicable to your machine and region.', related_product: 'All', priority: 'H' },
+  { category: 'After-Sales', question: 'Is installation and training included?', answer: 'Yes. Rey Long provides technical documentation, remote support, and on-site installation assistance. Operator training is included as part of the commissioning process.', related_product: 'All', priority: 'H' },
+  { category: 'After-Sales', question: 'How do I order spare parts?', answer: 'Spare parts are available globally with fast delivery. Contact our after-sales team with your machine model number and the part specification (or a photo/drawing) for a quick quotation.', related_product: 'All', priority: 'H' },
+  { category: 'After-Sales', question: 'Do you provide remote technical support?', answer: 'Yes. Rey Long provides remote support via video call, with real-time guidance from our engineers. For major issues, on-site service can be arranged.', related_product: 'All', priority: 'M' },
+  // Company
+  { category: 'Company', question: 'Where is Rey Long based?', answer: 'Rey Long Machinery Co., Ltd. is a professional manufacturer of plastic and packaging machinery headquartered in Taiwan, serving manufacturers worldwide.', related_product: 'Company', priority: 'H' },
+  { category: 'Company', question: 'What types of machines does Rey Long manufacture?', answer: 'Rey Long manufactures flexible packaging bag making machines (three-side seal, doypack, zipper), PP woven bag convention lines, flexographic printing machines, recycling separation systems, and AI-powered machine intelligence solutions.', related_product: 'Company', priority: 'H' },
+  { category: 'Company', question: 'Does Rey Long have CE certification or international certifications?', answer: 'CE certification for our machines is currently in progress. We will provide updated certification documentation as it becomes available. Please contact us for the latest status relevant to your target market.', related_product: 'Company', priority: 'M' },
+  // Application
+  { category: 'Application', question: 'Can the JL-L-2TZP600 produce liquid packaging pouches?', answer: 'Yes. The JL-L-2TZP600 supports liquid packaging in doypack and three-side seal formats using appropriate barrier laminated films. For liquid-fill integration, the bag is typically made on the JL-L-2TZP600 and filled on a separate filling machine.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Application', question: 'Is the machine suitable for rice or grain packaging?', answer: 'Yes. The JL-L-2TZP600 handles rice packaging in three-side seal and doypack formats. Film thickness up to 180 μm accommodates the heavier-gauge films often used for grain packaging.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Application', question: 'Can I use the machine for garment or clothing packaging?', answer: 'Yes. Three-side seal bags and doypack pouches produced by the JL-L-2TZP600 are used for garment packaging. The machine supports wide bags (up to 580 mm) suitable for folded clothing.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Application', question: 'What frozen food packaging can this machine produce?', answer: 'The JL-L-2TZP600 produces frozen food packaging in three-side seal, doypack, and zipper formats using NY/PE or PET/PE laminated films rated for freezer temperatures. The sealing temperature range (up to 300°C) handles the full range of freeze-grade films.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  // Comparison
+  { category: 'Comparison', question: 'How does the JL-L-2TZP600 compare to other high-speed pouch machines on the market?', answer: 'The JL-L-2TZP600 delivers ≤0.3 mm positional accuracy and up to 220 pcs/min using Panasonic full-servo control — performance comparable to premium international machines, with competitive pricing and a 2–3 month lead time. The 10 mm steel-plate frame provides superior rigidity at high speed.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Comparison', question: 'What makes Rey Long machines different from other manufacturers?', answer: 'Key differentiators: 10 mm steel-plate frame (heavier than industry standard) for vibration resistance, full Panasonic servo control, multi-format capability on a single platform, AI integration options, and direct factory engineering support. Lead time is 2–3 months.', related_product: 'All', priority: 'M' },
+  // Technical – Operations
+  { category: 'Technical – Operations', question: 'How long does it take to change over between bag formats on the JL-L-2TZP600?', answer: 'Format changeover time depends on the degree of size change. Minor adjustments (same format, different size) typically take 15–30 minutes. Switching between bag types (e.g., three-side seal to doypack) may take 30–60 minutes with trained operators. Rey Long provides changeover procedures and operator training during commissioning.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'How do I set the sealing temperature for a new film material?', answer: "Sealing temperature is set via the PLC touch screen. Start with the film supplier's recommended heat-seal temperature range, then run test bags at low speed and adjust in 5°C increments until seal quality is consistent. The machine supports up to 300°C. Rey Long's commissioning engineer will demonstrate this process during installation.", related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'What causes poor seal quality or seal leakage?', answer: 'Common causes: (1) sealing temperature too low for the film material, (2) sealing pressure insufficient, (3) sealing dwell time too short at high speed, (4) film contamination or moisture on the seal area, (5) worn sealing bar. Check temperature settings first, then inspect the sealing bar surface. Contact our technical support team if the issue persists.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'What causes misaligned printing registration on finished bags?', answer: 'Registration errors are typically caused by: (1) inconsistent film tension — check the tension control setting, (2) film splice or quality variation, (3) photo-eye sensor sensitivity needs adjustment, (4) servo parameters need recalibration. The JL-L-2TZP600 has ≤0.3 mm accuracy under normal operating conditions. Contact Rey Long technical support for sensor and servo calibration guidance.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'How do I thread the film into the machine?', answer: "Film threading procedure is detailed in the operation manual provided with the machine. Rey Long's commissioning engineer demonstrates threading during installation and training. A threading diagram is also posted near the film path on the machine for reference.", related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – Operations', question: 'What is the recommended maintenance schedule for the JL-L-2TZP600?', answer: 'Recommended schedule: Daily — clean sealing bars, check film path and tension rollers. Weekly — lubricate moving parts per the lubrication chart, inspect servo belts. Monthly — check electrical connections, inspect heating elements and thermocouples. A full maintenance checklist is included in the operation manual. Rey Long also offers remote maintenance support.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'What spare parts should I keep in stock?', answer: 'Recommended stock items: sealing bars (vertical and horizontal), silicone pads, heating elements, thermocouples, photo-eye sensors, and servo belts. Rey Long provides a recommended spare parts list with each machine. Parts can be ordered directly from our after-sales team.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'The machine stops mid-run and shows an error. What should I do?', answer: 'Check the PLC touch screen for the error code and alarm message. The operation manual contains a full error code reference. Common causes: film break (check tension and splice), servo fault (check drive indicator lights), temperature alarm (verify heating element and thermocouple). If you cannot resolve the issue, contact Rey Long technical support with the error code and a description of the situation.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'Can I run the machine at maximum speed immediately after startup?', answer: 'No. It is recommended to warm up the sealing bars for 10–15 minutes before running at full speed, allowing the temperature to stabilize uniformly across all heating groups. Start at low speed, verify seal quality, then gradually increase to target speed.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – Operations', question: 'How do I adjust the zipper insertion position on zipper bags?', answer: 'Zipper position is adjusted via the servo-controlled zipper feeding mechanism on the PLC interface. Set the target zipper-to-top-seal distance, then run a test bag and measure. Fine-tune in small increments. The commissioning engineer covers zipper setup in detail during training.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – Operations', question: 'What film roll width and core diameter does the machine accept?', answer: 'Max web roll diameter is φ600 mm. The machine accepts standard 3-inch cores. Max web width for the main film is 1240 mm; patch web is 150 mm. Please confirm your roll specifications when ordering to ensure the unwind stand is configured correctly.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – Operations', question: 'Can the machine handle pre-printed films with registration marks?', answer: 'Yes. The JL-L-2TZP600 uses photo-eye registration sensors to track print marks on pre-printed films and maintain ≤0.3 mm positional accuracy. Ensure your film has a consistent, high-contrast registration mark and inform us of the mark position when configuring the machine.', related_product: 'JL-L-2TZP600', priority: 'H' },
+  { category: 'Technical – Operations', question: 'What happens if the film breaks during production?', answer: 'The machine automatically stops and triggers a film break alarm. Resplice the film, re-thread through the film path, reset the alarm on the PLC, and restart at low speed to verify the splice seals correctly before returning to full production speed.', related_product: 'JL-L-2TZP600', priority: 'M' },
+  { category: 'Technical – Operations', question: 'Is it possible to produce bags longer than 420 mm?', answer: 'Yes. The skip function allows bag lengths beyond the standard 420 mm limit, extending effective length up to 6× the base pitch. Contact our engineering team with your target dimensions for configuration confirmation.', related_product: 'JL-L-2TZP600', priority: 'M' },
+]
+
+export const GET: APIRoute = async ({ request, locals }) => {
+  const env = (locals as any)?.runtime?.env ?? {}
+  const ai = env.AI as { run: (model: string, opts: Record<string, unknown>) => Promise<unknown> } | undefined
+  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? ''
+
+  const url = new URL(request.url)
+  const key = url.searchParams.get('key')
+
+  if (!seedSecret || key !== seedSecret) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  if (!ai) {
+    return new Response(JSON.stringify({ error: 'AI binding not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  const supabaseUrl: string = env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? ''
+  const supabaseServiceKey: string = env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    return new Response(JSON.stringify({ error: 'Supabase env vars not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  try {
+    const BATCH = 20
+    type Row = QAEntry & { embedding: number[] }
+    const rows: Row[] = []
+
+    // Generate embeddings in batches
+    for (let i = 0; i < QA.length; i += BATCH) {
+      const batch = QA.slice(i, i + BATCH)
+      const texts = batch.map(q => q.question)
+      const result = await ai.run('@cf/baai/bge-small-en-v1.5', { text: texts }) as { data: number[][] }
+      for (let j = 0; j < batch.length; j++) {
+        rows.push({ ...batch[j], embedding: result.data[j] })
+      }
+    }
+
+    // Insert in batches
+    let inserted = 0
+    for (let i = 0; i < rows.length; i += BATCH) {
+      const batch = rows.slice(i, i + BATCH)
+      const res = await fetch(`${supabaseUrl}/rest/v1/chatbot_qa`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: supabaseServiceKey,
+          Authorization: `Bearer ${supabaseServiceKey}`,
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify(batch),
+      })
+      if (!res.ok) {
+        const err = await res.text()
+        return new Response(JSON.stringify({ error: `Insert failed at row ${i}: ${err}` }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+      inserted += batch.length
+    }
+
+    return new Response(JSON.stringify({ success: true, inserted, total: QA.length }), {
+      headers: { 'Content-Type': 'application/json' },
+    })
+  } catch (err) {
+    console.error('[seed] error:', err)
+    return new Response(JSON.stringify({ error: String(err) }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+}
