@@ -163,10 +163,10 @@ const QA: QAEntry[] = [
 export const GET: APIRoute = async ({ request, locals }) => {
   const env = (locals as any)?.runtime?.env ?? {}
   const ai = env.AI as { run: (model: string, opts: Record<string, unknown>) => Promise<unknown> } | undefined
-  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? ''
+  const seedSecret: string = (env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? '').trim()
 
   const url = new URL(request.url)
-  const key = url.searchParams.get('key')
+  const key = (url.searchParams.get('key') ?? '').trim()
 
   if (!seedSecret || key !== seedSecret) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
@@ -183,7 +183,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
   }
 
   const supabaseUrl: string = (env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? '').trim()
-  const supabaseServiceKey: string = env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+  const supabaseServiceKey: string = (env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? '').trim()
 
   if (!supabaseUrl || !supabaseServiceKey) {
     return new Response(JSON.stringify({ error: 'Supabase env vars not configured' }), {
