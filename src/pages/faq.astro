@@ -154,6 +154,50 @@ const categories = [
         q: 'How many colors can the flexographic printing machine print?',
         a: '6 colors, 6 independent stations with ceramic anilox rollers. Configurations: 0+6, 1+5, 2+4, 3+3.',
       },
+      {
+        q: 'What are the most common defects in flexographic printing?',
+        a: 'The 12 primary defects are: Dot Gain (pressure/anilox volume), Gear Marks (mechanical vibration), Halo & Feathering (pressure/viscosity), Doughnuts & Skip Out (ink transfer), Misregistration (mechanical limits), Mottled Image (anilox/surface energy), Filling In & Bridging (incorrect ink pH), Pinholing (drying too fast), and Dirty Print (contamination). Most stem from imbalances in pressure, ink chemistry, or mechanical concentricity.',
+      },
+      {
+        q: 'What is the "Kiss Print" principle?',
+        a: '"Kiss Print" is the absolute minimum impression pressure required to transfer a clean image. Excessive pressure is the root cause of dot gain and halo effects. Pressure must be calibrated at both the Anilox-to-Plate and Plate-to-Substrate contact points.',
+      },
+      {
+        q: 'What causes dot gain and how do I fix it?',
+        a: 'Dot gain is caused by excessive impression pressure, dots dipping into oversized anilox cells, plate swelling, or incorrect mounting tape. Fix: reduce pressure to kiss print level, clean cylinders, switch to a higher LPI / lower volume anilox roller, and verify ink viscosity.',
+      },
+      {
+        q: 'What causes gear marks (horizontal bands) on the print?',
+        a: 'Gear marks are caused by mechanical resonance — concentricity (T.I.R.) out of spec, excessive ink pressure in the doctor blade chamber, imbalanced image layout, or damaged gears. Fix: verify gear condition, rebalance the image on the printing form, check T.I.R. on anilox and plate cylinders.',
+      },
+      {
+        q: 'How do I select mounting tape hardness for the print job?',
+        a: 'Use Soft (Cushion) tape for halftone/process printing and high-speed runs — prevents dot expansion in fine screens. Use Hard/Medium-Hard tape for solid backgrounds and lines — supports uniform thick ink transfer. Incorrect tape causes halo effects and material waste.',
+      },
+      {
+        q: 'What is the anilox roller and how do I select LPI/BCM?',
+        a: 'The anilox roller is the precision ink metering device. For non-absorbent films (PP woven), use 360–1400 LPI with 1.0–5.0 BCM. For corrugated/kraft (high absorbency), use 200–400 LPI with 4.5–9.5 BCM. Mismatching anilox to substrate causes feathering, dirty print, or mottled image.',
+      },
+      {
+        q: 'How does ink pH affect print quality?',
+        a: 'In water-based ink systems, resins require alkaline pH to stay dissolved. If pH drops, resins precipitate — causing ink kick-out, foaming, and filling in. Use automated pH equipment for metered amine dosing. Keep all ink containers covered to prevent amine evaporation.',
+      },
+      {
+        q: 'What causes filling in and bridging defects?',
+        a: 'Both are caused by incorrect ink pH. Filling In (fine type closes up) and Bridging (dots join together) occur when ink chemistry is off. Fix by adjusting ink pH to the correct alkaline range, and for bridging, switch to a higher LPI anilox to reduce ink volume.',
+      },
+      {
+        q: 'How do I clean and maintain the anilox roller?',
+        a: 'Daily: for water-based inks, clean immediately with hot water and detergents to prevent resin solidification. Deep cleaning: follow exact dilution ratios for chemical cleaning — excessive concentration erodes the ceramic surface. For high-LPI rollers (800–1400 LPI), verify media blasting pressure with the supplier. Laser cleaning is the preferred non-contact method.',
+      },
+      {
+        q: 'What is the shift-start checklist for the printing machine?',
+        a: '(1) Mechanical: inspect gears and mandrels, check T.I.R. concentricity. (2) Chemical: test ink viscosity and pH, verify ink matches substrate surface energy. (3) Plate & Cylinder Hygiene: check plates for swelling, ensure cylinders are free of dried ink. (4) Mounting Integrity: confirm correct tape density, check for trapped air under plates.',
+      },
+      {
+        q: 'What does doctor blade wear indicate?',
+        a: 'Polished Band = excessive pressure → reduce blade pressure. Scalloped Edge = vibration or loose holder → inspect clamps. Linear Scoring = hard particle contamination → check ink filtration. Burnt/Melted Edge = dry friction from running without ink → audit startup procedures.',
+      },
     ],
   },
   {
