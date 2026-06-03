@@ -143,7 +143,7 @@ const QA: QAEntry[] = [
 export const GET: APIRoute = async ({ request, locals }) => {
   const env = (locals as any)?.runtime?.env ?? {}
   const ai = env.AI as { run: (model: string, opts: Record<string, unknown>) => Promise<unknown> } | undefined
-  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? 'reylong-seed-2026'
+  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? ''
 
   const url = new URL(request.url)
   const key = url.searchParams.get('key')
@@ -162,8 +162,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
     })
   }
 
-  const supabaseUrl: string = env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? 'https://lqgrvkhrbsgbatzhzgvy.supabase.co'
-  const supabaseServiceKey: string = env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxZ3J2a2hyYnNnYmF0emh6Z3Z5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTMyMzM1MiwiZXhwIjoyMDk0ODk5MzUyfQ.mlidZHTn0u6XCS4Fj21pi--9xvojIr3-lrevQ-Fxq7k'
+  const supabaseUrl: string = env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? ''
+  const supabaseServiceKey: string = env.SUPABASE_SERVICE_ROLE_KEY ?? import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
 
   if (!supabaseUrl || !supabaseServiceKey) {
     return new Response(JSON.stringify({ error: 'Supabase env vars not configured' }), {
