@@ -19,6 +19,11 @@ pnpm-debug.log*
 .env.local
 .env.development
 .env*.local
+.dev.vars
+.dev.vars.*
+
+# playwright MCP artifacts (may contain secrets in logs)
+.playwright-mcp/
 
 # macOS-specific files
 .DS_Store
