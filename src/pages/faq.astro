@@ -1,0 +1,452 @@
+---
+export const prerender = true
+
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const categories = [
+  {
+    id: 'product-selection',
+    title: 'Product Selection',
+    items: [
+      {
+        q: 'Which machine should I choose for making stand-up doypack pouches?',
+        a: 'The JL-L-2TZP600 is the right choice. It produces stand-up doypack pouches — both plain and with zipper — at 35–120 pcs/min, using heat-seal laminated film (30–180 μm). It handles five bag styles on a single platform so you can switch formats without changing machines.',
+      },
+      {
+        q: 'Can one machine make both flat three-side seal bags and doypack pouches?',
+        a: 'Yes. The JL-L-2TZP600 is a multi-function platform that produces three-side seal bags, three-side seal zipper bags, four-side seal bags, doypack pouches, and doypack with zipper — all on one machine. Switching between bag styles requires a format changeover but no separate machine.',
+      },
+      {
+        q: 'I need to produce coffee bags with a degassing valve. Which machine is suitable?',
+        a: 'The JL-L-2TZP600 supports coffee packaging (both center-seal and doypack formats) and can accommodate degassing valve insertion. Please contact us with your specific valve type and bag dimensions for a configuration confirmation.',
+      },
+      {
+        q: 'Do you have a machine for PP woven bags?',
+        a: 'Yes. The JLPTCSM-1300W is a fully integrated convention line for high-volume PP woven bag production, combining flexographic printing, tube forming, cutting & sewing, and overtape application in one continuous process at 25–40 bags/min.',
+      },
+      {
+        q: 'What machine makes medical packaging bags or sterilization pouches?',
+        a: 'The JL-L-2TZP600 supports medical packaging applications, including individual bags and flat pouches. For specialized medical bag types, please contact our engineering team with your specifications.',
+      },
+      {
+        q: 'I need to package pet food. What bag machine do you recommend?',
+        a: 'The JL-L-2TZP600 handles pet food packaging in doypack, stand-up zipper, and three-side seal formats using high-barrier laminated film. Please share your target bag dimensions and production speed for a detailed recommendation.',
+      },
+      {
+        q: 'Which machine is best for facial mask or cosmetic packaging?',
+        a: 'The JL-L-2TZP600 produces three-side seal and doypack bags commonly used for facial masks, skincare, and cosmetic products. It supports printed laminated films with ≤0.3 mm positional accuracy.',
+      },
+      {
+        q: 'Can your machines handle anti-static packaging for electronics?',
+        a: 'Yes. The JL-L-2TZP600 can process anti-static laminated films suitable for electronic component packaging. The applicable film thickness range is 30–180 μm.',
+      },
+    ],
+  },
+  {
+    id: 'technical-jl-l-2tzp600',
+    title: 'Technical — JL-L-2TZP600',
+    items: [
+      {
+        q: 'What is the maximum production speed of the JL-L-2TZP600?',
+        a: 'Up to 220 pcs/min for three-side seal bags, 150 pcs/min for three-side seal with zipper bags, and 120 pcs/min for doypack pouches. Minimum speed is 35 pcs/min across all formats.',
+      },
+      {
+        q: 'What bag sizes can the JL-L-2TZP600 produce?',
+        a: 'Bag width: 100–580 mm, bag length: 50–420 mm. A skip function extends effective length up to 6×. Bottom seal width: 5–60 mm.',
+      },
+      {
+        q: 'What materials can the JL-L-2TZP600 process?',
+        a: 'Heat-seal laminated films 30–180 μm. Common structures: NY/PE, PET/PE, AL/PE, OPP/CPP, BOPP/LLDPE.',
+      },
+      {
+        q: 'What power supply does the JL-L-2TZP600 require?',
+        a: '220V / 3-phase / 60Hz, 60 kW total. 50 Hz configuration available on request.',
+      },
+      {
+        q: 'How precise is the sealing and registration?',
+        a: '≤0.3 mm positional accuracy via full Panasonic servo control. 4 groups heating + 2 groups cooling for vertical and horizontal seals.',
+      },
+      {
+        q: 'How is the zipper sealed on zipper bag format?',
+        a: 'Ultrasonic technology (1 group). Standard zipper width: 13 mm.',
+      },
+      {
+        q: 'What is the machine weight?',
+        a: '9,000 kg. Contact us for full installation drawing with footprint dimensions.',
+      },
+      {
+        q: 'What control system does the JL-L-2TZP600 use?',
+        a: 'PLC touch-screen with full Panasonic servo drives. 10 mm steel-plate frame for vibration resistance.',
+      },
+      {
+        q: 'Can it run retort or high-temperature packaging films?',
+        a: 'Yes. Temperature range up to 300°C. Suitable for NY/CPP, AL/CPP retort-grade films.',
+      },
+    ],
+  },
+  {
+    id: 'technical-jlptcsm-1300w',
+    title: 'Technical — JLPTCSM-1300W',
+    items: [
+      {
+        q: 'What is the production speed of the PP woven bag convention line?',
+        a: '25–40 bags/min. Integrates flexographic printing, tube forming, cutting & sewing, and overtape application in one continuous process.',
+      },
+      {
+        q: 'What bag dimensions does the JLPTCSM-1300W handle?',
+        a: 'Fabric width: 700–1300 mm. Finished bag width: 430–660 mm. Cutting length: 550–1250 mm. Gusset: 40–90 mm.',
+      },
+      {
+        q: 'How many print colors does the JLPTCSM-1300W support?',
+        a: '4-color flexographic printing (4+0). Printing repeat: 450–1200 mm. Max printing width: 1300 mm.',
+      },
+    ],
+  },
+  {
+    id: 'technical-printing',
+    title: 'Technical — Printing Machine',
+    items: [
+      {
+        q: 'What materials can the flexographic printing machine print on?',
+        a: 'PP woven fabric and PP laminated fabric. Max web width: 800 mm. Max speed: 120 m/min.',
+      },
+      {
+        q: 'How many colors can the flexographic printing machine print?',
+        a: '6 colors, 6 independent stations with ceramic anilox rollers. Configurations: 0+6, 1+5, 2+4, 3+3.',
+      },
+    ],
+  },
+  {
+    id: 'technical-recycling',
+    title: 'Technical — Recycling',
+    items: [
+      {
+        q: 'What materials does the eddy current separator recover?',
+        a: 'Non-ferrous metals (aluminum, copper, brass) from e-waste, shredded plastic, mixed scrap. Capacity: 1,000 kg/h.',
+      },
+    ],
+  },
+  {
+    id: 'ai-solutions',
+    title: 'AI Solutions',
+    items: [
+      {
+        q: 'What is the AI Machine Intelligence solution?',
+        a: 'Edge computing and industrial IoT embedded into existing production lines. Provides real-time computer vision quality inspection, predictive maintenance, and process optimization without cloud connectivity.',
+      },
+      {
+        q: 'Can AI be retrofitted onto an existing machine?',
+        a: 'Yes. Designed case-by-case for specific machines. Can be integrated without full machine replacement.',
+      },
+    ],
+  },
+  {
+    id: 'procurement',
+    title: 'Procurement',
+    items: [
+      {
+        q: 'How do I get a price quote?',
+        a: 'Use the "Request a Quote" button on any product page or visit our Contact page. Our team responds within 1 business day.',
+      },
+      {
+        q: 'How much does the JL-L-2TZP600 cost?',
+        a: 'Pricing varies by configuration. Please use the Request a Quote form — our team responds within 1 business day.',
+      },
+      {
+        q: 'What is the price of the PP woven bag convention line?',
+        a: 'Depends on production specifications. Fill in the inquiry form for a detailed quotation.',
+      },
+      {
+        q: 'Can you give me a ballpark price?',
+        a: 'We quote based on exact requirements. Submit an inquiry with your target bag type, dimensions, and speed.',
+      },
+      {
+        q: 'What is the typical lead time for machine delivery?',
+        a: '2–3 months from order confirmation. Covers manufacturing, quality testing, and pre-shipment inspection.',
+      },
+      {
+        q: 'Do you offer machine customization?',
+        a: 'Yes. Bag size range, speed configuration, optional accessories, and special film compatibility. Contact our engineering team.',
+      },
+      {
+        q: 'What payment terms do you offer?',
+        a: 'Discussed on a per-order basis. Contact our sales team for options.',
+      },
+      {
+        q: 'Do you export to the United States / Japan?',
+        a: 'Yes. Experience with export documentation, container loading, and international shipping.',
+      },
+      {
+        q: 'What voltage and frequency options are available?',
+        a: 'Default: 220V/3P/60Hz. 50 Hz configurations available on request.',
+      },
+    ],
+  },
+  {
+    id: 'after-sales',
+    title: 'After-Sales & Support',
+    items: [
+      {
+        q: 'What warranty does Rey Long provide?',
+        a: 'Warranty on parts and workmanship. Specific terms stated in the sales contract.',
+      },
+      {
+        q: 'Is installation and training included?',
+        a: 'Yes. Technical documentation, remote support, on-site installation, and operator training included.',
+      },
+      {
+        q: 'How do I order spare parts?',
+        a: 'Contact after-sales team with machine model number and part specification. Fast global delivery.',
+      },
+      {
+        q: 'Do you provide remote technical support?',
+        a: 'Yes. Remote support via video call. On-site service available for major issues.',
+      },
+    ],
+  },
+  {
+    id: 'company',
+    title: 'Company',
+    items: [
+      {
+        q: 'Where is Rey Long based?',
+        a: 'Headquartered in Taiwan. Serving manufacturers worldwide.',
+      },
+      {
+        q: 'What types of machines does Rey Long manufacture?',
+        a: 'Flexible packaging bag making machines, PP woven bag convention lines, flexographic printing machines, recycling separation systems, and AI machine intelligence solutions.',
+      },
+      {
+        q: 'Does Rey Long have CE certification?',
+        a: 'CE certification is currently in progress. Contact us for the latest status.',
+      },
+    ],
+  },
+  {
+    id: 'application',
+    title: 'Application',
+    items: [
+      {
+        q: 'Can the JL-L-2TZP600 produce liquid packaging pouches?',
+        a: 'Yes. Doypack and three-side seal formats using barrier laminated films. Liquid filling requires a separate filling machine.',
+      },
+      {
+        q: 'Is the machine suitable for rice or grain packaging?',
+        a: 'Yes. Three-side seal and doypack. Film thickness up to 180 μm.',
+      },
+      {
+        q: 'Can I use it for garment packaging?',
+        a: 'Yes. Supports wide bags up to 580 mm.',
+      },
+      {
+        q: 'What frozen food packaging can it produce?',
+        a: 'Three-side seal, doypack, zipper using NY/PE or PET/PE rated for freezer temperatures.',
+      },
+    ],
+  },
+  {
+    id: 'operations',
+    title: 'Technical — Operations',
+    items: [
+      {
+        q: 'How long does format changeover take?',
+        a: 'Minor adjustments: 15–30 min. Switching bag types: 30–60 min with trained operators.',
+      },
+      {
+        q: 'How do I set sealing temperature for a new film?',
+        a: "Start with film supplier's recommended range, adjust in 5°C increments. Machine supports up to 300°C.",
+      },
+      {
+        q: 'What causes poor seal quality?',
+        a: 'Temperature too low, pressure insufficient, dwell time too short, film contamination, or worn sealing bar.',
+      },
+      {
+        q: 'What causes misaligned printing registration?',
+        a: 'Film tension inconsistency, film splice variation, photo-eye sensitivity, or servo parameters need recalibration.',
+      },
+      {
+        q: 'How do I thread the film?',
+        a: 'Detailed in operation manual. Threading diagram posted near film path on the machine.',
+      },
+      {
+        q: 'What is the recommended maintenance schedule?',
+        a: 'Daily: clean sealing bars, check film path. Weekly: lubricate, inspect servo belts. Monthly: check electrical connections, heating elements.',
+      },
+      {
+        q: 'What spare parts should I keep in stock?',
+        a: 'Sealing bars, silicone pads, heating elements, thermocouples, photo-eye sensors, servo belts.',
+      },
+      {
+        q: 'The machine stops and shows an error. What should I do?',
+        a: 'Check PLC touch screen for error code. Common causes: film break, servo fault, temperature alarm. Contact Rey Long support with the error code.',
+      },
+      {
+        q: 'Can I run at maximum speed immediately after startup?',
+        a: 'No. Warm up sealing bars 10–15 minutes before full speed. Start slow, verify seal quality, then increase speed.',
+      },
+      {
+        q: 'How do I adjust zipper insertion position?',
+        a: 'Via servo-controlled zipper feeding on PLC interface. Set target distance, run test bag, fine-tune.',
+      },
+      {
+        q: 'What film roll width and core diameter does it accept?',
+        a: 'Max roll diameter: φ600 mm. Standard 3-inch cores. Max web width: 1240 mm main film, 150 mm patch web.',
+      },
+      {
+        q: 'Can it handle pre-printed films with registration marks?',
+        a: 'Yes. Photo-eye sensors maintain ≤0.3 mm accuracy. Ensure consistent high-contrast registration marks.',
+      },
+      {
+        q: 'What happens if the film breaks during production?',
+        a: 'Machine automatically stops. Resplice film, re-thread, reset alarm, restart at low speed.',
+      },
+      {
+        q: 'Is it possible to produce bags longer than 420 mm?',
+        a: 'Yes. Skip function extends effective length up to 6×. Contact engineering team for configuration.',
+      },
+    ],
+  },
+  {
+    id: 'comparison',
+    title: 'Comparison',
+    items: [
+      {
+        q: 'How does the JL-L-2TZP600 compare to other high-speed pouch machines?',
+        a: '≤0.3 mm accuracy, up to 220 pcs/min, Panasonic full-servo control, competitive pricing, 2–3 month lead time, 10 mm steel-plate frame.',
+      },
+      {
+        q: 'What makes Rey Long machines different?',
+        a: '10 mm steel-plate frame, full Panasonic servo control, multi-format capability, AI integration options, direct factory engineering support.',
+      },
+    ],
+  },
+]
+
+// Build FAQPage JSON-LD
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: categories.flatMap((cat) =>
+    cat.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    }))
+  ),
+}
+---
+
+<BaseLayout
+  title="FAQ — Reylong Packaging & Bag Making Machines"
+  description="Frequently asked questions about Reylong bag making machines, PP woven bag lines, flexographic printing, and after-sales support. Get answers fast."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="bg-brand-blue text-white py-14">
+    <div class="container-wide">
+      <h1 class="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h1>
+      <p class="mt-3 text-blue-100 text-lg max-w-2xl">
+        Everything you need to know about our machines, pricing, and after-sales support — answered.
+      </p>
+      <p class="mt-2 text-blue-200 text-sm">
+        Can't find what you're looking for?
+        <a href="/contact" class="underline hover:text-white transition-colors">Contact our team</a> — we reply within 1 business day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Nav -->
+  <nav aria-label="FAQ categories" class="bg-gray-50 border-b border-gray-200 sticky top-0 z-10 hidden md:block">
+    <div class="container-wide overflow-x-auto">
+      <ul class="flex gap-1 py-2 text-sm font-medium whitespace-nowrap">
+        {categories.map((cat) => (
+          <li>
+            <a
+              href={`#${cat.id}`}
+              class="px-3 py-1.5 rounded hover:bg-white hover:text-brand-blue transition-colors text-gray-600"
+            >
+              {cat.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- FAQ Content -->
+  <div class="container-wide py-12 space-y-12">
+    {categories.map((cat) => (
+      <section id={cat.id} aria-labelledby={`heading-${cat.id}`}>
+        <h2
+          id={`heading-${cat.id}`}
+          class="text-xl font-bold text-gray-900 border-l-4 border-brand-red pl-4 mb-5"
+        >
+          {cat.title}
+        </h2>
+
+        <div class="space-y-2">
+          {cat.items.map((item, idx) => (
+            <div
+              x-data="{ open: false }"
+              class="border border-gray-200 rounded-lg overflow-hidden"
+            >
+              <button
+                x-on:click="open = !open"
+                class="w-full text-left flex items-center justify-between gap-4 px-5 py-4 bg-white hover:bg-gray-50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                aria-expanded="false"
+                x-bind:aria-expanded="open.toString()"
+              >
+                <span class="font-medium text-gray-900 text-sm md:text-base">
+                  {item.q}
+                </span>
+                <span
+                  class="flex-shrink-0 w-5 h-5 text-brand-blue transition-transform duration-200"
+                  x-bind:class="open ? 'rotate-180' : ''"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+
+              <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-150"
+                x-transition:enter-start="opacity-0 -translate-y-1"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-1"
+                class="px-5 pb-5 pt-1 bg-white border-t border-gray-100"
+                x-cloak
+              >
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                  {item.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <!-- CTA -->
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-8 text-center mt-8">
+      <h2 class="text-xl font-bold text-gray-900">Still have questions?</h2>
+      <p class="text-gray-600 mt-2 mb-6">
+        Our engineering team can answer technical questions about specific configurations, film compatibility, and custom options.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/contact" class="btn-primary">Contact Us</a>
+        <a href="/products" class="btn-secondary">Browse Products</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
