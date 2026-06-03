@@ -143,7 +143,7 @@ const QA: QAEntry[] = [
 export const GET: APIRoute = async ({ request, locals }) => {
   const env = (locals as any)?.runtime?.env ?? {}
   const ai = env.AI as { run: (model: string, opts: Record<string, unknown>) => Promise<unknown> } | undefined
-  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? ''
+  const seedSecret: string = env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? 'reylong-seed-2026'
 
   const url = new URL(request.url)
   const key = url.searchParams.get('key')
