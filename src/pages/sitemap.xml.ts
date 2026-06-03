@@ -15,7 +15,8 @@ const staticRoutes = [
 export const GET: APIRoute = async () => {
   const supabase = createClient(
     import.meta.env.SUPABASE_URL ?? 'https://lqgrvkhrbsgbatzhzgvy.supabase.co',
-    import.meta.env.SUPABASE_ANON_KEY ?? 'sb_publishable_p5T1U-WGt_bNzoWdAHZu3Q_KvuYVN2J'
+    // publishable key is public by design; embed directly to avoid stale build-time env
+    'sb_publishable_p5T1U-WGt_bNzoWdAHZu3Q_KvuYVN2J'
   )
 
   const { data: products } = await supabase
