@@ -185,41 +185,71 @@ export const GET: APIRoute = async ({ request, locals }) => {
   const supabaseUrl = 'https://lqgrvkhrbsgbatzhzgvy.supabase.co'
   const supabaseServiceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxZ3J2a2hyYnNnYmF0emh6Z3Z5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTMyMzM1MiwiZXhwIjoyMDk0ODk5MzUyfQ.mlidZHTn0u6XCS4Fj21pi--9xvojIr3-lrevQ-Fxq7k'
 
+  // Step 1: test embed of 1 item
+  let step = 'embed-test'
   try {
+    const testEmbed = await ai.run('@cf/baai/bge-small-en-v1.5', { text: ['test'] }) as { data: number[][] }
+    const testVec = testEmbed?.data?.[0]
+    if (!testVec || testVec.length !== 384) {
+      return new Response(JSON.stringify({ error: 'embed-test failed', shape: testEmbed }), { status: 500 })
+    }
+
+    // Step 2: test insert of 1 row
+    step = 'insert-test'
+    const testRow = [{ ...QA[0], embedding: Array.from(testVec) }]
+    const testRes = await fetch(`${supabaseUrl}/rest/v1/chatbot_qa`, {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'apikey': supabaseServiceKey,
+        'Authorization': `Bearer ${supabaseServiceKey}`,
+        'Prefer': 'return=minimal',
+      }),
+      body: JSON.stringify(testRow),
+    })
+    if (!testRes.ok) {
+      const err = await testRes.text()
+      return new Response(JSON.stringify({ error: `insert-test failed: ${err}` }), { status: 500 })
+    }
+
+    // Step 3: delete the test row and do full seed
+    step = 'full-seed'
+    await fetch(`${supabaseUrl}/rest/v1/chatbot_qa?id=gte.1`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'apikey': supabaseServiceKey,
+        'Authorization': `Bearer ${supabaseServiceKey}`,
+      }),
+    })
+
     const BATCH = 20
     type Row = QAEntry & { embedding: number[] }
     const rows: Row[] = []
-
-    // Generate embeddings in batches
     for (let i = 0; i < QA.length; i += BATCH) {
       const batch = QA.slice(i, i + BATCH)
       const texts = batch.map(q => q.question)
       const result = await ai.run('@cf/baai/bge-small-en-v1.5', { text: texts }) as { data: number[][] }
       for (let j = 0; j < batch.length; j++) {
-        rows.push({ ...batch[j], embedding: result.data[j] })
+        rows.push({ ...batch[j], embedding: Array.from(result.data[j]) })
       }
     }
 
-    // Insert in batches
     let inserted = 0
     for (let i = 0; i < rows.length; i += BATCH) {
       const batch = rows.slice(i, i + BATCH)
       const res = await fetch(`${supabaseUrl}/rest/v1/chatbot_qa`, {
         method: 'POST',
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
-          apikey: supabaseServiceKey,
-          Authorization: `Bearer ${supabaseServiceKey}`,
-          Prefer: 'return=minimal',
-        },
+          'apikey': supabaseServiceKey,
+          'Authorization': `Bearer ${supabaseServiceKey}`,
+          'Prefer': 'return=minimal',
+        }),
         body: JSON.stringify(batch),
       })
       if (!res.ok) {
         const err = await res.text()
-        return new Response(JSON.stringify({ error: `Insert failed at row ${i}: ${err}` }), {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' },
-        })
+        return new Response(JSON.stringify({ error: `Insert failed at row ${i}: ${err}` }), { status: 500 })
       }
       inserted += batch.length
     }
@@ -228,8 +258,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
       headers: { 'Content-Type': 'application/json' },
     })
   } catch (err) {
-    console.error('[seed] error:', err)
-    return new Response(JSON.stringify({ error: String(err) }), {
+    return new Response(JSON.stringify({ error: String(err), step }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     })
