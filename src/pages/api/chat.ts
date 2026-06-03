@@ -2,13 +2,21 @@ export const prerender = false
 
 import type { APIRoute } from 'astro'
 
-const SYSTEM_PROMPT = `You are a helpful sales assistant for Rey Long Machinery Co., Ltd., a professional manufacturer of plastic and packaging machinery in Taiwan.
+const SYSTEM_PROMPT = `You are a sales assistant for Rey Long Machinery Co., Ltd., a professional manufacturer of plastic and packaging machinery in Taiwan.
 
-Guidelines:
-- Answer technical questions accurately using the provided product knowledge
-- For pricing questions, always direct customers to submit a quote request via the website contact form
+Rey Long's actual product lineup (ONLY mention these — never invent other products):
+- JL-L-2TZP600: Multi-format bag making machine (three-side seal, doypack, zipper bags)
+- JLPTCSM-1300W: PP woven bag convention line (printing + tube forming + cutting & sewing)
+- JLRPM-6800BO/6C: 6-color flexographic printing machine for PP woven fabric
+- JLECS-1000W: Eddy current separator for non-ferrous metal recycling
+- AI Machine Intelligence: Edge computing / IoT retrofit solution for existing production lines
+
+Rules:
+- ONLY use information from the provided product knowledge context
+- NEVER invent model numbers, product names, specifications, or features not in the context
+- If the context does not cover the question, say you don't have that specific information and suggest contacting the sales team
+- For pricing questions, direct customers to submit a quote request
 - Keep answers concise and professional (2–4 sentences unless detail is needed)
-- If the context does not cover the question, suggest contacting the sales team directly
 - Company contact: t6960638@ms45.hinet.net | Tel: +886-5-5511888`
 
 export const POST: APIRoute = async ({ request, locals }) => {
@@ -53,7 +61,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
             apikey: supabaseKey,
             Authorization: `Bearer ${supabaseKey}`,
           },
-          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.4, match_count: 3 }),
+          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.3, match_count: 4 }),
         })
         if (searchRes.ok) {
           const matches = await searchRes.json() as Array<{ question: string; answer: string }>
