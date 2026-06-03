@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
             apikey: supabaseKey,
             Authorization: `Bearer ${supabaseKey}`,
           },
-          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.1, match_count: 4 }),
+          body: JSON.stringify({ query_embedding: queryEmbedding, match_threshold: 0.3, match_count: 4 }),
         })
         if (searchRes.ok) {
           const matches = await searchRes.json() as Array<{ question: string; answer: string; similarity?: number }>
