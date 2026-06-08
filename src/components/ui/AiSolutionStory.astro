@@ -1,0 +1,77 @@
+---
+import type { AiContent } from '../../lib/db/products'
+
+interface Props {
+  content: AiContent
+  lang?: 'en' | 'es'
+}
+
+const { content, lang = 'en' } = Astro.props
+const isEs = lang === 'es'
+const t = (en: string, es: string) => (isEs ? es : en)
+
+const hero = content.hero
+const highlights = content.highlights ?? []
+const sections = content.sections ?? []
+const machines = content.machines ?? []
+---
+
+{hero?.tagline_en && (
+  <section class="mt-12 relative overflow-hidden bg-brand-blue text-white">
+    {hero.image_url && (
+      <img src={hero.image_url} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-30" />
+    )}
+    <div class="relative px-8 py-16 md:py-24 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold max-w-3xl mx-auto !text-white">
+        {t(hero.tagline_en, hero.tagline_es)}
+      </h2>
+    </div>
+  </section>
+)}
+
+{highlights.length > 0 && (
+  <section class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4" aria-label={t('Results', 'Resultados')}>
+    {highlights.map(h => (
+      <div class="bg-gray-50 border border-gray-200 p-6 text-center">
+        <div class="text-3xl font-bold text-brand-red">{h.value}</div>
+        <div class="text-sm text-gray-600 mt-2 leading-snug">{t(h.label_en, h.label_es)}</div>
+      </div>
+    ))}
+  </section>
+)}
+
+{sections.length > 0 && (
+  <div class="mt-16 space-y-16">
+    {sections.map((s, i) => (
+      <section class={`grid grid-cols-1 ${s.image_url ? 'lg:grid-cols-2' : ''} gap-8 lg:gap-12 items-center`}>
+        {s.image_url && (
+          <img
+            src={s.image_url}
+            alt={t(s.heading_en, s.heading_es)}
+            class={`w-full aspect-[4/3] object-cover ${i % 2 === 1 ? 'lg:order-last' : ''}`}
+          />
+        )}
+        <div class={s.image_url ? '' : 'max-w-3xl'}>
+          <h3 class="text-2xl font-bold">{t(s.heading_en, s.heading_es)}</h3>
+          <p class="text-gray-600 mt-4 leading-relaxed">{t(s.body_en, s.body_es)}</p>
+        </div>
+      </section>
+    ))}
+  </div>
+)}
+
+{machines.length > 0 && (
+  <section class="mt-16" aria-label={t('Applicable machines', 'Máquinas aplicables')}>
+    <h3 class="text-xl font-bold mb-6">{t('Deployed across', 'Implementado en')}</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {machines.map(m => (
+        <div class="border border-gray-200 overflow-hidden">
+          {m.image_url && (
+            <img src={m.image_url} alt={t(m.name_en, m.name_es)} class="w-full aspect-video object-cover" />
+          )}
+          <div class="p-4 font-semibold text-gray-800">{t(m.name_en, m.name_es)}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

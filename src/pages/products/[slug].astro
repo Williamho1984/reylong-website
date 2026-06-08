@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import ImageGallery from '../../components/ui/ImageGallery.astro'
 import SpecsTable from '../../components/ui/SpecsTable.astro'
 import ApplicationsGrid from '../../components/ui/ApplicationsGrid.astro'
+import AiSolutionStory from '../../components/ui/AiSolutionStory.astro'
 import ProductSchema from '../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../components/ui/InquiryForm.astro'
 import { getProductBySlug, getProductMedia } from '../../lib/db/products'
@@ -14,6 +15,10 @@ if (!product) return Astro.redirect('/products')
 
 const media = await getProductMedia(product.id).catch(() => [])
 const mainImageUrl = media.find(m => m.type === 'image')?.url
+
+// Solution-type products use an article/story layout (alternating image + text)
+// instead of the gallery + specs-table template. Driven by the products.content JSONB.
+const aiContent = product.content?.sections?.length ? product.content : null
 const pageUrl = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : `https://reylong.com${Astro.url.pathname}`
@@ -87,36 +92,58 @@ const faqItems: FAQItem[] = productFAQ[slug] ?? [
       </ol>
     </nav>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <!-- Media Gallery -->
-      <div>
-        <ImageGallery media={media} productName={product.name_en} />
-      </div>
-
-      <!-- Product Info -->
-      <div>
+    {aiContent ? (
+      <!-- Solution intro (article layout) -->
+      <div class="max-w-3xl">
         <p class="text-sm text-gray-500 uppercase tracking-wide mb-1 capitalize">
           {product.category.replace(/-/g, ' ')}
         </p>
         <h1>{product.name_en}</h1>
         <p class="text-gray-600 mt-4 leading-relaxed">{product.description_en}</p>
-
         <div class="flex flex-wrap gap-3 mt-6">
           <a href="#inquiry" class="btn-primary">Request a Quote</a>
           <a href="/contact" class="btn-secondary">Contact Us</a>
         </div>
       </div>
-    </div>
+    ) : (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Media Gallery -->
+        <div>
+          <ImageGallery media={media} productName={product.name_en} />
+        </div>
 
-    <!-- Application Fields -->
-    <ApplicationsGrid applications={product.applications ?? []} lang="en" />
+        <!-- Product Info -->
+        <div>
+          <p class="text-sm text-gray-500 uppercase tracking-wide mb-1 capitalize">
+            {product.category.replace(/-/g, ' ')}
+          </p>
+          <h1>{product.name_en}</h1>
+          <p class="text-gray-600 mt-4 leading-relaxed">{product.description_en}</p>
 
-    <!-- Technical Specs -->
-    {(Array.isArray(product.specs) ? product.specs.length : Object.keys(product.specs ?? {}).length) > 0 && (
-      <section class="mt-12" aria-label="Technical specifications">
-        <h2 class="mb-4">Technical Specifications</h2>
-        <SpecsTable specs={product.specs} />
-      </section>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <a href="#inquiry" class="btn-primary">Request a Quote</a>
+            <a href="/contact" class="btn-secondary">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {aiContent ? (
+      <!-- Solution story: hero, results, alternating sections, machines -->
+      <AiSolutionStory content={aiContent} lang="en" />
+    ) : (
+      <Fragment>
+        <!-- Application Fields -->
+        <ApplicationsGrid applications={product.applications ?? []} lang="en" />
+
+        <!-- Technical Specs -->
+        {(Array.isArray(product.specs) ? product.specs.length : Object.keys(product.specs ?? {}).length) > 0 && (
+          <section class="mt-12" aria-label="Technical specifications">
+            <h2 class="mb-4">Technical Specifications</h2>
+            <SpecsTable specs={product.specs} />
+          </section>
+        )}
+      </Fragment>
     )}
 
     <!-- FAQ Section (AEO) -->

@@ -7,6 +7,26 @@ export type ApplicationField = {
   image_url: string
 }
 
+// Rich "article" content for solution-type products (e.g. AI Machine Intelligence),
+// presented as a story with alternating image/text sections instead of a specs table.
+// Stored in the products.content JSONB column so images can be filled in later
+// (upload to the product-media bucket, then set image_url) without a redeploy.
+export type AiStoryHighlight = { value: string; label_en: string; label_es: string }
+export type AiStorySection = {
+  heading_en: string
+  heading_es: string
+  body_en: string
+  body_es: string
+  image_url: string
+}
+export type AiStoryMachine = { name_en: string; name_es: string; image_url: string }
+export type AiContent = {
+  hero?: { tagline_en: string; tagline_es: string; image_url: string }
+  highlights?: AiStoryHighlight[]
+  sections?: AiStorySection[]
+  machines?: AiStoryMachine[]
+}
+
 export type Product = {
   id: string
   slug: string
@@ -19,6 +39,7 @@ export type Product = {
   description_es: string
   specs: Array<{ key: string; value: string }> | Record<string, string>
   applications: ApplicationField[]
+  content?: AiContent | null
   created_at: string
   updated_at: string
   cover_image_url?: string

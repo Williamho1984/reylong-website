@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro'
 import ImageGallery from '../../../components/ui/ImageGallery.astro'
 import SpecsTable from '../../../components/ui/SpecsTable.astro'
 import ApplicationsGrid from '../../../components/ui/ApplicationsGrid.astro'
+import AiSolutionStory from '../../../components/ui/AiSolutionStory.astro'
 import ProductSchema from '../../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../../components/ui/InquiryForm.astro'
 import { getProductBySlug, getProductMedia } from '../../../lib/db/products'
@@ -14,6 +15,8 @@ if (!product) return Astro.redirect('/es/products')
 
 const media = await getProductMedia(product.id).catch(() => [])
 const mainImageUrl = media.find(m => m.type === 'image')?.url
+
+const aiContent = product.content?.sections?.length ? product.content : null
 const pageUrl = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : `https://reylong.com${Astro.url.pathname}`
@@ -30,23 +33,37 @@ const pageUrl = Astro.site
   </Fragment>
 
   <div class="container-wide py-12">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <ImageGallery media={media} productName={product.name_es} />
-      <div>
+    {aiContent ? (
+      <div class="max-w-3xl">
         <h1>{product.name_es}</h1>
         <p class="text-gray-600 mt-4 leading-relaxed">{product.description_es}</p>
         <a href="#inquiry" class="btn-primary mt-6 inline-block">Solicitar Cotización</a>
       </div>
-    </div>
+    ) : (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <ImageGallery media={media} productName={product.name_es} />
+        <div>
+          <h1>{product.name_es}</h1>
+          <p class="text-gray-600 mt-4 leading-relaxed">{product.description_es}</p>
+          <a href="#inquiry" class="btn-primary mt-6 inline-block">Solicitar Cotización</a>
+        </div>
+      </div>
+    )}
 
-    <!-- Application Fields -->
-    <ApplicationsGrid applications={product.applications ?? []} lang="es" />
+    {aiContent ? (
+      <AiSolutionStory content={aiContent} lang="es" />
+    ) : (
+      <Fragment>
+        <!-- Application Fields -->
+        <ApplicationsGrid applications={product.applications ?? []} lang="es" />
 
-    {Object.keys(product.specs ?? {}).length > 0 && (
-      <section class="mt-12">
-        <h2 class="mb-4">Especificaciones Técnicas</h2>
-        <SpecsTable specs={product.specs} />
-      </section>
+        {Object.keys(product.specs ?? {}).length > 0 && (
+          <section class="mt-12">
+            <h2 class="mb-4">Especificaciones Técnicas</h2>
+            <SpecsTable specs={product.specs} />
+          </section>
+        )}
+      </Fragment>
     )}
 
     <section id="inquiry" class="mt-12 bg-gray-50 p-8">
