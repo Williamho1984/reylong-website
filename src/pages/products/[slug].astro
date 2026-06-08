@@ -49,6 +49,14 @@ const productFAQ: Record<string, FAQItem[]> = {
     { q: 'Is installation and training provided?', a: 'Yes. Rey Long provides on-site installation, technical documentation, and operator training. Remote technical support is also available after commissioning.' },
     { q: 'What is the standard lead time?', a: 'Standard lead time is 2–3 months from order confirmation, covering manufacturing, quality testing, and pre-shipment inspection.' },
   ],
+  'ai-machine-intelligence-solutions': [
+    { q: 'What does AI-Powered Machine Intelligence actually do on a plastic bag making machine?', a: 'It adds a "digital brain" to the line through three capabilities: it digitizes veteran operators\' parameter know-how and recommends optimal settings on the HMI, runs CNN computer-vision inspection to catch defects in real time, and applies dynamic error compensation that corrects the servo drives to tighten cutting and sewing accuracy. All inference runs on edge hardware at the machine.' },
+    { q: 'Can it be retrofitted onto machines we already operate?', a: 'Yes. The program is engineered case by case for a specific machine and process and integrates into existing production lines through standard industrial protocols (OPC-UA, Modbus, MQTT) — no full machine replacement required. Send us your machine type and target application for an assessment.' },
+    { q: 'Does the system need internet or cloud connectivity?', a: 'No. All AI inference and decision-making run locally on edge hardware installed at the machine, with near-zero latency and full offline resilience. This suits factory environments with limited networks or strict data-security requirements.' },
+    { q: 'What defects can the computer-vision inspection detect?', a: 'Printing defects (registration drift, ink skip, blur, smearing), material defects (broken warp/weft filaments, weave holes, surface fuzz), and processing defects (skipped stitches, cut-point offset, uneven hems). The model deploys few-shot — a baseline can be built from as few as ~50 reference samples — and targets up to 95%+ defect recall.' },
+    { q: 'How much can it improve accuracy and reduce waste?', a: 'By reading Eye-Mark deformation and compensating the servo drives in real time, cutting and sewing accuracy can target ≤ ±1 mm versus the ~±5 mm typical of fixed-length cutting, with scrap reduced to as low as ~2% from ~5% and print yield up by around 5% — all application-dependent. One operator can also supervise up to 4 machines instead of 2.' },
+    { q: 'Does it help when running recycled (PCR) material?', a: 'Yes. Recycled resin has unstable melt flow and tensile strength that can cause breaks at high speed. The AI tension-control loop senses the resulting micro-variations and automatically adjusts speed and sealing temperature to keep the bag within its strength spec — increasingly useful as brands move to higher recycled content.' },
+  ],
 }
 
 const faqItems: FAQItem[] = productFAQ[slug] ?? [
