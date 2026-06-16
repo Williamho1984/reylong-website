@@ -1,0 +1,51 @@
+---
+import type { TechArticle } from '../../lib/db/products'
+
+interface Props {
+  article: TechArticle
+  lang?: 'en' | 'es'
+}
+
+const { article, lang = 'en' } = Astro.props
+const title = lang === 'es' ? article.title_es : article.title_en
+---
+
+<section class="mt-12" id="technical-overview" aria-label="Technical overview">
+  <h2 class="mb-6">{title || (lang === 'es' ? 'Principio Técnico' : 'How It Works')}</h2>
+  <div class="space-y-8">
+    {article.sections.map(section => {
+      const heading = lang === 'es' ? section.heading_es : section.heading_en
+      const body = lang === 'es' ? section.body_es : section.body_en
+      return (
+        <div>
+          {heading && <h3 class="text-lg font-semibold mb-2">{heading}</h3>}
+          <p class="text-gray-700 leading-relaxed">{body}</p>
+          {section.image_url && (
+            <figure class="mt-4">
+              <img
+                src={section.image_url}
+                alt={section.image_caption_en ?? heading ?? ''}
+                class="w-full max-w-2xl rounded"
+                loading="lazy"
+              />
+              {section.image_caption_en && (
+                <figcaption class="text-sm text-gray-500 mt-1">{section.image_caption_en}</figcaption>
+              )}
+            </figure>
+          )}
+          {section.animation_url && !section.image_url && (
+            <video
+              src={section.animation_url}
+              autoplay
+              loop
+              muted
+              playsinline
+              class="mt-4 w-full max-w-2xl rounded"
+              aria-label={heading ?? ''}
+            />
+          )}
+        </div>
+      )
+    })}
+  </div>
+</section>
