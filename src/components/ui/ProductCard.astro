@@ -33,6 +33,16 @@ const learnMoreLabel = lang === 'es' ? 'Más Información' : 'Learn More'
       {name}
     </h3>
     <p class="text-gray-600 text-sm mt-2 line-clamp-3">{description}</p>
+    {product.tech_article?.summary_en && lang === 'en' && (
+      <p class="text-gray-500 text-xs mt-2 line-clamp-2 italic">
+        {product.tech_article.summary_en}
+      </p>
+    )}
+    {product.tech_article?.summary_es && lang === 'es' && (
+      <p class="text-gray-500 text-xs mt-2 line-clamp-2 italic">
+        {product.tech_article.summary_es}
+      </p>
+    )}
     <a
       href={productUrl}
       class="inline-block mt-4 text-brand-blue text-sm font-medium hover:underline"
