@@ -6,6 +6,7 @@ import ApplicationsGrid from '../../components/ui/ApplicationsGrid.astro'
 import AiSolutionStory from '../../components/ui/AiSolutionStory.astro'
 import ProductSchema from '../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../components/ui/InquiryForm.astro'
+import TechArticleSection from '../../components/ui/TechArticleSection.astro'
 import { getProductBySlug, getProductMedia } from '../../lib/db/products'
 
 const { slug } = Astro.params
@@ -145,6 +146,10 @@ const faqItems: FAQItem[] = productFAQ[slug] ?? [
         )}
       </Fragment>
     )}
+
+    {!aiContent && product.tech_article?.sections?.length ? (
+      <TechArticleSection article={product.tech_article} lang="en" />
+    ) : null}
 
     <!-- FAQ Section (AEO) -->
     <section class="mt-12" aria-label="Frequently asked questions">
