@@ -163,12 +163,19 @@ const QA: QAEntry[] = [
 export const GET: APIRoute = async ({ request, locals }) => {
   const env = (locals as any)?.runtime?.env ?? {}
   const ai = env.AI as { run: (model: string, opts: Record<string, unknown>) => Promise<unknown> } | undefined
-  const seedSecret: string = (env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? 'reylong-seed-2026').trim()
+  const seedSecret: string = (env.SEED_SECRET ?? import.meta.env.SEED_SECRET ?? '').trim()
+
+  if (!seedSecret) {
+    return new Response(JSON.stringify({ error: 'SEED_SECRET not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
 
   const url = new URL(request.url)
   const key = (url.searchParams.get('key') ?? '').trim()
 
-  if (!seedSecret || key !== seedSecret) {
+  if (key !== seedSecret) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
