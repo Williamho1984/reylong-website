@@ -27,6 +27,24 @@ export type AiContent = {
   machines?: AiStoryMachine[]
 }
 
+export type TechArticleSection = {
+  heading_en: string
+  heading_es: string
+  body_en: string
+  body_es: string
+  image_url?: string
+  image_caption_en?: string
+  animation_url?: string
+}
+
+export type TechArticle = {
+  summary_en: string
+  summary_es: string
+  title_en: string
+  title_es: string
+  sections: TechArticleSection[]
+}
+
 export type Product = {
   id: string
   slug: string
@@ -40,6 +58,7 @@ export type Product = {
   specs: Array<{ key: string; value: string }> | Record<string, string>
   applications: ApplicationField[]
   content?: AiContent | null
+  tech_article?: TechArticle | null
   created_at: string
   updated_at: string
   cover_image_url?: string
