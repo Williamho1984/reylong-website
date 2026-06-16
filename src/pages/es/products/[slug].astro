@@ -6,6 +6,7 @@ import ApplicationsGrid from '../../../components/ui/ApplicationsGrid.astro'
 import AiSolutionStory from '../../../components/ui/AiSolutionStory.astro'
 import ProductSchema from '../../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../../components/ui/InquiryForm.astro'
+import TechArticleSection from '../../../components/ui/TechArticleSection.astro'
 import { getProductBySlug, getProductMedia } from '../../../lib/db/products'
 
 const { slug } = Astro.params
@@ -65,6 +66,10 @@ const pageUrl = Astro.site
         )}
       </Fragment>
     )}
+
+    {!aiContent && product.tech_article?.sections?.length ? (
+      <TechArticleSection article={product.tech_article} lang="es" />
+    ) : null}
 
     <section id="inquiry" class="mt-12 bg-gray-50 p-8">
       <h2 class="mb-6">Solicitar Cotización — {product.name_es}</h2>
