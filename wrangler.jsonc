@@ -5,5 +5,8 @@
   "pages_build_output_dir": "./dist",
   "ai": {
     "binding": "AI"
-  }
+  },
+  "kv_namespaces": [
+    { "binding": "RATE_LIMIT", "id": "15b62e4d40d344b5a67dca5e38525a87" }
+  ]
 }

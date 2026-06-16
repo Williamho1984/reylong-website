@@ -1,6 +1,17 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
+import { checkRateLimit, getClientIp } from '../../lib/rate-limit'
+
+const ALLOWED_ORIGINS = ['https://www.reylong.com', 'https://reylong.com']
+
+function corsHeaders(request: Request): Record<string, string> {
+  const origin = request.headers.get('origin')
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    return { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' }
+  }
+  return {}
+}
 
 const SYSTEM_PROMPT = `You are a sales assistant for Rey Long Machinery Co., Ltd., a professional manufacturer of plastic and packaging machinery in Taiwan.
 
@@ -27,6 +38,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response(JSON.stringify({ error: 'AI binding not configured' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  const rateLimit = await checkRateLimit(env.RATE_LIMIT, `chat:${getClientIp(request)}`, 8, 60)
+  if (!rateLimit.allowed) {
+    return new Response(JSON.stringify({ error: 'Too many requests, please slow down.' }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'Retry-After': String(rateLimit.retryAfterSeconds),
+        ...corsHeaders(request),
+      },
     })
   }
 
@@ -94,7 +117,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
-        'Access-Control-Allow-Origin': '*',
+        ...corsHeaders(request),
       },
     })
   } catch (err) {
@@ -106,11 +129,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 }
 
-export const OPTIONS: APIRoute = () =>
+export const OPTIONS: APIRoute = ({ request }) =>
   new Response(null, {
     headers: {
-      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      ...corsHeaders(request),
     },
   })

@@ -1,11 +1,20 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
+import { checkRateLimit, getClientIp } from '../../lib/rate-limit'
 
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = (locals as any)?.runtime?.env ?? {}
   const supabaseUrl: string = (env.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? 'https://lqgrvkhrbsgbatzhzgvy.supabase.co').trim()
   const supabaseKey: string = env.SUPABASE_ANON_KEY ?? import.meta.env.SUPABASE_ANON_KEY ?? 'sb_publishable_p5T1U-WGt_bNzoWdAHZu3Q_KvuYVN2J'
+
+  const rateLimit = await checkRateLimit(env.RATE_LIMIT, `chat-log:${getClientIp(request)}`, 20, 60)
+  if (!rateLimit.allowed) {
+    return new Response(JSON.stringify({ success: false }), {
+      status: 429,
+      headers: { 'Content-Type': 'application/json', 'Retry-After': String(rateLimit.retryAfterSeconds) },
+    })
+  }
 
   let body: { session_id?: string; user_message?: string; ai_response?: string }
   try {
