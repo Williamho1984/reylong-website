@@ -38,6 +38,19 @@ const schema = {
       }))
 }
 
+const techArticleSchema = product.tech_article?.title_en ? {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: product.tech_article.title_en,
+  description: product.tech_article.summary_en,
+  url: `${pageUrl}#technical-overview`,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Reylong Machinery Co., Ltd.',
+    url: 'https://reylong.com'
+  }
+} : null
+
 function safeJson(obj: unknown): string {
   return JSON.stringify(obj)
     .replace(/</g, '\\u003c')
@@ -47,3 +60,6 @@ function safeJson(obj: unknown): string {
 ---
 
 <script type="application/ld+json" set:html={safeJson(schema)} />
+{techArticleSchema && (
+  <script type="application/ld+json" set:html={safeJson(techArticleSchema)} />
+)}
