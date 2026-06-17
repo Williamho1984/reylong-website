@@ -10,6 +10,7 @@ const categories = [...new Set(products.map(p => p.category))]
 <BaseLayout
   title="Products — Reylong Industrial Machinery"
   description="Browse Reylong's full range of plastic and packaging machinery — woven bag production lines, eddy current separators, pouch making machines, and more."
+  alternateHref={Astro.site ? new URL('/es/products', Astro.site).toString() : 'https://www.reylong.com/es/products'}
 >
   <div class="container-wide py-12">
     <h1>Our Products</h1>

@@ -10,15 +10,16 @@ interface Props {
   description: string
   ogImage?: string
   lang?: 'en' | 'es'
+  alternateHref?: string
 }
 
-const { title, description, ogImage, lang = 'en' } = Astro.props
+const { title, description, ogImage, lang = 'en', alternateHref } = Astro.props
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <SEOHead title={title} description={description} ogImage={ogImage} />
+    <SEOHead title={title} description={description} ogImage={ogImage} lang={lang} alternateHref={alternateHref} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

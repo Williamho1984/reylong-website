@@ -4,12 +4,16 @@ import { createClient } from '@supabase/supabase-js'
 const SITE = 'https://www.reylong.com'
 
 const staticRoutes = [
-  { url: '/', priority: '1.0', changefreq: 'weekly' },
-  { url: '/products', priority: '0.9', changefreq: 'weekly' },
-  { url: '/about', priority: '0.7', changefreq: 'monthly' },
-  { url: '/contact', priority: '0.7', changefreq: 'monthly' },
-  { url: '/news', priority: '0.6', changefreq: 'weekly' },
-  { url: '/case-studies', priority: '0.6', changefreq: 'monthly' },
+  { url: '/',             priority: '1.0', changefreq: 'weekly'  },
+  { url: '/products',     priority: '0.9', changefreq: 'weekly'  },
+  { url: '/faq',          priority: '0.8', changefreq: 'monthly' },
+  { url: '/about',        priority: '0.7', changefreq: 'monthly' },
+  { url: '/contact',      priority: '0.7', changefreq: 'monthly' },
+  { url: '/news',         priority: '0.7', changefreq: 'weekly'  },
+  { url: '/case-studies', priority: '0.6', changefreq: 'weekly'  },
+  { url: '/events',       priority: '0.6', changefreq: 'weekly'  },
+  { url: '/es/',          priority: '0.9', changefreq: 'weekly'  },
+  { url: '/es/products',  priority: '0.8', changefreq: 'weekly'  },
 ]
 
 export const GET: APIRoute = async () => {
@@ -40,14 +44,14 @@ export const GET: APIRoute = async () => {
     <priority>${priority}</priority>
   </url>`
     ),
-    ...(products ?? []).map(
-      (p) => `
-  <url>
-    <loc>${SITE}/products/${p.slug}</loc>
-    <lastmod>${new Date(p.updated_at).toISOString().split('T')[0]}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`
+    ...(products ?? []).flatMap(
+      (p) => {
+        const lastmod = new Date(p.updated_at).toISOString().split('T')[0]
+        return [
+          `\n  <url>\n    <loc>${SITE}/products/${p.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
+          `\n  <url>\n    <loc>${SITE}/es/products/${p.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`,
+        ]
+      }
     ),
     ...(news ?? []).map(
       (n) => `
@@ -75,6 +79,9 @@ ${urls.join('')}
 </urlset>`
 
   return new Response(xml, {
-    headers: { 'Content-Type': 'application/xml' },
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    },
   })
 }

@@ -44,12 +44,27 @@ const techArticleSchema = product.tech_article?.title_en ? {
   headline: product.tech_article.title_en,
   description: product.tech_article.summary_en,
   url: `${pageUrl}#technical-overview`,
+  author: {
+    '@type': 'Organization',
+    name: 'Reylong Machinery Co., Ltd.',
+    url: 'https://www.reylong.com',
+  },
   publisher: {
     '@type': 'Organization',
     name: 'Reylong Machinery Co., Ltd.',
-    url: 'https://reylong.com'
-  }
+    url: 'https://www.reylong.com',
+  },
 } : null
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',     item: 'https://www.reylong.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://www.reylong.com/products' },
+    { '@type': 'ListItem', position: 3, name: product.name_en },
+  ],
+}
 
 function safeJson(obj: unknown): string {
   return JSON.stringify(obj)
@@ -60,6 +75,7 @@ function safeJson(obj: unknown): string {
 ---
 
 <script type="application/ld+json" set:html={safeJson(schema)} />
+<script type="application/ld+json" set:html={safeJson(breadcrumbSchema)} />
 {techArticleSchema && (
   <script type="application/ld+json" set:html={safeJson(techArticleSchema)} />
 )}

@@ -13,9 +13,39 @@ const date = new Date(article.published_at).toLocaleDateString('en-US', {
 const description = article.content_en
   ? article.content_en.replace(/<[^>]+>/g, '').trim().slice(0, 160)
   : article.title_en
+
+const pageUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : `https://www.reylong.com${Astro.url.pathname}`
+
+const newsArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: article.title_en,
+  description,
+  datePublished: article.published_at,
+  dateModified: article.published_at,
+  url: pageUrl,
+  ...(article.cover_image_url ? { image: article.cover_image_url } : {}),
+  publisher: {
+    '@type': 'Organization',
+    name: 'Reylong Machinery Co., Ltd.',
+    url: 'https://www.reylong.com',
+  },
+}
+
+function safeJson(obj: unknown): string {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/\//g, '\\u002f')
+}
 ---
 
 <BaseLayout title={`${article.title_en} — Reylong`} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={safeJson(newsArticleSchema)} />
+  </Fragment>
   <article class="container-wide py-12 max-w-3xl">
     <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
       <a href="/" class="hover:text-brand-blue">Home</a>

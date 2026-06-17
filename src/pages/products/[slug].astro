@@ -23,6 +23,9 @@ const aiContent = product.content?.sections?.length ? product.content : null
 const pageUrl = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : `https://reylong.com${Astro.url.pathname}`
+const esPageUrl = Astro.site
+  ? new URL('/es' + Astro.url.pathname, Astro.site).toString()
+  : `https://reylong.com/es${Astro.url.pathname}`
 
 type FAQItem = { q: string; a: string }
 
@@ -76,6 +79,7 @@ const faqItems: FAQItem[] = productFAQ[slug] ?? [
   title={`${product.name_en} — Reylong`}
   description={product.description_en}
   ogImage={mainImageUrl}
+  alternateHref={esPageUrl}
 >
   <Fragment slot="head">
     <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} />
