@@ -27,6 +27,11 @@ const newsArticleSchema = {
   dateModified: article.published_at,
   url: pageUrl,
   ...(article.cover_image_url ? { image: article.cover_image_url } : {}),
+  author: {
+    '@type': 'Organization',
+    name: 'Reylong Machinery Co., Ltd.',
+    url: 'https://www.reylong.com',
+  },
   publisher: {
     '@type': 'Organization',
     name: 'Reylong Machinery Co., Ltd.',

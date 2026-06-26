@@ -23,7 +23,10 @@ const { slides } = Astro.props
   class="relative overflow-hidden bg-gray-900"
 >
   <div class="relative h-[60vh] md:h-[70vh] min-h-[400px]">
-    {slides.map((slide, i) => (
+    {slides.map((slide, i) => {
+      // Only the first slide is the page's H1; the rest are H2 to keep a single H1 per page (SEO).
+      const Heading = i === 0 ? 'h1' : 'h2'
+      return (
       <div
         x-show={`current === ${i}`}
         x-transition:enter="transition-opacity duration-700"
@@ -48,12 +51,13 @@ const { slides } = Astro.props
           </>
         )}
         <div class="container-wide text-white relative z-10">
-          <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</h1>
+          <Heading class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</Heading>
           <p class="text-xl mt-6 text-[#E0E0E0] max-w-xl leading-relaxed">{slide.subtitle}</p>
           <a href={slide.ctaHref} class="btn-primary mt-10 inline-block text-lg">{slide.ctaText}</a>
         </div>
       </div>
-    ))}
+      )
+    })}
   </div>
 
   <!-- Dot controls -->
