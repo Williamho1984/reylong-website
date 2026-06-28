@@ -6,9 +6,9 @@ const SITE = 'https://www.reylong.com'
 const staticRoutes = [
   { url: '/',             priority: '1.0', changefreq: 'weekly'  },
   { url: '/products',     priority: '0.9', changefreq: 'weekly'  },
-  { url: '/faq',          priority: '0.8', changefreq: 'monthly' },
-  { url: '/about',        priority: '0.7', changefreq: 'monthly' },
-  { url: '/contact',      priority: '0.7', changefreq: 'monthly' },
+  { url: '/faq/',         priority: '0.8', changefreq: 'monthly' },
+  { url: '/about/',       priority: '0.7', changefreq: 'monthly' },
+  { url: '/contact/',     priority: '0.7', changefreq: 'monthly' },
   { url: '/news',         priority: '0.7', changefreq: 'weekly'  },
   { url: '/case-studies', priority: '0.6', changefreq: 'weekly'  },
   { url: '/events',       priority: '0.6', changefreq: 'weekly'  },
