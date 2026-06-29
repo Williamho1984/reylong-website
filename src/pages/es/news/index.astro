@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import NewsCard from '../../../components/ui/NewsCard.astro'
+import { getAllNews } from '../../../lib/db/news'
+
+const articles = await getAllNews().catch((err) => { console.error('Failed to fetch news:', err); return [] })
+---
+
+<BaseLayout
+  title="Noticias — Reylong"
+  description="Últimas noticias de Reylong: nuevos productos, ferias, novedades del sector y anuncios de la empresa."
+  lang="es"
+>
+  <div class="container-wide py-12">
+    <h1>Noticias</h1>
+    <div class="mt-8 max-w-2xl space-y-0">
+      {articles.map(article => <NewsCard article={article} lang="es" />)}
+      {articles.length === 0 && (
+        <p class="text-gray-500">Aún no hay noticias.</p>
+      )}
+    </div>
+  </div>
+</BaseLayout>

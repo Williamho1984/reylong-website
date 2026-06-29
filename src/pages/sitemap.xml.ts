@@ -14,6 +14,7 @@ const staticRoutes = [
   { url: '/events',       priority: '0.6', changefreq: 'weekly'  },
   { url: '/es/',          priority: '0.9', changefreq: 'weekly'  },
   { url: '/es/products',  priority: '0.8', changefreq: 'weekly'  },
+  { url: '/es/news',      priority: '0.6', changefreq: 'weekly'  },
 ]
 
 export const GET: APIRoute = async () => {
@@ -60,6 +61,15 @@ export const GET: APIRoute = async () => {
     <lastmod>${new Date(n.published_at).toISOString().split('T')[0]}</lastmod>
     <changefreq>never</changefreq>
     <priority>0.5</priority>
+  </url>`
+    ),
+    ...(news ?? []).map(
+      (n) => `
+  <url>
+    <loc>${SITE}/es/news/${n.slug}</loc>
+    <lastmod>${new Date(n.published_at).toISOString().split('T')[0]}</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.4</priority>
   </url>`
     ),
     ...(caseStudies ?? []).map(
