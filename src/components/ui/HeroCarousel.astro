@@ -22,7 +22,7 @@ const { slides } = Astro.props
   x-init="() => { const id = setInterval(() => { current = (current + 1) % total }, 5000); return () => clearInterval(id) }"
   class="relative overflow-hidden bg-gray-900"
 >
-  <div class="relative h-[60vh] md:h-[70vh] min-h-[400px]">
+  <div class="relative h-[70vh] md:h-[85vh] min-h-[460px]">
     {slides.map((slide, i) => {
       // Only the first slide is the page's H1; the rest are H2 to keep a single H1 per page (SEO).
       const Heading = i === 0 ? 'h1' : 'h2'
@@ -46,14 +46,17 @@ const { slides } = Astro.props
               alt={slide.imageAlt ?? slide.title}
               class="absolute inset-0 w-full h-full object-cover"
               loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : undefined}
             />
-            <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+            {/* Light left scrim + drop-shadow on the text keeps white copy legible while letting the product imagery stay bright. */}
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
           </>
         )}
         <div class="container-wide text-white relative z-10">
-          <Heading class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">{slide.title}</Heading>
-          <p class="text-xl mt-6 text-[#E0E0E0] max-w-xl leading-relaxed">{slide.subtitle}</p>
-          <a href={slide.ctaHref} class="btn-primary mt-10 inline-block text-lg">{slide.ctaText}</a>
+          <Heading class="text-5xl md:text-7xl font-extrabold tracking-tight max-w-3xl leading-[1.05] drop-shadow-lg">{slide.title}</Heading>
+          <p class="text-lg md:text-2xl mt-6 text-white/90 max-w-xl leading-relaxed drop-shadow">{slide.subtitle}</p>
+          <a href={slide.ctaHref} class="btn-primary mt-10 inline-block text-lg shadow-xl">{slide.ctaText}</a>
         </div>
       </div>
       )
