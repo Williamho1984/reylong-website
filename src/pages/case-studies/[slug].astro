@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCaseStudyBySlug } from '../../lib/db/case-studies'
 import { getProductById } from '../../lib/db/products'
+import { metaDescription } from '../../lib/meta'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/case-studies')
@@ -13,9 +14,7 @@ const relatedProduct = caseStudy.product_id ? await getProductById(caseStudy.pro
 const date = new Date(caseStudy.published_at).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
 })
-const description = caseStudy.content_en
-  ? caseStudy.content_en.replace(/<[^>]+>/g, '').trim().slice(0, 160)
-  : caseStudy.title_en
+const description = metaDescription(caseStudy.content_en) || caseStudy.title_en
 ---
 
 <BaseLayout title={`${caseStudy.title_en} — Reylong`} description={description}>

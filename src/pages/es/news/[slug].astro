@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro'
 import { getNewsBySlug } from '../../../lib/db/news'
+import { metaDescription } from '../../../lib/meta'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/es/news')
@@ -10,9 +11,7 @@ if (!article) return Astro.redirect('/es/news')
 const date = new Date(article.published_at).toLocaleDateString('es-ES', {
   year: 'numeric', month: 'long', day: 'numeric'
 })
-const description = article.content_es
-  ? article.content_es.replace(/<[^>]+>/g, '').trim().slice(0, 160)
-  : article.title_es
+const description = metaDescription(article.content_es) || article.title_es
 
 const pageUrl = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()

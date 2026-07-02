@@ -8,6 +8,7 @@ import ProductSchema from '../../../components/seo/ProductSchema.astro'
 import InquiryForm from '../../../components/ui/InquiryForm.astro'
 import TechArticleSection from '../../../components/ui/TechArticleSection.astro'
 import { getProductBySlug, getProductMedia } from '../../../lib/db/products'
+import { metaDescription } from '../../../lib/meta'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/es/products')
@@ -25,7 +26,7 @@ const pageUrl = Astro.site
 
 <BaseLayout
   title={`${product.name_es} — Reylong`}
-  description={product.description_es}
+  description={metaDescription(product.description_es)}
   ogImage={mainImageUrl}
   lang="es"
 >
