@@ -7,6 +7,9 @@ interface Slide {
   bgClass: string
   image?: string
   imageAlt?: string
+  // 'light' = product shot on a white/bright background -> dark text + white scrim.
+  // default (dark) = full-bleed photo -> white text + dark scrim.
+  theme?: 'light' | 'dark'
 }
 
 interface Props {
@@ -26,6 +29,7 @@ const { slides } = Astro.props
     {slides.map((slide, i) => {
       // Only the first slide is the page's H1; the rest are H2 to keep a single H1 per page (SEO).
       const Heading = i === 0 ? 'h1' : 'h2'
+      const light = slide.theme === 'light'
       return (
       <div
         x-show={`current === ${i}`}
@@ -36,7 +40,7 @@ const { slides } = Astro.props
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         :aria-hidden={`current !== ${i}`}
-        class:list={['absolute inset-0 flex items-center', slide.image ? '' : slide.bgClass]}
+        class:list={['absolute inset-0 flex items-center', slide.image ? (light ? 'bg-white' : '') : slide.bgClass]}
         {...(i > 0 ? { 'x-cloak': '' } : {})}
       >
         {slide.image && (
@@ -44,13 +48,20 @@ const { slides } = Astro.props
             <img
               src={slide.image}
               alt={slide.imageAlt ?? slide.title}
-              class="absolute inset-0 w-full h-full object-cover"
+              class="absolute inset-0 w-full h-full object-cover brightness-110"
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchpriority={i === 0 ? 'high' : undefined}
             />
-            {/* Light left scrim + drop-shadow on the text keeps white copy legible while letting the product imagery stay bright. */}
-            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+            {light ? (
+              /* White-bg product shot: strong black gradient over the left half so white text reads; right stays bright for the product. */
+              <div class="absolute inset-0 bg-gradient-to-r from-black/80 from-10% via-black/55 via-45% to-transparent to-60%" />
+            ) : (
+              /* Light dark scrim + text drop-shadow keeps white copy legible while imagery stays bright. */
+              <>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/15 to-transparent" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+              </>
+            )}
           </>
         )}
         <div class="container-wide text-white relative z-10">

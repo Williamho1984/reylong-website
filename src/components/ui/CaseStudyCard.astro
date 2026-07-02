@@ -4,13 +4,18 @@ import type { CaseStudy } from '../../lib/db/case-studies'
 interface Props {
   caseStudy: CaseStudy
   lang?: 'en' | 'es'
+  // On a tinted section (e.g. the blue homepage band) drop the white card so the
+  // item blends into the background like the News list; keep the boxed card elsewhere.
+  onTint?: boolean
 }
 
-const { caseStudy, lang = 'en' } = Astro.props
+const { caseStudy, lang = 'en', onTint = false } = Astro.props
 const title = lang === 'es' ? caseStudy.title_es : caseStudy.title_en
 ---
 
-<article class="bg-white border border-gray-200 p-4 hover:border-brand-blue transition-colors">
+<article class:list={[onTint
+  ? 'border-b border-brand-blue/20 pb-4 last:border-0'
+  : 'bg-white border border-gray-200 p-4 hover:border-brand-blue transition-colors']}>
   <div class="flex items-start gap-3">
     <div class="shrink-0 w-8 h-8 bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-sm rounded">
       CS

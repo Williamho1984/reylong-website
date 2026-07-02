@@ -28,6 +28,7 @@ const heroSlides = [
     ctaText: 'See the Machines',
     ctaHref: '/products/automatic-printing-tubing-cutting-sewing-line',
     bgClass: 'bg-gray-900',
+    theme: 'light',
     image: `${STORAGE}/hero/woven-bags.jpg`,
     imageAlt: 'Printed PP woven bags produced on a Reylong bag-making line',
   },
@@ -125,7 +126,8 @@ const heroSlides = [
   </section>
 
   <!-- News + Case Studies + Events -->
-  <section class="py-16 container-wide" aria-label="Latest news and events">
+  <section class="bg-blue-100 py-16" aria-label="Latest news and events">
+    <div class="container-wide">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
       <!-- News -->
       <div>
@@ -146,7 +148,7 @@ const heroSlides = [
           <a href="/case-studies" class="text-brand-blue text-sm hover:underline">All →</a>
         </div>
         <div class="space-y-3 min-h-[100px]">
-          {latestCases.map(cs => <CaseStudyCard caseStudy={cs} lang="en" />)}
+          {latestCases.map(cs => <CaseStudyCard caseStudy={cs} lang="en" onTint />)}
           {latestCases.length === 0 && <p class="text-gray-500 text-sm">No case studies yet.</p>}
         </div>
       </div>
@@ -162,6 +164,7 @@ const heroSlides = [
           {upcomingEvents.length === 0 && <p class="text-gray-500 text-sm">No upcoming events.</p>}
         </div>
       </div>
+    </div>
     </div>
   </section>
 
