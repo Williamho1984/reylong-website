@@ -9,17 +9,17 @@ const navLinks = isEs
       { href: '/case-studies', label: 'Casos de Éxito' },
       { href: '/es/news', label: 'Noticias' },
       { href: '/events', label: 'Eventos' },
-      { href: '/about', label: 'Nosotros' },
-      { href: '/contact', label: 'Contacto' },
+      { href: '/about/', label: 'Nosotros' },
+      { href: '/contact/', label: 'Contacto' },
     ]
   : [
       { href: '/products', label: 'Products' },
       { href: '/case-studies', label: 'Case Studies' },
-      { href: '/faq', label: 'FAQ' },
+      { href: '/faq/', label: 'FAQ' },
       { href: '/news', label: 'News' },
       { href: '/events', label: 'Events' },
-      { href: '/about', label: 'About' },
-      { href: '/contact', label: 'Contact' },
+      { href: '/about/', label: 'About' },
+      { href: '/contact/', label: 'Contact' },
     ]
 
 const ctaLabel = isEs ? 'Cotizar' : 'Get a Quote'
@@ -50,7 +50,7 @@ const ctaLabel = isEs ? 'Cotizar' : 'Get a Quote'
             {link.label}
           </a>
         ))}
-        <a href="/contact" class="btn-primary text-sm px-4 py-2">{ctaLabel}</a>
+        <a href="/contact/" class="btn-primary text-sm px-4 py-2">{ctaLabel}</a>
       </nav>
 
       <!-- Mobile menu button -->
@@ -88,7 +88,7 @@ const ctaLabel = isEs ? 'Cotizar' : 'Get a Quote'
           {link.label}
         </a>
       ))}
-      <a href="/contact" class="btn-primary text-center mt-2">{ctaLabel}</a>
+      <a href="/contact/" class="btn-primary text-center mt-2">{ctaLabel}</a>
     </nav>
   </div>
 </header>

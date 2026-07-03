@@ -50,7 +50,10 @@ const { title, description, ogImage, lang = 'en', alternateHref } = Astro.props
       },
       "email": "t6960638@ms45.hinet.net",
       "telephone": "+886-5-5511888",
-      "foundingLocation": "Taiwan",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Dou-Liu City, Yunlin County, Taiwan"
+      },
       "knowsAbout": ["plastic machinery", "woven bag machines", "flexographic printing machines", "packaging machinery"]
     })} />
     <!-- Ahrefs Web Analytics (cookieless) -->
