@@ -73,6 +73,11 @@ function safeJson(obj: unknown): string {
         src={article.cover_image_url}
         alt={article.title_en}
         class="w-full aspect-video object-cover mt-6"
+        width="1200"
+        height="675"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
       />
     )}
 

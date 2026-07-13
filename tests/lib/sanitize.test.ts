@@ -76,6 +76,22 @@ describe('sanitizeArticleHtml — preserves real article markup', () => {
   })
 })
 
+describe('sanitizeArticleHtml — image loading hints', () => {
+  // Body images sit below the fold and their markup lives in the DB, so the only place we can
+  // attach loading hints to them is here, on the way out.
+  it('adds lazy loading and async decoding to article images', () => {
+    const out = sanitizeArticleHtml('<figure><img src="https://cdn.test/a.jpg" alt="A"></figure>')
+    expect(out).toContain('loading="lazy"')
+    expect(out).toContain('decoding="async"')
+  })
+
+  it('does not override a loading hint the content already specifies', () => {
+    const out = sanitizeArticleHtml('<img src="https://cdn.test/a.jpg" loading="eager">')
+    expect(out).toContain('loading="eager"')
+    expect(out).not.toContain('loading="lazy"')
+  })
+})
+
 describe('sanitizeArticleHtml — empty input', () => {
   it('returns an empty string for null, undefined and empty content', () => {
     expect(sanitizeArticleHtml(null)).toBe('')

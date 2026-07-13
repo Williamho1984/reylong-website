@@ -16,7 +16,7 @@ const OPTIONS: sanitizeHtml.IOptions = {
   ],
   allowedAttributes: {
     a: ['href', 'title', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+    img: ['src', 'alt', 'title', 'width', 'height', 'loading', 'decoding'],
     th: ['colspan', 'rowspan', 'scope'],
     td: ['colspan', 'rowspan'],
   },
@@ -24,6 +24,18 @@ const OPTIONS: sanitizeHtml.IOptions = {
   // Images must come from a real host — this is what rejects data: payloads.
   allowedSchemesByTag: { img: ['http', 'https'] },
   allowProtocolRelative: false,
+  transformTags: {
+    // Body images are always below the fold, and their markup lives in the database, so this is
+    // the only place we can attach loading hints to them. Never overwrite a hint the content set.
+    img: (tagName, attribs) => ({
+      tagName,
+      attribs: {
+        loading: 'lazy',
+        decoding: 'async',
+        ...attribs,
+      },
+    }),
+  },
 }
 
 export function sanitizeArticleHtml(html: string | null | undefined): string {

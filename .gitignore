@@ -31,3 +31,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local backup of original Storage images before optimization
+.image-backup/
