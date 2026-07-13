@@ -1,9 +1,24 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
-import { checkRateLimit, getClientIp } from '../../lib/rate-limit'
+import { checkRateLimit, dailyBudgetKey, getClientIp } from '../../lib/rate-limit'
 
 const ALLOWED_ORIGINS = ['https://www.reylong.com', 'https://reylong.com']
+
+// Site-wide ceiling on chat turns per day. Every turn costs two Workers AI calls (an embedding
+// plus a generation), so without this a single day of scripted abuse can drain the account's
+// whole AI allowance and leave real visitors with a dead chatbot. Real traffic on this site runs
+// well under this; override with CHAT_DAILY_LIMIT if that stops being true.
+const DEFAULT_CHAT_DAILY_LIMIT = 500
+const ONE_DAY_SECONDS = 86400
+
+// Workers AI retires models out from under you: @cf/meta/llama-3.1-8b-instruct was deprecated on
+// 2026-05-30 and every chat turn had been failing with AiError 5028 ever since. fp8 is the same
+// model, quantized, and it streams the same `data: {"response": "..."}` frames the widget parses.
+const GENERATION_MODEL = '@cf/meta/llama-3.1-8b-instruct-fp8'
+// Must stay in lockstep with the model that produced the stored knowledge-base vectors — swapping
+// it would silently put the query in a different vector space and every match would be garbage.
+const EMBEDDING_MODEL = '@cf/baai/bge-small-en-v1.5'
 
 function corsHeaders(request: Request): Record<string, string> {
   const origin = request.headers.get('origin')
@@ -53,6 +68,22 @@ export const POST: APIRoute = async ({ request, locals }) => {
     })
   }
 
+  const dailyLimit = Number(env.CHAT_DAILY_LIMIT ?? DEFAULT_CHAT_DAILY_LIMIT) || DEFAULT_CHAT_DAILY_LIMIT
+  const budget = await checkRateLimit(env.RATE_LIMIT, dailyBudgetKey('chat:budget'), dailyLimit, ONE_DAY_SECONDS)
+  if (!budget.allowed) {
+    return new Response(
+      JSON.stringify({ error: 'The AI assistant is unavailable for the rest of today. Please use the contact form and our team will get back to you.' }),
+      {
+        status: 503,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(budget.retryAfterSeconds),
+          ...corsHeaders(request),
+        },
+      }
+    )
+  }
+
   let message: string
   try {
     const body = await request.json() as { message?: string }
@@ -70,7 +101,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   try {
     // 1. Embed the query
-    const embedResult = await ai.run('@cf/baai/bge-small-en-v1.5', { text: [message] }) as { data: number[][] }
+    const embedResult = await ai.run(EMBEDDING_MODEL, { text: [message] }) as { data: number[][] }
     const queryEmbedding = embedResult.data[0]
 
     // 2. Search Supabase pgvector
@@ -104,7 +135,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       : `${SYSTEM_PROMPT}\n\nNo specific product match found. Provide general guidance and suggest contacting our sales team.`
 
     // 3. Stream Llama response
-    const stream = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+    const stream = await ai.run(GENERATION_MODEL, {
       stream: true,
       messages: [
         { role: 'system', content: systemContent },

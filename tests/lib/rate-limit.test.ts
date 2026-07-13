@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { checkRateLimit, getClientIp } from '../../src/lib/rate-limit'
+import { checkRateLimit, dailyBudgetKey, getClientIp } from '../../src/lib/rate-limit'
 
 function createMockKv() {
   const store = new Map<string, string>()
@@ -39,6 +39,31 @@ describe('checkRateLimit', () => {
   it('fails open when no KV binding is provided', async () => {
     const result = await checkRateLimit(undefined, 'chat:1.2.3.4', 1, 60)
     expect(result.allowed).toBe(true)
+  })
+})
+
+describe('dailyBudgetKey', () => {
+  it('stamps the key with the UTC date so the budget resets at midnight', () => {
+    const key = dailyBudgetKey('chat:budget', new Date('2026-07-13T23:59:00Z'))
+    expect(key).toBe('chat:budget:2026-07-13')
+  })
+
+  it('produces a different key on the next day', () => {
+    const day1 = dailyBudgetKey('chat:budget', new Date('2026-07-13T12:00:00Z'))
+    const day2 = dailyBudgetKey('chat:budget', new Date('2026-07-14T12:00:00Z'))
+    expect(day1).not.toBe(day2)
+  })
+
+  // The per-IP limiter cannot stop a burst from a single attacker (KV is eventually consistent,
+  // and a limit of 8 is small enough to race past). A global ceiling is the backstop: it bounds
+  // how much Workers AI quota one day of abuse can consume, whatever the source.
+  it('stops AI calls once the whole site has spent its daily allowance', async () => {
+    const kv = createMockKv()
+    const key = dailyBudgetKey('chat:budget', new Date('2026-07-13T00:00:00Z'))
+    for (let i = 0; i < 3; i++) {
+      expect((await checkRateLimit(kv, key, 3, 86400)).allowed).toBe(true)
+    }
+    expect((await checkRateLimit(kv, key, 3, 86400)).allowed).toBe(false)
   })
 })
 
