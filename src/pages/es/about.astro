@@ -1,0 +1,110 @@
+---
+export const prerender = true
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const machines = [
+  { model: 'JLPTCSM-1300W', slug: 'automatic-printing-tubing-cutting-sewing-line', name: 'Línea integral de sacos de PP tejido', note: 'impresión, tubulado, corte y cosido en una sola pasada continua' },
+  { model: 'JLRPM-6800BO/6C', slug: 'flexographic-printing-machine-6c', name: 'Impresora flexográfica de 6 colores', note: 'seis estaciones con rodillo anilox cerámico para tejido de PP' },
+  { model: 'JL-L-2TZP600', slug: 'hp-l-2tzp600-stand-up-zipper-pouch-machine', name: 'Máquina multiformato de bolsas flexibles', note: 'cinco formatos de bolsa, control totalmente servoasistido Panasonic' },
+  { model: 'JLECS-1000W', slug: 'eddy-current-non-ferrous-separator', name: 'Separador de corrientes de Foucault', note: 'recuperación de metales no ferrosos en líneas de reciclaje' },
+  { model: '', slug: 'ai-machine-intelligence-solutions', name: 'Inteligencia de Máquina con IA', note: 'visión en el borde y compensación de servos sobre líneas ya instaladas' },
+]
+---
+
+<BaseLayout
+  title="Sobre Reylong — Fabricante de Maquinaria de Plástico y Embalaje"
+  description="Rey Long lleva más de 20 años fabricando maquinaria de plástico y embalaje en Yunlin, Taiwán. Nuestras máquinas trabajan en más de 30 países."
+  lang="es"
+  alternateHref="https://www.reylong.com/about/"
+>
+  <div class="container-wide py-12">
+    <h1>Sobre Reylong</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8 items-start">
+      <div class="prose prose-gray max-w-none">
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Rey Long Machinery Co., Ltd. lleva más de veinte años fabricando maquinaria de plástico
+          y embalaje en la ciudad de Douliu, condado de Yunlin (Taiwán). Nuestras máquinas
+          trabajan en plantas de producción de más de treinta países.
+        </p>
+
+        <h2>Las máquinas que fabricamos</h2>
+        <p>
+          Fabricamos alrededor de veinte modelos de máquina. En esta web mostramos a propósito
+          una selección reducida: las máquinas especializadas donde nuestra ingeniería marca la
+          diferencia con mayor claridad, y no el catálogo completo.
+        </p>
+        <ul>
+          {machines.map(m => (
+            <li>
+              <a href={`/es/products/${m.slug}`}>
+                {m.model ? <strong>{m.model}</strong> : <strong>{m.name}</strong>}
+              </a>
+              {m.model && <span> — {m.name}</span>}
+              <span class="text-gray-600">. {m.note}.</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          Si el modelo que necesita no aparece en esta lista, pregúntenos: es muy probable que lo
+          fabriquemos y simplemente no lo hayamos publicado en la web.
+        </p>
+
+        <h2>Líneas de producción completas</h2>
+        <p>
+          Una planta de sacos tejidos necesita más máquinas de las que fabricamos nosotros mismos.
+          Las líneas de extrusión de rafia, los telares circulares y los equipos de laminación los
+          <strong>suministramos e integramos a través de nuestras fábricas asociadas</strong>, no
+          los fabricamos internamente. Lo decimos con claridad porque la distinción importa a la
+          hora de elegir proveedor, y porque seguimos asumiendo la responsabilidad de definir la
+          línea y de que todas las etapas funcionen juntas, sea quien sea el fabricante de cada
+          máquina.
+        </p>
+
+        <h2>Dónde trabajan nuestras máquinas</h2>
+        <p>
+          Los equipos de Rey Long operan en fábricas de Asia, América Latina, Oriente Medio, el
+          sur de Asia y África. Trabajamos con distribuidores y socios de servicio en nuestros
+          mercados principales para que el soporte no dependa de la distancia hasta Taiwán.
+        </p>
+
+        <h2>Después de la entrega</h2>
+        <p>
+          Cada máquina se entrega con documentación técnica completa, apoyo en la instalación y
+          formación para los operarios. La mayoría de nuestros clientes trabaja en producción
+          continua y de alto volumen: lo que de verdad importa tras la puesta en marcha son los
+          repuestos y que haya alguien que responda al teléfono. Nos organizamos en torno a eso.
+        </p>
+
+        <h2>Dónde encontrarnos</h2>
+        <p>
+          Rey Long Machinery Co., Ltd.<br />
+          No. 3, Zhuwei Road, Douliu City, Yunlin County, Taiwán<br />
+          Tel.: <a href="tel:+886-5-5511888">+886-5-5511888</a><br />
+          Email: <a href="mailto:t6960638@ms45.hinet.net">t6960638@ms45.hinet.net</a>
+        </p>
+      </div>
+
+      <aside class="space-y-6">
+        <div class="bg-gray-50 p-6 border-l-4 border-brand-red">
+          <div class="text-4xl font-bold text-brand-red">20+</div>
+          <div class="text-gray-600 mt-1">Años fabricando máquinas en Taiwán</div>
+        </div>
+        <div class="bg-gray-50 p-6 border-l-4 border-brand-blue">
+          <div class="text-4xl font-bold text-brand-blue">30+</div>
+          <div class="text-gray-600 mt-1">Países donde operan nuestras máquinas</div>
+        </div>
+        <div class="bg-gray-50 p-6 border-l-4 border-gray-600">
+          <div class="text-4xl font-bold text-gray-700">20</div>
+          <div class="text-gray-600 mt-1">Modelos fabricados — aquí mostramos nuestras líneas especializadas</div>
+        </div>
+
+        <div class="mt-6">
+          <a href="/contact/" class="btn-primary w-full text-center block">Contacte con Nosotros</a>
+          <a href="/es/products" class="btn-secondary w-full text-center block mt-3">Ver Todos los Productos</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

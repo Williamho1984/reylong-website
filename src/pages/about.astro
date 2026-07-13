@@ -2,11 +2,20 @@
 export const prerender = true
 
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const machines = [
+  { model: 'JLPTCSM-1300W', slug: 'automatic-printing-tubing-cutting-sewing-line', name: 'PP woven bag convention line', note: 'printing, tubing, cutting and sewing in one continuous pass' },
+  { model: 'JLRPM-6800BO/6C', slug: 'flexographic-printing-machine-6c', name: '6-colour flexographic printing machine', note: 'six ceramic anilox stations for PP woven fabric' },
+  { model: 'JL-L-2TZP600', slug: 'hp-l-2tzp600-stand-up-zipper-pouch-machine', name: 'Multi-format pouch making machine', note: 'five pouch formats, full Panasonic servo control' },
+  { model: 'JLECS-1000W', slug: 'eddy-current-non-ferrous-separator', name: 'Eddy current separator', note: 'non-ferrous metal recovery for recycling lines' },
+  { model: '', slug: 'ai-machine-intelligence-solutions', name: 'AI Machine Intelligence', note: 'edge vision and servo compensation retrofitted to existing lines' },
+]
 ---
 
 <BaseLayout
   title="About Reylong — Plastic & Packaging Machinery Manufacturer"
-  description="For 20+ years Reylong has built plastic and packaging machinery — woven bag lines, pouch machines and recycling systems — for clients in 30+ countries."
+  description="Rey Long has built plastic and packaging machinery in Yunlin, Taiwan for over 20 years. Our machines run in factories in more than 30 countries."
+  alternateHref="https://www.reylong.com/es/about/"
 >
   <div class="container-wide py-12">
     <h1>About Reylong</h1>
@@ -14,46 +23,79 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8 items-start">
       <div class="prose prose-gray max-w-none">
         <p class="text-lg text-gray-700 leading-relaxed">
-          Reylong Machinery Co., Ltd. is a professional manufacturer of plastic and packaging
-          machinery with over two decades of experience. We design and build industrial-grade
-          equipment for factories across the plastics processing and flexible packaging industries worldwide.
+          Rey Long Machinery Co., Ltd. has been building plastic and packaging machinery in
+          Douliu City, Yunlin County, Taiwan for over twenty years. Our machines run on
+          production floors in more than thirty countries.
         </p>
 
-        <h2>Our Products</h2>
+        <h2>The machines we build</h2>
         <p>
-          Our product range spans plastic processing and flexible packaging: woven bag production lines
-          (tape extrusion, circular looms, lamination, cutting &amp; sewing), eddy current separators for
-          plastic recycling, and pouch making machines for flexible packaging. Each machine is
-          engineered for reliability and continuous high-volume production.
+          We manufacture around twenty machine models. This site shows a deliberately narrow
+          selection of them — the specialty machines where our engineering makes the clearest
+          difference, rather than the whole catalogue:
+        </p>
+        <ul>
+          {machines.map(m => (
+            <li>
+              <a href={`/products/${m.slug}`}>
+                {m.model ? <strong>{m.model}</strong> : <strong>{m.name}</strong>}
+              </a>
+              {m.model && <span> — {m.name}</span>}
+              <span class="text-gray-600">. {m.note}.</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          If the model you need is not on this list, ask us — there is a good chance we build it
+          and simply have not put it on the website.
         </p>
 
-        <h2>Global Reach</h2>
+        <h2>Complete production lines</h2>
         <p>
-          Reylong machines operate in factories across Asia, Latin America, the Middle East, South Asia,
-          and Africa. We have established partnerships with distributors and service centers in key markets
-          to ensure prompt after-sales support wherever our clients operate.
+          A woven bag plant needs more than the machines we build ourselves. Tape extrusion lines,
+          circular looms and lamination equipment are <strong>supplied and integrated through our
+          partner factories</strong> rather than manufactured in-house. We say so plainly because
+          the distinction matters when you are choosing a supplier — and because we still take
+          responsibility for specifying the line and making every stage work together, whoever
+          built each machine.
         </p>
 
-        <h2>Quality Commitment</h2>
+        <h2>Where our machines run</h2>
         <p>
-          Every machine is manufactured to international quality standards. We provide comprehensive
-          technical documentation, installation support, and training to ensure our clients achieve
-          optimal production efficiency.
+          Rey Long equipment operates in factories across Asia, Latin America, the Middle East,
+          South Asia and Africa. We work with distributors and service partners in our main
+          markets so that support does not depend on the distance to Taiwan.
+        </p>
+
+        <h2>After the machine ships</h2>
+        <p>
+          Every machine is delivered with full technical documentation, installation support and
+          operator training. Most of our customers are running continuous, high-volume production,
+          so what matters after commissioning is spare parts and someone who answers the phone —
+          and that is what we organise around.
+        </p>
+
+        <h2>Where to find us</h2>
+        <p>
+          Rey Long Machinery Co., Ltd.<br />
+          No. 3, Zhuwei Road, Douliu City, Yunlin County, Taiwan<br />
+          Tel: <a href="tel:+886-5-5511888">+886-5-5511888</a><br />
+          Email: <a href="mailto:t6960638@ms45.hinet.net">t6960638@ms45.hinet.net</a>
         </p>
       </div>
 
       <aside class="space-y-6">
         <div class="bg-gray-50 p-6 border-l-4 border-brand-red">
           <div class="text-4xl font-bold text-brand-red">20+</div>
-          <div class="text-gray-600 mt-1">Years of manufacturing experience</div>
+          <div class="text-gray-600 mt-1">Years building machines in Taiwan</div>
         </div>
         <div class="bg-gray-50 p-6 border-l-4 border-brand-blue">
           <div class="text-4xl font-bold text-brand-blue">30+</div>
-          <div class="text-gray-600 mt-1">Countries served</div>
+          <div class="text-gray-600 mt-1">Countries our machines run in</div>
         </div>
         <div class="bg-gray-50 p-6 border-l-4 border-gray-600">
           <div class="text-4xl font-bold text-gray-700">20</div>
-          <div class="text-gray-600 mt-1">Machine models available</div>
+          <div class="text-gray-600 mt-1">Machine models built — this site shows our specialty lines</div>
         </div>
 
         <div class="mt-6">
