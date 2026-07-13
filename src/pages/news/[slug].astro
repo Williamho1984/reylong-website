@@ -2,11 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getNewsBySlug } from '../../lib/db/news'
 import { metaDescription } from '../../lib/meta'
+import { sanitizeArticleHtml } from '../../lib/sanitize'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/news')
 const article = await getNewsBySlug(slug)
 if (!article) return Astro.redirect('/news')
+
+const body = sanitizeArticleHtml(article.content_en)
 
 const date = new Date(article.published_at).toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: 'numeric'
@@ -73,7 +76,6 @@ function safeJson(obj: unknown): string {
       />
     )}
 
-    {/* TODO before launch: sanitize content_en with sanitize-html to prevent stored XSS */}
-    <div class="prose prose-gray max-w-none mt-8" set:html={article.content_en} />
+    <div class="prose prose-gray max-w-none mt-8" set:html={body} />
   </article>
 </BaseLayout>

@@ -3,11 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCaseStudyBySlug } from '../../lib/db/case-studies'
 import { getProductById } from '../../lib/db/products'
 import { metaDescription } from '../../lib/meta'
+import { sanitizeArticleHtml } from '../../lib/sanitize'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/case-studies')
 const caseStudy = await getCaseStudyBySlug(slug)
 if (!caseStudy) return Astro.redirect('/case-studies')
+
+const body = sanitizeArticleHtml(caseStudy.content_en)
 
 const relatedProduct = caseStudy.product_id ? await getProductById(caseStudy.product_id) : null
 
@@ -45,8 +48,7 @@ const description = metaDescription(caseStudy.content_en) || caseStudy.title_en
       />
     )}
 
-    {/* TODO before launch: sanitize content_en with sanitize-html to prevent stored XSS */}
-    <div class="prose prose-gray max-w-none mt-8" set:html={caseStudy.content_en} />
+    <div class="prose prose-gray max-w-none mt-8" set:html={body} />
 
     {relatedProduct && (
       <div class="mt-8 p-6 bg-gray-50 border border-gray-200">
