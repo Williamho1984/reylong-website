@@ -8,15 +8,28 @@ interface Props {
 
 const { article, lang = 'en' } = Astro.props
 const title = lang === 'es' ? article.title_es : article.title_en
+const summary = lang === 'es' ? article.summary_es : article.summary_en
 const locale = lang === 'es' ? 'es-ES' : 'en-US'
 const date = new Date(article.published_at).toLocaleDateString(locale, {
   year: 'numeric', month: 'long', day: 'numeric'
 })
+const href = lang === 'es' ? `/es/news/${article.slug}` : `/news/${article.slug}`
+
+// A guide answers a question that will still be asked in three years, so leading with its
+// publication date invites readers to write it off as stale. News is the opposite: the date is
+// the point. Guides keep the date in the markup for the NewsArticle schema, just not up front.
+const isGuide = article.category === 'guide'
 ---
 
-<article class="border-b border-gray-200 pb-4 last:border-0">
-  <time class="text-xs text-gray-500 uppercase tracking-wide" datetime={article.published_at}>{date}</time>
-  <h3 class="font-semibold mt-1 hover:text-brand-blue transition-colors">
-    <a href={lang === 'es' ? `/es/news/${article.slug}` : `/news/${article.slug}`}>{title}</a>
+<article class="border-b border-gray-200 py-4 first:pt-0 last:border-0">
+  {!isGuide && (
+    <time class="text-xs text-gray-500 uppercase tracking-wide" datetime={article.published_at}>{date}</time>
+  )}
+  <h3 class:list={['font-semibold hover:text-brand-blue transition-colors', isGuide ? '' : 'mt-1']}>
+    <a href={href}>{title}</a>
   </h3>
+  {summary && <p class="text-sm text-gray-600 mt-1 leading-relaxed">{summary}</p>}
+  {isGuide && (
+    <time class="text-xs text-gray-400 mt-2 block" datetime={article.published_at}>{date}</time>
+  )}
 </article>

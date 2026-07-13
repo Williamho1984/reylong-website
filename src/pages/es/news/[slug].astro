@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro'
 import { getNewsBySlug } from '../../../lib/db/news'
 import { metaDescription } from '../../../lib/meta'
 import { sanitizeArticleHtml } from '../../../lib/sanitize'
+import { faqPageSchema } from '../../../lib/schema'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/es/news')
@@ -42,6 +43,8 @@ const newsArticleSchema = {
   },
 }
 
+const faqSchema = faqPageSchema(article.faq, 'es')
+
 function safeJson(obj: unknown): string {
   return JSON.stringify(obj)
     .replace(/</g, '\\u003c')
@@ -53,6 +56,7 @@ function safeJson(obj: unknown): string {
 <BaseLayout title={`${article.title_es} — Reylong`} description={description} lang="es">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={safeJson(newsArticleSchema)} />
+    {faqSchema && <script type="application/ld+json" set:html={safeJson(faqSchema)} />}
   </Fragment>
   <article class="container-wide py-12 max-w-3xl">
     <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">

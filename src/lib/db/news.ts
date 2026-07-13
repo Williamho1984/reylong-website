@@ -1,14 +1,32 @@
 import { supabase } from '../supabase'
 
+// Question/answer pairs behind the FAQPage JSON-LD on a guide. Lives in the database rather than
+// the page so an answer can be corrected without a redeploy.
+export type NewsFaq = {
+  q_en: string
+  a_en: string
+  q_es: string
+  a_es: string
+}
+
+// 'guide' is an evergreen technical article; 'news' is dated company news (events, announcements).
+// They sit in the same table and keep the same /news/<slug> URLs — the split is presentational,
+// so nothing needs redirecting.
+export type NewsCategory = 'news' | 'guide'
+
 export type NewsArticle = {
   id: string
   slug: string
   published_at: string
   cover_image_url: string
+  category: NewsCategory
   title_en: string
   title_es: string
+  summary_en: string
+  summary_es: string
   content_en: string
   content_es: string
+  faq: NewsFaq[]
 }
 
 export async function getAllNews(): Promise<NewsArticle[]> {

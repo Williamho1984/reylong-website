@@ -4,20 +4,40 @@ import NewsCard from '../../../components/ui/NewsCard.astro'
 import { getAllNews } from '../../../lib/db/news'
 
 const articles = await getAllNews().catch((err) => { console.error('Failed to fetch news:', err); return [] })
+
+const guides = articles.filter(a => a.category === 'guide')
+const companyNews = articles.filter(a => a.category !== 'guide')
 ---
 
 <BaseLayout
-  title="Noticias y Novedades del Sector — Reylong Machinery"
-  description="Últimas noticias de Reylong Machinery: nuevas máquinas, ferias internacionales, tendencias del sector del embalaje y reciclaje, y anuncios de la empresa."
+  title="Noticias y Guías Técnicas — Reylong Machinery"
+  description="Guías técnicas sobre impresión flexográfica, termosellado y separación por corrientes de Foucault, además de noticias de Reylong Machinery."
   lang="es"
 >
   <div class="container-wide py-12">
-    <h1>Noticias</h1>
-    <div class="mt-8 max-w-2xl space-y-0">
-      {articles.map(article => <NewsCard article={article} lang="es" />)}
-      {articles.length === 0 && (
-        <p class="text-gray-500">Aún no hay noticias.</p>
-      )}
-    </div>
+    <h1>Noticias y Guías Técnicas</h1>
+
+    {guides.length > 0 && (
+      <section class="mt-10 max-w-2xl" aria-labelledby="guides-heading">
+        <h2 id="guides-heading" class="text-xl font-bold">Guías Técnicas</h2>
+        <p class="text-sm text-gray-600 mt-1">
+          Cómo funcionan realmente las máquinas, y qué revisar cuando dejan de hacerlo.
+        </p>
+        <div class="mt-4">
+          {guides.map(article => <NewsCard article={article} lang="es" />)}
+        </div>
+      </section>
+    )}
+
+    {companyNews.length > 0 && (
+      <section class="mt-12 max-w-2xl" aria-labelledby="news-heading">
+        <h2 id="news-heading" class="text-xl font-bold">Noticias de la Empresa</h2>
+        <div class="mt-4">
+          {companyNews.map(article => <NewsCard article={article} lang="es" />)}
+        </div>
+      </section>
+    )}
+
+    {articles.length === 0 && <p class="text-gray-500 mt-8">Aún no hay artículos.</p>}
   </div>
 </BaseLayout>

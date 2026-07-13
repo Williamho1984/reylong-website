@@ -4,20 +4,43 @@ import NewsCard from '../../components/ui/NewsCard.astro'
 import { getAllNews } from '../../lib/db/news'
 
 const articles = await getAllNews().catch((err) => { console.error('Failed to fetch news:', err); return [] })
+
+// Two kinds of content with very different lifespans share this table and these URLs. Splitting
+// them here — rather than by moving anything — keeps the evergreen guides from being buried under
+// dated announcements without breaking a single existing link.
+const guides = articles.filter(a => a.category === 'guide')
+const companyNews = articles.filter(a => a.category !== 'guide')
 ---
 
 <BaseLayout
   title="News & Industry Insights — Reylong Machinery"
-  description="Latest news from Reylong Machinery: new machines, trade-show appearances, packaging and recycling industry insights, and company announcements."
+  description="Technical guides on flexographic printing, heat sealing and eddy current separation, plus company news from Reylong Machinery."
   alternateHref="https://www.reylong.com/es/news"
 >
   <div class="container-wide py-12">
-    <h1>News</h1>
-    <div class="mt-8 max-w-2xl space-y-0">
-      {articles.map(article => <NewsCard article={article} lang="en" />)}
-      {articles.length === 0 && (
-        <p class="text-gray-500">No news articles yet.</p>
-      )}
-    </div>
+    <h1>News &amp; Technical Guides</h1>
+
+    {guides.length > 0 && (
+      <section class="mt-10 max-w-2xl" aria-labelledby="guides-heading">
+        <h2 id="guides-heading" class="text-xl font-bold">Technical Guides</h2>
+        <p class="text-sm text-gray-600 mt-1">
+          How the machinery actually works, and what to check when it does not.
+        </p>
+        <div class="mt-4">
+          {guides.map(article => <NewsCard article={article} lang="en" />)}
+        </div>
+      </section>
+    )}
+
+    {companyNews.length > 0 && (
+      <section class="mt-12 max-w-2xl" aria-labelledby="news-heading">
+        <h2 id="news-heading" class="text-xl font-bold">Company News</h2>
+        <div class="mt-4">
+          {companyNews.map(article => <NewsCard article={article} lang="en" />)}
+        </div>
+      </section>
+    )}
+
+    {articles.length === 0 && <p class="text-gray-500 mt-8">No articles yet.</p>}
   </div>
 </BaseLayout>
