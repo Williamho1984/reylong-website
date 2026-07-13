@@ -1,0 +1,26 @@
+name: Health check
+
+# The chatbot was dead for six weeks without anyone noticing (Workers AI deprecated the
+# generation model on 2026-05-30). Nothing was watching, so nothing said anything.
+# This runs from GitHub rather than Cloudflare on purpose: a Cloudflare outage is something
+# it should be able to report, not something that silently takes the monitor down with it.
+on:
+  schedule:
+    - cron: '0 1 * * *' # 01:00 UTC daily = 09:00 Taipei
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Emails on failure; if the secret is ever missing the step still fails the run,
+      # which GitHub notifies on anyway.
+      - run: node scripts/health-check.mjs
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
