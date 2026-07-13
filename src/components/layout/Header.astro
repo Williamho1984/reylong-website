@@ -9,7 +9,9 @@ const navLinks = isEs
       { href: '/case-studies', label: 'Casos de Éxito' },
       { href: '/es/news', label: 'Noticias' },
       { href: '/events', label: 'Eventos' },
-      { href: '/es/about', label: 'Nosotros' },
+      // Trailing slash on purpose: /es/about is prerendered and 308s to /es/about/, so linking
+      // without it would point every visitor (and Ahrefs) at a redirect.
+      { href: '/es/about/', label: 'Nosotros' },
       { href: '/contact/', label: 'Contacto' },
     ]
   : [
