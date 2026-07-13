@@ -11,6 +11,10 @@ const featuredProducts = await getFeaturedProducts().catch(() => [])
   description="瑞隆機械工業股份有限公司，專業製造製袋生產線、渦電流回收分選設備及 AI 智慧機械解決方案，服務全球 30 餘國客戶。"
   lang="zh"
 >
+  <Fragment slot="head">
+    <!-- Chinese site not yet launched; keep it out of the index until it's complete -->
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
   <!-- Hero -->
   <section class="bg-gradient-to-r from-gray-900 to-brand-blue/80 text-white py-24">
     <div class="container-wide">

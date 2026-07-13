@@ -12,7 +12,7 @@ const staticRoutes = [
   { url: '/news',         priority: '0.7', changefreq: 'weekly'  },
   { url: '/case-studies', priority: '0.6', changefreq: 'weekly'  },
   { url: '/events',       priority: '0.6', changefreq: 'weekly'  },
-  { url: '/es/',          priority: '0.9', changefreq: 'weekly'  },
+  { url: '/es',           priority: '0.9', changefreq: 'weekly'  },
   { url: '/es/products',  priority: '0.8', changefreq: 'weekly'  },
   { url: '/es/news',      priority: '0.6', changefreq: 'weekly'  },
 ]
