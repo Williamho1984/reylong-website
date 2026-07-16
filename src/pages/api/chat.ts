@@ -32,7 +32,7 @@ const SYSTEM_PROMPT = `You are a sales assistant for Rey Long Machinery Co., Ltd
 
 Rey Long's actual product lineup (ONLY mention these — never invent other products):
 - JL-L-2TZP600: Multi-format bag making machine (three-side seal, doypack, zipper bags)
-- JLPTCSM-1300W: PP woven bag convention line (printing + tube forming + cutting & sewing)
+- JLPTCSM-1300W: PP woven bag conversion line (printing + tube forming + cutting & sewing)
 - JLRPM-6800BO/6C: 6-color flexographic printing machine for PP woven fabric
 - JLECS-1000W: Eddy current separator for non-ferrous metal recycling
 - AI Machine Intelligence: Edge computing / IoT retrofit solution for existing production lines

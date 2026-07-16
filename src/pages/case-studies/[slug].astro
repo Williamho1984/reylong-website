@@ -7,6 +7,13 @@ import { sanitizeArticleHtml } from '../../lib/sanitize'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/case-studies')
+
+// Old URLs that were renamed after indexing; permanent-redirect to the new slug.
+const renamedSlugs: Record<string, string> = {
+  'thailand-fibc-convention-line': 'thailand-fibc-conversion-line',
+}
+if (renamedSlugs[slug]) return Astro.redirect(`/case-studies/${renamedSlugs[slug]}`, 301)
+
 const caseStudy = await getCaseStudyBySlug(slug)
 if (!caseStudy) return Astro.redirect('/case-studies')
 
