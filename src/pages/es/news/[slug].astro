@@ -15,6 +15,10 @@ const body = sanitizeArticleHtml(article.content_es)
 const date = new Date(article.published_at).toLocaleDateString('es-ES', {
   year: 'numeric', month: 'long', day: 'numeric'
 })
+// Show "Actualizado" only when the edit happened on a later day than publication.
+const updatedDate = article.updated_at && article.updated_at.slice(0, 10) > article.published_at.slice(0, 10)
+  ? new Date(article.updated_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null
 const description = metaDescription(article.content_es) || article.title_es
 
 const pageUrl = Astro.site
@@ -28,7 +32,7 @@ const newsArticleSchema = {
   description,
   inLanguage: 'es',
   datePublished: article.published_at,
-  dateModified: article.published_at,
+  dateModified: article.updated_at ?? article.published_at,
   url: pageUrl,
   ...(article.cover_image_url ? { image: article.cover_image_url } : {}),
   author: {
@@ -55,6 +59,9 @@ function safeJson(obj: unknown): string {
 
 <BaseLayout title={`${article.title_es} — Reylong`} description={description} lang="es">
   <Fragment slot="head">
+    <meta name="author" content="Reylong Engineering Team" />
+    <meta property="article:published_time" content={article.published_at} />
+    <meta property="article:modified_time" content={article.updated_at ?? article.published_at} />
     <script type="application/ld+json" set:html={safeJson(newsArticleSchema)} />
     {faqSchema && <script type="application/ld+json" set:html={safeJson(faqSchema)} />}
   </Fragment>
@@ -67,8 +74,14 @@ function safeJson(obj: unknown): string {
       <span class="text-gray-800">{article.title_es}</span>
     </nav>
 
-    <time datetime={article.published_at} class="text-sm text-gray-500 uppercase tracking-wide">{date}</time>
+    <p class="text-sm text-gray-500 uppercase tracking-wide">
+      <time datetime={article.published_at}>{date}</time>
+      {updatedDate && (
+        <Fragment> · Actualizado el <time datetime={article.updated_at}>{updatedDate}</time></Fragment>
+      )}
+    </p>
     <h1 class="mt-2">{article.title_es}</h1>
+    <p class="mt-2 text-sm text-gray-500">Por el equipo de ingeniería de Reylong</p>
 
     {article.cover_image_url && (
       <img

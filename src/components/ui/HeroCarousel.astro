@@ -22,7 +22,7 @@ const { slides } = Astro.props
 <section
   aria-label="Featured highlights"
   x-data={`{ current: 0, total: ${slides.length} }`}
-  x-init="() => { const id = setInterval(() => { current = (current + 1) % total }, 5000); return () => clearInterval(id) }"
+  x-init="setInterval(function () { current = (current + 1) % total }, 5000)"
   class="relative overflow-hidden bg-gray-900"
 >
   <div class="relative h-[70vh] md:h-[85vh] min-h-[460px]">

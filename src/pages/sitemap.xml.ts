@@ -34,7 +34,7 @@ export const GET: APIRoute = async () => {
 
   const { data: news } = await supabase
     .from('news')
-    .select('slug, published_at')
+    .select('slug, published_at, updated_at')
 
   const { data: caseStudies } = await supabase
     .from('case_studies')
@@ -62,7 +62,7 @@ export const GET: APIRoute = async () => {
       (n) => `
   <url>
     <loc>${SITE}/news/${n.slug}</loc>
-    <lastmod>${new Date(n.published_at).toISOString().split('T')[0]}</lastmod>
+    <lastmod>${new Date(n.updated_at ?? n.published_at).toISOString().split('T')[0]}</lastmod>
     <changefreq>never</changefreq>
     <priority>0.5</priority>
   </url>`
@@ -71,7 +71,7 @@ export const GET: APIRoute = async () => {
       (n) => `
   <url>
     <loc>${SITE}/es/news/${n.slug}</loc>
-    <lastmod>${new Date(n.published_at).toISOString().split('T')[0]}</lastmod>
+    <lastmod>${new Date(n.updated_at ?? n.published_at).toISOString().split('T')[0]}</lastmod>
     <changefreq>never</changefreq>
     <priority>0.4</priority>
   </url>`

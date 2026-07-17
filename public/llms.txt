@@ -1,35 +1,38 @@
 # Reylong Machinery Co., Ltd.
-# REY LONG MACHINERY INDUSTRIAL CO., LTD.
-# 瑞隆機械工業股份有限公司
 
-## About
-Reylong Machinery is a Taiwan-based manufacturer specializing in plastic and packaging machinery, including woven bag making machines, flexographic printing machines, and related industrial equipment. Founded and headquartered in Dou-Liu City, Yunlin County, Taiwan.
+> Taiwan-based manufacturer of plastic and packaging machinery: PP woven bag conversion lines, flexographic printing machines, eddy current non-ferrous metal separators, stand-up zipper pouch machines, and AI machine-intelligence retrofits. B2B industrial equipment, exported to clients in 30+ countries. Site available in English (default) and Spanish (/es).
 
 ## Products
-Reylong manufactures industrial machinery for the plastic woven bag and packaging industry:
-- Flexographic printing machines (roll-to-roll, multi-color)
-- Woven bag making machines
-- Lamination machines
-- Cutting and sewing machines
-- Circular looms and related equipment
 
-All machines are designed for high-speed, continuous production in B2B industrial environments.
+- [Automatic PP Woven Bag Conversion Line (Printing-Tubing-Cutting-Sewing)](https://www.reylong.com/products/automatic-printing-tubing-cutting-sewing-line): complete woven bag conversion line, Eye-Mark dynamic error compensation, up to 220 pcs/min
+- [6-Color Flexographic Roll-to-Roll Printing Machine](https://www.reylong.com/products/flexographic-printing-machine-6c): JLRPM-6800BO/6C for PP woven and laminated fabric, servo tension control, inter-color drying, 100 m/min
+- [Eddy Current Non-Ferrous Metal Separator Line](https://www.reylong.com/products/eddy-current-non-ferrous-separator): recovers copper, aluminum and zinc from shredded plastic and mixed recycling streams
+- [High-Speed Stand-Up Zipper Pouch Bag Making Machine](https://www.reylong.com/products/hp-l-2tzp600-stand-up-zipper-pouch-machine): five pouch styles on one platform, up to 220 pcs/min
+- [AI-Powered Machine Intelligence Solutions](https://www.reylong.com/products/ai-machine-intelligence-solutions): edge AI vision inspection and predictive maintenance retrofits for existing lines
+- [All products](https://www.reylong.com/products)
 
-## Contact
-- Website: https://www.reylong.com
-- Email: t6960638@ms45.hinet.net
-- Phone: +886-5-5511888 / +886-5-5517111
-- Fax: +886-5-5518969
-- Address: No. 3 Chu-Wei Road, Shi-Chou Li, Dou-Liu City, Yunlin County, Taiwan R.O.C.
+## Technical Guides
 
-## Language
-This website is available in English (default) and Spanish (es).
+- [Print Registration Drift on PP Woven Fabric: A Diagnostic Guide](https://www.reylong.com/news/print-registration-drift-pp-woven-fabric): why registration on woven PP is a tension problem, and what AI vision can and cannot do today
+- [Heat Seal Failures in Pouch Production: A Diagnostic Guide](https://www.reylong.com/news/heat-seal-strength-failure-diagnosis): four failure modes (false seal, burn-through, channel leak, random weak seals) and how to diagnose each
+- [Cut-Length Drift on Woven Bag Lines](https://www.reylong.com/news/cut-length-drift-woven-bag-lines): why fixed-length cutting drifts and how Eye-Mark vision-to-servo compensation holds ±1 mm
+- [AI Visual Inspection on Woven Bag Lines: What It Catches — and What It Misses](https://www.reylong.com/news/ai-visual-inspection-woven-bag-printing): CNN vision on textured woven substrates, recall vs precision, camera and lighting choices
+- [Manual vs AI Inspection on Woven Bag Lines: An Honest Comparison](https://www.reylong.com/news/manual-vs-ai-inspection-woven-bag-lines): Sandia research on 20–30% human miss rates, the economics, and when manual inspection is still right
+- [Retrofitting Edge AI Inspection onto an Existing Bag Line](https://www.reylong.com/news/retrofit-edge-ai-inspection-woven-bag-line): what gets installed, the ~50 reference samples, three integration depths
+- [What Is Eddy Current Separation?](https://www.reylong.com/news/eddy-current-separation-guide): recovering non-ferrous metals from recycling lines
+- [Water-Based Inks: The Sustainable Future of Flexographic Packaging Printing](https://www.reylong.com/news/water-based-inks-flexographic-printing-sustainable-packaging)
+- [3-Side Seal vs. Stand-Up Zipper Pouch: Which Bag Format Is Right for Your Line?](https://www.reylong.com/news/3-side-seal-vs-stand-up-zipper-pouch)
+- [All guides and news](https://www.reylong.com/news)
 
-## Pages
-- / : Homepage with featured products and company overview
-- /products : Full product catalog
-- /products/[slug] : Individual product detail pages with specifications
-- /about : Company history and manufacturing capabilities
-- /contact : Inquiry form and contact information
-- /news : Industry news and company announcements
-- /case-studies : Customer case studies by region
+## Key Pages
+
+- [Frequently Asked Questions](https://www.reylong.com/faq/): machine capabilities, lead times, customization, support
+- [About Reylong](https://www.reylong.com/about/): company history and manufacturing capabilities, Dou-Liu City, Yunlin County, Taiwan
+- [Case Studies](https://www.reylong.com/case-studies): anonymized customer deployments with real machine specifications
+- [Contact / Request a Quote](https://www.reylong.com/contact/): inquiry form; email t6960638@ms45.hinet.net; phone +886-5-5511888
+
+## Spanish (Español)
+
+- [Inicio](https://www.reylong.com/es)
+- [Productos](https://www.reylong.com/es/products)
+- [Noticias y guías técnicas](https://www.reylong.com/es/news)

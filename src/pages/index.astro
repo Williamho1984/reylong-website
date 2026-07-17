@@ -101,7 +101,7 @@ const heroSlides = [
       <div
         class="relative aspect-video overflow-hidden bg-gray-200"
         x-data="{ current: 0, images: ['/factory.png'], total: 1 }"
-        x-init="() => { if (total > 1) { const id = setInterval(() => { current = (current + 1) % total }, 4000); return () => clearInterval(id) } }"
+        x-init="if (total > 1) { setInterval(function () { current = (current + 1) % total }, 4000) }"
       >
         <template x-for="(src, i) in images" :key="i">
           <img

@@ -18,6 +18,8 @@ export type NewsArticle = {
   id: string
   slug: string
   published_at: string
+  // Set only when an article receives a substantive edit after publication; null otherwise.
+  updated_at: string | null
   cover_image_url: string
   category: NewsCategory
   title_en: string
