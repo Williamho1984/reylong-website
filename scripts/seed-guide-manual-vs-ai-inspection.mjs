@@ -72,7 +72,7 @@ const faq = [
   },
 ]
 
-const content_en = `<p>Manual inspection misses 20&ndash;30% of defects even under good conditions &mdash; that figure comes from research at Sandia National Laboratories, not from a vendor brochure &mdash; while an AI vision system inspects every bag at line speed with the same attention on bag ten thousand as on bag one. That asymmetry, not any single accuracy number, is the real argument for automating inspection on a woven bag line. It is also not the whole story: there are runs where manual inspection remains the right choice, and this guide covers both sides.</p>
+const content_en = `<p>Manual inspection misses 20&ndash;30% of defects even under good conditions &mdash; that figure comes from <a href="https://www.osti.gov/biblio/1055636">research at Sandia National Laboratories</a>, not from a vendor brochure &mdash; while an AI vision system inspects every bag at line speed with the same attention on bag ten thousand as on bag one. That asymmetry, not any single accuracy number, is the real argument for automating inspection on a woven bag line. It is also not the whole story: there are runs where manual inspection remains the right choice, and this guide covers both sides.</p>
 
 <h2>What human inspection actually delivers</h2>
 <p>The published evidence on sustained visual inspection is consistent and sobering:</p>
@@ -130,7 +130,7 @@ const content_en = `<p>Manual inspection misses 20&ndash;30% of defects even und
 <li><a href="/case-studies/taiwan-ai-predictive-maintenance">Case study: AI predictive maintenance on a Taiwan bag line</a></li>
 </ul>`
 
-const content_es = `<p>La inspecci&oacute;n manual pasa por alto el 20&ndash;30% de los defectos incluso en buenas condiciones &mdash; la cifra procede de la investigaci&oacute;n de Sandia National Laboratories, no de un folleto comercial &mdash;, mientras que un sistema de visi&oacute;n por IA inspecciona cada saco a velocidad de l&iacute;nea con la misma atenci&oacute;n en el saco diez mil que en el primero. Esa asimetr&iacute;a, y no ninguna cifra aislada de precisi&oacute;n, es el argumento real para automatizar la inspecci&oacute;n en una l&iacute;nea de sacos tejidos. Tampoco es toda la historia: hay tiradas donde la inspecci&oacute;n manual sigue siendo la opci&oacute;n correcta, y esta gu&iacute;a cubre ambos lados.</p>
+const content_es = `<p>La inspecci&oacute;n manual pasa por alto el 20&ndash;30% de los defectos incluso en buenas condiciones &mdash; la cifra procede de la <a href="https://www.osti.gov/biblio/1055636">investigaci&oacute;n de Sandia National Laboratories</a>, no de un folleto comercial &mdash;, mientras que un sistema de visi&oacute;n por IA inspecciona cada saco a velocidad de l&iacute;nea con la misma atenci&oacute;n en el saco diez mil que en el primero. Esa asimetr&iacute;a, y no ninguna cifra aislada de precisi&oacute;n, es el argumento real para automatizar la inspecci&oacute;n en una l&iacute;nea de sacos tejidos. Tampoco es toda la historia: hay tiradas donde la inspecci&oacute;n manual sigue siendo la opci&oacute;n correcta, y esta gu&iacute;a cubre ambos lados.</p>
 
 <h2>Lo que la inspecci&oacute;n humana realmente ofrece</h2>
 <p>La evidencia publicada sobre inspecci&oacute;n visual sostenida es consistente y aleccionadora:</p>

@@ -39,3 +39,24 @@ export function faqPageSchema(faq: NewsFaq[] | undefined | null, lang: 'en' | 'e
 
   return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity }
 }
+
+// FAQPage JSON-LD from already-localized question/answer pairs. Product pages keep their FAQ
+// content in the page source (one language per route) rather than in the database, so they
+// can't reuse the bilingual NewsFaq shape above.
+export function faqPageSchemaFromItems(
+  items: Array<{ q: string; a: string }> | undefined | null
+): FaqPage | null {
+  if (!items?.length) return null
+
+  const mainEntity = items
+    .filter(item => item.q?.trim() && item.a?.trim())
+    .map(item => ({
+      '@type': 'Question' as const,
+      name: item.q.trim(),
+      acceptedAnswer: { '@type': 'Answer' as const, text: item.a.trim() },
+    }))
+
+  if (!mainEntity.length) return null
+
+  return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity }
+}

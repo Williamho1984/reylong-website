@@ -1,13 +1,18 @@
 ---
 import type { Product } from '../../lib/db/products'
+import { faqPageSchemaFromItems } from '../../lib/schema'
 
 interface Props {
   product: Product
   imageUrl?: string
   pageUrl: string
+  // Localized Q&A pairs matching the page's visible FAQ section — emitted as FAQPage JSON-LD.
+  faq?: Array<{ q: string; a: string }>
 }
 
-const { product, imageUrl, pageUrl } = Astro.props
+const { product, imageUrl, pageUrl, faq } = Astro.props
+
+const faqSchema = faqPageSchemaFromItems(faq)
 
 const schema = {
   '@context': 'https://schema.org',
@@ -78,4 +83,7 @@ function safeJson(obj: unknown): string {
 <script type="application/ld+json" set:html={safeJson(breadcrumbSchema)} />
 {techArticleSchema && (
   <script type="application/ld+json" set:html={safeJson(techArticleSchema)} />
+)}
+{faqSchema && (
+  <script type="application/ld+json" set:html={safeJson(faqSchema)} />
 )}

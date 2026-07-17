@@ -22,6 +22,55 @@ const aiContent = product.content?.sections?.length ? product.content : null
 const pageUrl = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : `https://reylong.com${Astro.url.pathname}`
+
+type FAQItem = { q: string; a: string }
+
+// Spanish mirror of the per-product FAQ on the English route — keep the two in sync when editing.
+const productFAQ: Record<string, FAQItem[]> = {
+  'automatic-printing-tubing-cutting-sewing-line': [
+    { q: '¿Cuál es la velocidad de producción de la línea de conversión JLPTCSM-1300W?', a: 'La JLPTCSM-1300W produce 25–40 sacos/min en un proceso totalmente integrado que combina impresión flexográfica, formación del tubo, corte y costura, y aplicación de cinta de refuerzo en una sola línea continua.' },
+    { q: '¿Qué dimensiones de saco puede producir la JLPTCSM-1300W?', a: 'Ancho de tejido antes del tubado: 700–1300 mm. Ancho del saco terminado: 430–660 mm. Longitud de corte: 550–1250 mm. El fuelle es ajustable de 40 a 90 mm.' },
+    { q: '¿Cuántos colores de impresión admite la línea de conversión?', a: 'Impresión flexográfica de 4 colores (configuración 4+0) con una longitud de repetición de impresión de 450–1200 mm y un ancho máximo de impresión de 1300 mm.' },
+    { q: '¿Qué tipos de tejido procesa la JLPTCSM-1300W?', a: 'La línea procesa tejido de PP plano y laminado. Se admite tejido laminado con BOPP para aplicaciones que requieren resistencia a la humedad o una superficie de impresión brillante.' },
+    { q: '¿Una "línea de conversión" es lo mismo que una máquina de corte y costura de sacos tejidos?', a: 'Sí. "Máquina de corte y costura", "máquina de corte y cosido" y "línea de conversión de sacos tejidos" son términos regionales para la misma clase de equipo. La JLPTCSM-1300W cubre todas esas funciones — corta el tejido tubular de PP a la longitud deseada y cose el dobladillo inferior — y añade impresión flexográfica y aplicación de cinta de refuerzo en la misma pasada continua.' },
+    { q: '¿Cuál es el plazo de entrega estándar y el proceso de envío?', a: 'El plazo estándar es de 2 a 3 meses desde la confirmación del pedido, e incluye fabricación, pruebas de calidad e inspección previa al embarque. Rey Long asiste con la documentación de exportación y la carga del contenedor.' },
+  ],
+  'hp-l-2tzp600-stand-up-zipper-pouch-machine': [
+    { q: '¿Qué estilos de bolsa puede producir la JL-L-2TZP600?', a: 'Cinco formatos en una sola plataforma: sellado de tres lados, tres lados con cierre zíper, sellado de cuatro lados, doypack y doypack con zíper. Cambiar de formato requiere un ajuste, pero no una máquina separada.' },
+    { q: '¿Cuál es la velocidad máxima de producción?', a: 'Hasta 220 pzas/min en bolsas de tres sellos, 150 pzas/min en bolsas de tres sellos con zíper y 120 pzas/min en bolsas doypack. La velocidad mínima es de 35 pzas/min en todos los formatos.' },
+    { q: '¿Qué películas laminadas puede procesar la máquina?', a: 'Películas laminadas termosellables de 30–180 μm de espesor. Las estructuras comunes incluyen NY/PE, PET/PE, AL/PE, OPP/CPP y BOPP/LLDPE. El rango de temperatura de hasta 300 °C admite películas de grado retorta.' },
+    { q: '¿Qué precisión tienen el sellado y el registro de impresión?', a: 'La precisión de posicionamiento es ≤0,3 mm mediante control servo Panasonic completo. El sistema de sellado usa 4 grupos de calentamiento + 2 grupos de enfriamiento para una calidad de sellado constante a alta velocidad.' },
+    { q: '¿La instalación y la formación de operarios están incluidas?', a: 'Sí. Rey Long proporciona instalación in situ, documentación técnica y formación de operarios durante la puesta en marcha. Tras la instalación hay soporte remoto por videollamada.' },
+  ],
+  'flexographic-printing-machine-6c': [
+    { q: '¿Sobre qué materiales imprime la JLRPM-6800BO/6C?', a: 'Tejido de PP y tejido de PP laminado, con un ancho máximo de banda de 800 mm y una velocidad máxima de máquina de 120 m/min (velocidad de impresión de hasta 100 m/min).' },
+    { q: '¿Cuántos colores y qué configuraciones admite?', a: '6 colores mediante 6 estaciones de impresión independientes con rodillos anilox cerámicos. Configuraciones: 0+6, 1+5, 2+4, 3+3 (anverso/reverso). Un sistema de secado entre colores garantiza una separación de color limpia.' },
+    { q: '¿Qué causa los defectos de impresión comunes y cómo se corrigen?', a: 'La mayoría de los defectos provienen de la presión, la química de la tinta (pH/viscosidad) o la concentricidad mecánica. La ganancia de punto se corrige reduciendo la presión de impresión al nivel "kiss print". Las marcas de engranaje requieren comprobar el T.I.R. de las piezas rotativas. La impresión sucia requiere limpiar el rodillo anilox y los cilindros.' },
+    { q: '¿Cuál es el programa de mantenimiento recomendado?', a: 'Diario: limpiar el anilox con los disolventes especificados o agua caliente (tintas al agua) inmediatamente después del turno. Antes de cada trabajo: inspeccionar los engranajes, comprobar la viscosidad y el pH de la tinta, y revisar el montaje del cliché por si hay aire atrapado.' },
+    { q: '¿Cuál es el plazo de entrega estándar?', a: 'El plazo estándar es de 2 a 3 meses desde la confirmación del pedido. Rey Long proporciona documentación técnica completa y soporte de puesta en marcha.' },
+  ],
+  'eddy-current-non-ferrous-separator': [
+    { q: '¿Qué materiales recupera la JLECS-1000W?', a: 'Metales no ferrosos como aluminio, cobre y latón a partir de flujos mixtos como residuos electrónicos, plástico triturado y chatarra mixta. Combina la separación magnética de tambor (eliminación de férricos) con la separación por corriente de Foucault (recuperación de no ferrosos).' },
+    { q: '¿Cuál es la capacidad de procesamiento?', a: 'La JLECS-1000W opera a 1.000 kg/h. Contáctenos con la composición y granulometría de su material de entrada para una evaluación de rendimiento detallada.' },
+    { q: '¿Qué industrias usan el separador por corriente de Foucault?', a: 'Las aplicaciones comunes incluyen el reciclaje de residuos electrónicos, la clasificación de residuos sólidos urbanos, la recuperación de aluminio de chatarra triturada y las líneas de reciclaje de plástico que requieren eliminar metales.' },
+    { q: '¿Se incluyen instalación y formación?', a: 'Sí. Rey Long proporciona instalación in situ, documentación técnica y formación de operarios. También hay soporte técnico remoto tras la puesta en marcha.' },
+    { q: '¿Cuál es el plazo de entrega estándar?', a: 'El plazo estándar es de 2 a 3 meses desde la confirmación del pedido, e incluye fabricación, pruebas de calidad e inspección previa al embarque.' },
+  ],
+  'ai-machine-intelligence-solutions': [
+    { q: '¿Qué hace realmente la Inteligencia de Máquina con IA en una máquina de fabricar bolsas de plástico?', a: 'Añade un "cerebro digital" a la línea mediante tres capacidades: digitaliza el know-how de parámetros de los operarios veteranos y recomienda ajustes óptimos en la HMI, ejecuta inspección por visión artificial CNN para detectar defectos en tiempo real, y aplica compensación dinámica de errores que corrige los servomotores para mejorar la precisión de corte y costura. Toda la inferencia se ejecuta en hardware edge en la máquina.' },
+    { q: '¿Puede instalarse en máquinas que ya operamos?', a: 'Sí. El programa se diseña caso por caso para una máquina y un proceso específicos y se integra en líneas existentes mediante protocolos industriales estándar (OPC-UA, Modbus, MQTT), sin reemplazar la máquina completa. Envíenos su tipo de máquina y aplicación objetivo para una evaluación.' },
+    { q: '¿El sistema necesita internet o conectividad a la nube?', a: 'No. Toda la inferencia y la toma de decisiones se ejecutan localmente en hardware edge instalado en la máquina, con latencia casi nula y plena resiliencia sin conexión. Es idóneo para fábricas con redes limitadas o requisitos estrictos de seguridad de datos.' },
+    { q: '¿Qué defectos detecta la inspección por visión artificial?', a: 'Defectos de impresión (desviación de registro, falta de tinta, borrosidad, manchas), defectos de material (cintas de urdimbre/trama rotas, agujeros en el tejido, pelusa superficial) y defectos de proceso (puntadas saltadas, corte desplazado, dobladillos irregulares). El modelo se implementa con pocas muestras — una base funcional a partir de unas 50 muestras de referencia — y apunta a más del 95% de detección de defectos.' },
+    { q: '¿Cuánto puede mejorar la precisión y reducir el desperdicio?', a: 'Al leer la deformación del Eye-Mark y compensar los servomotores en tiempo real, la precisión de corte y costura puede apuntar a ≤ ±1 mm frente a los ~±5 mm típicos del corte de longitud fija, con el desperdicio reducido hasta ~2% desde ~5% y un rendimiento de impresión un ~5% mayor — todo dependiente de la aplicación. Un operario puede además supervisar hasta 4 máquinas en lugar de 2.' },
+    { q: '¿Ayuda al procesar material reciclado (PCR)?', a: 'Sí. La resina reciclada tiene un flujo de fusión y una resistencia inestables que pueden causar roturas a alta velocidad. El lazo de control de tensión con IA detecta esas microvariaciones y ajusta automáticamente la velocidad y la temperatura de sellado para mantener la bolsa dentro de su especificación de resistencia — cada vez más útil a medida que las marcas aumentan el contenido reciclado.' },
+  ],
+}
+
+const faqItems: FAQItem[] = productFAQ[slug] ?? [
+  { q: `¿Qué materiales puede procesar la ${product.name_es}?`, a: 'La máquina está diseñada para procesar polipropileno (PP), polietileno (PE) y otros polímeros comunes en aplicaciones de plástico y envasado. Contáctenos con sus requisitos de material específicos.' },
+  { q: '¿Qué soporte posventa ofrece Reylong?', a: 'Rey Long proporciona documentación técnica completa, soporte remoto por videollamada y asistencia de instalación in situ. Hay repuestos disponibles globalmente con entrega rápida.' },
+  { q: '¿Pueden personalizarse las máquinas para requisitos de producción específicos?', a: 'Sí. Rey Long ofrece personalización para la mayoría de los modelos — velocidad, rango de tamaños de bolsa, accesorios opcionales y compatibilidad con materiales especiales. Contacte a nuestro equipo de ingeniería con sus requisitos.' },
+]
 ---
 
 <BaseLayout
@@ -31,7 +80,7 @@ const pageUrl = Astro.site
   lang="es"
 >
   <Fragment slot="head">
-    <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} />
+    <ProductSchema product={product} imageUrl={mainImageUrl} pageUrl={pageUrl} faq={faqItems} />
   </Fragment>
 
   <div class="container-wide py-12">
@@ -71,6 +120,22 @@ const pageUrl = Astro.site
     {!aiContent && product.tech_article?.sections?.length ? (
       <TechArticleSection article={product.tech_article} lang="es" />
     ) : null}
+
+    <!-- FAQ Section (AEO) -->
+    <section class="mt-12" aria-label="Preguntas frecuentes">
+      <h2 class="mb-6">Preguntas Frecuentes</h2>
+      <div class="space-y-4">
+        {faqItems.map(item => (
+          <details class="border border-gray-200 p-4 group">
+            <summary class="cursor-pointer list-none flex justify-between items-center gap-3">
+              <h3 class="text-base md:text-lg font-semibold">{item.q}</h3>
+              <span class="text-gray-400 group-open:rotate-180 transition-transform shrink-0" aria-hidden="true">▼</span>
+            </summary>
+            <p class="mt-3 text-gray-600">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
 
     <section id="inquiry" class="mt-12 bg-gray-50 p-8">
       <h2 class="mb-6">Solicitar Cotización — {product.name_es}</h2>
