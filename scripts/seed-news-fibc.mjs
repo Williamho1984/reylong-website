@@ -29,7 +29,7 @@ const content_en = `<p>Flexible Intermediate Bulk Containers (FIBCs) &mdash; the
 <p>Demand is strongest where bulk goods cross borders &mdash; chemicals, food ingredients, minerals and fertilizers. Exporters want bags that protect cargo across long transit cycles and that can be produced consistently and at volume. That puts the focus on the production line: consistent print registration, clean cutting and sewing, and reliable throughput.</p>
 <h2>How Reylong fits</h2>
 <p>Reylong's <a href="/products/automatic-printing-tubing-cutting-sewing-line">automatic PP woven bag convention line</a> integrates flexographic printing, tube forming, cutting, sewing and overtape application into one continuous process, so woven bags are produced consistently and at volume from a single line. Building production around an integrated, well-controlled line is what lets manufacturers meet the rising bar on quality, certification and recyclable construction that 2026 buyers are setting.</p>
-<p><a href="/contact">Talk to Reylong's engineering team</a> about an integrated woven-bag production line for your market.</p>
+<p><a href="/contact/">Talk to Reylong's engineering team</a> about an integrated woven-bag production line for your market.</p>
 <h2>Related reading</h2>
 <ul>
 <li><a href="/news/mono-material-recyclable-pouches-heat-seal-challenge">Mono-Material Recyclable Pouches: Solving the Heat-Seal Challenge</a></li>
@@ -48,7 +48,7 @@ const content_es = `<p>Los contenedores flexibles para graneles (FIBC) &mdash;la
 <p>La demanda es más fuerte donde los graneles cruzan fronteras &mdash; productos químicos, ingredientes alimentarios, minerales y fertilizantes. Los exportadores quieren sacas que protejan la carga en ciclos largos de tránsito y que puedan producirse de forma consistente y en volumen. Eso pone el foco en la línea de producción: registro de impresión consistente, corte y costura limpios y producción fiable.</p>
 <h2>Cómo encaja Reylong</h2>
 <p>La <a href="/es/products/automatic-printing-tubing-cutting-sewing-line">línea automática de sacos de PP tejido</a> de Reylong integra impresión flexográfica, formación de tubo, corte, costura y aplicación de cinta en un proceso continuo, de modo que las sacas tejidas se producen de forma consistente y en volumen desde una sola línea. Construir la producción en torno a una línea integrada y bien controlada es lo que permite a los fabricantes cumplir el creciente nivel de calidad, certificación y construcción reciclable que exigen los compradores de 2026.</p>
-<p><a href="/contact">Hable con el equipo de ingeniería de Reylong</a> sobre una línea integrada de producción de sacos tejidos para su mercado.</p>
+<p><a href="/contact/">Hable con el equipo de ingeniería de Reylong</a> sobre una línea integrada de producción de sacos tejidos para su mercado.</p>
 <h2>Lecturas relacionadas</h2>
 <ul>
 <li><a href="/es/news/mono-material-recyclable-pouches-heat-seal-challenge">Bolsas reciclables monomaterial: cómo resolver el reto del sellado térmico</a></li>

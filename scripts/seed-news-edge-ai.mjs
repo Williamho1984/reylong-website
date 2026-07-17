@@ -47,7 +47,7 @@ const content_en = `<p>Artificial intelligence is moving out of the data center 
 <p>Reylong's <a href="/products/ai-machine-intelligence-solutions">AI Machine Intelligence solution</a> embeds edge computing and industrial IoT into existing production lines &mdash; delivering real-time computer-vision quality inspection, predictive maintenance and process optimization <strong>without requiring cloud connectivity</strong>. Because it is designed case by case for specific machines, it can be retrofitted onto equipment you already own, without a full machine replacement &mdash; turning an existing line into a smarter, self-monitoring one.</p>
 <h2>The bottom line</h2>
 <p>Edge AI is no longer experimental on the factory floor; it is a measurable upgrade to yield, uptime and quality. Vision inspection removes defects you currently can't see, and predictive maintenance removes downtime you currently can't predict &mdash; both running locally, in real time, on the line you already have.</p>
-<p><em><a href="/contact">Talk to Reylong's engineering team</a> about retrofitting AI vision and predictive maintenance onto your line.</em></p>
+<p><em><a href="/contact/">Talk to Reylong's engineering team</a> about retrofitting AI vision and predictive maintenance onto your line.</em></p>
 <h2>Related reading</h2>
 <ul>
 <li><a href="/news/water-based-inks-flexographic-printing-sustainable-packaging">Water-Based Inks: The Sustainable Future of Flexographic Packaging Printing</a></li>
@@ -75,7 +75,7 @@ const content_es = `<p>La inteligencia artificial está saliendo del centro de d
 <p>La <a href="/es/products/ai-machine-intelligence-solutions">solución de Inteligencia de Máquina con IA</a> de Reylong integra computación en el borde e IoT industrial en las líneas de producción existentes, ofreciendo inspección de calidad por visión artificial en tiempo real, mantenimiento predictivo y optimización de procesos <strong>sin necesidad de conexión a la nube</strong>. Al diseñarse caso por caso para máquinas específicas, puede adaptarse a equipos que ya posee, sin reemplazar la máquina completa, convirtiendo una línea existente en una más inteligente y con autosupervisión.</p>
 <h2>En conclusión</h2>
 <p>La IA en el borde ya no es experimental en la planta; es una mejora medible del rendimiento, la disponibilidad y la calidad. La inspección por visión elimina defectos que hoy no puede ver, y el mantenimiento predictivo elimina paradas que hoy no puede predecir, ambos ejecutándose localmente, en tiempo real, en la línea que ya tiene.</p>
-<p><em><a href="/contact">Hable con el equipo de ingeniería de Reylong</a> sobre cómo adaptar la visión por IA y el mantenimiento predictivo a su línea.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingeniería de Reylong</a> sobre cómo adaptar la visión por IA y el mantenimiento predictivo a su línea.</em></p>
 <h2>Lecturas relacionadas</h2>
 <ul>
 <li><a href="/es/news/water-based-inks-flexographic-printing-sustainable-packaging">Tintas al agua: el futuro sostenible de la impresión flexográfica de envases</a></li>

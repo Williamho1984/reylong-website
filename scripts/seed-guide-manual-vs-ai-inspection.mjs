@@ -109,7 +109,7 @@ const content_en = `<p>Manual inspection misses 20&ndash;30% of defects even und
 
 <h2>The short version</h2>
 <p>The case for AI inspection is not that a model is smarter than an inspector &mdash; it is that a camera does not get tired, does not sample, and does not move the pass/fail line between shifts, on a task where documented human performance misses a fifth to a third of defects. The case for manual inspection is real but specific: short runs, subjective criteria, tactile defects, slow single-shift lines. If your line runs long jobs across multiple shifts at 25+ bags/min, the numbers usually point one way &mdash; and <a href="/news/retrofit-edge-ai-inspection-woven-bag-line">retrofitting the system onto the machines you already own</a> is a smaller project than most factories expect.</p>
-<p><em><a href="/contact">Ask Rey Long's engineering team</a> for a scoped assessment against your defect history and line speeds.</em></p>
+<p><em><a href="/contact/">Ask Rey Long's engineering team</a> for a scoped assessment against your defect history and line speeds.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>How accurate is manual visual inspection really?</h3>
@@ -167,7 +167,7 @@ const content_es = `<p>La inspecci&oacute;n manual pasa por alto el 20&ndash;30%
 
 <h2>En resumen</h2>
 <p>El argumento a favor de la inspecci&oacute;n por IA no es que un modelo sea m&aacute;s listo que un inspector &mdash; es que una c&aacute;mara no se cansa, no muestrea y no mueve la l&iacute;nea de aprobado/rechazado entre turnos, en una tarea donde el rendimiento humano documentado pasa por alto de una quinta a una tercera parte de los defectos. El argumento a favor de la inspecci&oacute;n manual es real pero espec&iacute;fico: tiradas cortas, criterios subjetivos, defectos t&aacute;ctiles, l&iacute;neas lentas de un turno. Si su l&iacute;nea corre trabajos largos en varios turnos a 25+ sacos/min, los n&uacute;meros suelen apuntar en una direcci&oacute;n &mdash; e <a href="/es/news/retrofit-edge-ai-inspection-woven-bag-line">instalar el sistema sobre las m&aacute;quinas que ya posee</a> es un proyecto m&aacute;s peque&ntilde;o de lo que la mayor&iacute;a de las f&aacute;bricas espera.</p>
-<p><em><a href="/es/contact">Pida al equipo de ingenier&iacute;a de Rey Long</a> una evaluaci&oacute;n dimensionada contra su historial de defectos y sus velocidades de l&iacute;nea.</em></p>
+<p><em><a href="/contact/">Pida al equipo de ingenier&iacute;a de Rey Long</a> una evaluaci&oacute;n dimensionada contra su historial de defectos y sus velocidades de l&iacute;nea.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Qu&eacute; precisi&oacute;n tiene realmente la inspecci&oacute;n visual manual?</h3>

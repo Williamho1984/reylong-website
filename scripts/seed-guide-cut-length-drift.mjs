@@ -117,7 +117,7 @@ const content_en = `<p>A woven bag line can hold every mechanical tolerance on i
 
 <h2>The short version</h2>
 <p>Cut-length drift on woven PP is not a knife problem, an encoder problem or a servo problem. It is a measurement problem: the machine is measuring a roller that cannot stretch while cutting a fabric that can. Fix the tension profile first &mdash; particularly the taper through the roll &mdash; because that is where the stretch is created. Then, if the tolerance you need is tighter than an open-loop system can hold on elastic fabric, stop measuring the roller and start measuring the mark that rides on the material itself.</p>
-<p><em><a href="/contact">Talk to Rey Long's engineering team</a> about retrofitting Eye-Mark compensation onto your line.</em></p>
+<p><em><a href="/contact/">Talk to Rey Long's engineering team</a> about retrofitting Eye-Mark compensation onto your line.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>Why does cut length drift on woven bag lines?</h3>
@@ -183,7 +183,7 @@ const content_es = `<p>Una l&iacute;nea de sacos tejidos puede cumplir todas las
 
 <h2>En resumen</h2>
 <p>La desviaci&oacute;n de la longitud de corte en PP tejido no es un problema de cuchilla, ni de encoder, ni de servo. Es un problema de medici&oacute;n: la m&aacute;quina mide un rodillo que no puede estirarse mientras corta un tejido que s&iacute; puede. Corrija primero el perfil de tensi&oacute;n &mdash; en particular la conicidad a lo largo de la bobina &mdash;, porque ah&iacute; es donde se crea el estiramiento. Despu&eacute;s, si la tolerancia que necesita es m&aacute;s estrecha de lo que un sistema en lazo abierto puede sostener sobre un tejido el&aacute;stico, deje de medir el rodillo y empiece a medir la marca que viaja sobre el propio material.</p>
-<p><em><a href="/es/contact">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre la instalaci&oacute;n de la compensaci&oacute;n Eye-Mark en su l&iacute;nea.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre la instalaci&oacute;n de la compensaci&oacute;n Eye-Mark en su l&iacute;nea.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Por qu&eacute; se desv&iacute;a la longitud de corte en las l&iacute;neas de sacos tejidos?</h3>

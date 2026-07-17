@@ -119,7 +119,7 @@ const content_en = `<p>Registration drift is the defect that quietly eats margin
 
 <h2>The short version</h2>
 <p>On woven PP, registration drift is a tension problem until proven otherwise. Map the tension profile through the roll before you touch a plate. Then check anilox and impression, then drying, then the web path, then the room. A press with servo tension control, per-station ceramic anilox and inter-color drying removes the machine's contribution to the error; AI vision, today, tells you within seconds when the remaining error has crossed your limit &mdash; which on a line running 100 m/min is the difference between two scrap bags and two thousand.</p>
-<p><em><a href="/contact">Talk to Rey Long's engineering team</a> about registration on your fabric and artwork.</em></p>
+<p><em><a href="/contact/">Talk to Rey Long's engineering team</a> about registration on your fabric and artwork.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>What causes print registration drift on PP woven fabric?</h3>
@@ -184,7 +184,7 @@ const content_es = `<p>La desviaci&oacute;n del registro es el defecto que se co
 
 <h2>En resumen</h2>
 <p>En PP tejido, la desviaci&oacute;n del registro es un problema de tensi&oacute;n mientras no se demuestre lo contrario. Levante el perfil de tensi&oacute;n a lo largo de la bobina antes de tocar un clich&eacute;. Despu&eacute;s revise anilox y presi&oacute;n, luego el secado, luego el recorrido de la banda, y por &uacute;ltimo la nave. Una impresora con control de tensi&oacute;n por servo, anilox cer&aacute;mico por estaci&oacute;n y secado entre colores elimina la contribuci&oacute;n de la m&aacute;quina al error; la visi&oacute;n artificial, hoy, le avisa en segundos cuando el error restante ha superado su l&iacute;mite, lo que en una l&iacute;nea a 100 m/min es la diferencia entre dos sacos de desperdicio y dos mil.</p>
-<p><em><a href="/es/contact">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre el registro en su tejido y sus artes finales.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre el registro en su tejido y sus artes finales.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Qu&eacute; causa la desviaci&oacute;n del registro de impresi&oacute;n en tejido de PP?</h3>

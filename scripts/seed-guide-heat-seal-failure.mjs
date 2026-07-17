@@ -119,7 +119,7 @@ const content_en = `<p>Seal failures are rarely mysterious once you stop treatin
 
 <h2>The short version</h2>
 <p>Identify the failure mode before you change a setting. If the fault arrived with a speed change, it is dwell time. If seals are randomly weak with no pattern, look at cooling and at the PTFE tape before you look at temperature. If the seal leaks through one narrow channel, stop adjusting heat and go find the contamination or the wrinkle. And measure the bar &mdash; the HMI is telling you an intention, not a fact.</p>
-<p><em><a href="/contact">Talk to Rey Long's engineering team</a> about running your film structure on the JL-L-2TZP600.</em></p>
+<p><em><a href="/contact/">Talk to Rey Long's engineering team</a> about running your film structure on the JL-L-2TZP600.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>What are the three variables that control heat seal quality?</h3>
@@ -192,7 +192,7 @@ const content_es = `<p>Los fallos de sellado rara vez son un misterio en cuanto 
 
 <h2>En resumen</h2>
 <p>Identifique el modo de fallo antes de cambiar un ajuste. Si el fallo lleg&oacute; con un cambio de velocidad, es el tiempo de permanencia. Si los sellados son d&eacute;biles de forma aleatoria y sin patr&oacute;n, mire el enfriamiento y la cinta de PTFE antes que la temperatura. Si la fuga es por un canal estrecho, deje de ajustar el calor y busque la contaminaci&oacute;n o la arruga. Y mida la mordaza: la HMI le est&aacute; comunicando una intenci&oacute;n, no un hecho.</p>
-<p><em><a href="/es/contact">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre el procesamiento de su estructura de pel&iacute;cula en la JL-L-2TZP600.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre el procesamiento de su estructura de pel&iacute;cula en la JL-L-2TZP600.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Cu&aacute;les son las tres variables que controlan la calidad del sellado t&eacute;rmico?</h3>

@@ -38,7 +38,7 @@ const content_en = `<p><strong>Eddy current separation</strong> is an electromag
 <p>Non-ferrous metals are valuable commodities. Recovering them from shredded plastic and mixed waste streams generates direct revenue while improving the purity of the downstream plastic recyclate &mdash; a double payback. For facilities processing post-consumer or post-industrial waste, an eddy current separator is typically one of the highest-return pieces of equipment on the line.</p>
 <h2>Reylong Eddy Current Non-Ferrous Metal Separator Line</h2>
 <p>Reylong manufactures a complete <a href="/products/eddy-current-non-ferrous-separator">Eddy Current Non-Ferrous Metal Separator Line</a> designed for integration into existing recycling and sorting plants. It recovers aluminum, copper and brass from shredded plastic, e-waste and mixed scrap, with adjustable rotor frequency for different particle sizes, a high-throughput belt design, and a compact footprint suitable for retrofitting into existing facilities (throughput depends on material type and fragment size).</p>
-<p><a href="/contact">Contact our team</a> to discuss specifications and capacity requirements for your facility.</p>
+<p><a href="/contact/">Contact our team</a> to discuss specifications and capacity requirements for your facility.</p>
 <h2>Related reading</h2>
 <ul>
 <li><a href="/news/mono-material-recyclable-pouches-heat-seal-challenge">Mono-Material Recyclable Pouches: Solving the Heat-Seal Challenge</a></li>
@@ -61,7 +61,7 @@ const content_es = `<p>La <strong>separación por corriente de Foucault</strong>
 <p>Los metales no ferrosos son materias primas valiosas. Recuperarlos del plástico triturado y de corrientes de residuos mixtos genera ingresos directos y mejora la pureza del reciclado de plástico aguas abajo &mdash;un doble beneficio. Un separador por corriente de Foucault suele ser uno de los equipos con mayor retorno de inversión en la línea.</p>
 <h2>Línea separadora de Reylong</h2>
 <p>Reylong fabrica una <a href="/products/eddy-current-non-ferrous-separator">línea separadora completa de metales no ferrosos</a> diseñada para integrarse en plantas de reciclaje existentes. Recupera aluminio, cobre y latón de plástico triturado, residuos electrónicos y chatarra mixta, con frecuencia de rotor ajustable para distintos tamaños de partícula y diseño de cinta de alta producción (la producción depende del tipo de material y del tamaño de los fragmentos).</p>
-<p><a href="/contact">Contacte a nuestro equipo</a> para hablar sobre especificaciones y requisitos de capacidad.</p>
+<p><a href="/contact/">Contacte a nuestro equipo</a> para hablar sobre especificaciones y requisitos de capacidad.</p>
 <h2>Lecturas relacionadas</h2>
 <ul>
 <li><a href="/es/news/mono-material-recyclable-pouches-heat-seal-challenge">Bolsas reciclables monomaterial: cómo resolver el reto del sellado térmico</a></li>

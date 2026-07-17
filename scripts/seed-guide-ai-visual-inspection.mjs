@@ -110,7 +110,7 @@ const content_en = `<p>An AI vision system on a woven bag line reliably catches 
 
 <h2>The short version</h2>
 <p>AI vision earns its place on a woven bag line by doing one thing relentlessly: watching every bag at line speed for the visible, recurring faults that drain margin &mdash; and alerting a human while the count is still two, not two thousand. It deploys few-shot from ~50 samples, runs on edge hardware with no cloud dependency, and retrofits onto existing lines &mdash; <a href="/news/retrofit-edge-ai-inspection-woven-bag-line">the retrofit guide</a> covers what that involves. What it is not is a closed-loop colour corrector or a replacement for human judgement &mdash; and a vendor who claims otherwise is describing an ambition, not a shipping system.</p>
-<p><em><a href="/contact">Talk to Rey Long's engineering team</a> about inspection on your fabric, artwork and defect history.</em></p>
+<p><em><a href="/contact/">Talk to Rey Long's engineering team</a> about inspection on your fabric, artwork and defect history.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>What defects can AI vision detect on woven bags?</h3>
@@ -166,7 +166,7 @@ const content_es = `<p>Un sistema de visi&oacute;n por IA en una l&iacute;nea de
 
 <h2>En resumen</h2>
 <p>La visi&oacute;n por IA se gana su lugar en una l&iacute;nea de sacos tejidos haciendo una cosa sin descanso: vigilar cada saco a velocidad de l&iacute;nea en busca de los fallos visibles y recurrentes que drenan el margen &mdash; y alertar a un humano cuando la cuenta a&uacute;n va por dos, no por dos mil. Se implementa con pocas muestras (~50), se ejecuta en hardware edge sin dependencia de la nube y se instala sobre l&iacute;neas existentes &mdash; <a href="/es/news/retrofit-edge-ai-inspection-woven-bag-line">la gu&iacute;a de retrofit</a> explica lo que eso implica. Lo que no es: un corrector de color en lazo cerrado ni un sustituto del criterio humano &mdash; y un proveedor que afirme lo contrario est&aacute; describiendo una ambici&oacute;n, no un sistema en producci&oacute;n.</p>
-<p><em><a href="/es/contact">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre la inspecci&oacute;n de su tejido, su arte y su historial de defectos.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingenier&iacute;a de Rey Long</a> sobre la inspecci&oacute;n de su tejido, su arte y su historial de defectos.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Qu&eacute; defectos puede detectar la visi&oacute;n por IA en sacos tejidos?</h3>

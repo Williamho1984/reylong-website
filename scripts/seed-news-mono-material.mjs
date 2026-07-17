@@ -48,7 +48,7 @@ const content_en = `<p>The flexible packaging industry is moving decisively towa
 </ul>
 <h2>The bottom line</h2>
 <p>Mono-material is the direction of travel for recyclable flexible packaging, and PPWR makes the timeline concrete. Barrier and material science keep improving, but on the converting side the deciding factor is <strong>temperature precision</strong>. Machines built around zoned control, closed-loop feedback and ultrasonic sealing let converters run today's narrow-window mono-material films &mdash; and the even narrower ones coming next &mdash; without sacrificing speed or seal integrity.</p>
-<p><em><a href="/contact">Talk to Reylong's engineering team</a> about running mono-material films on the JL-L-2TZP600.</em></p>
+<p><em><a href="/contact/">Talk to Reylong's engineering team</a> about running mono-material films on the JL-L-2TZP600.</em></p>
 <h2>Related reading</h2>
 <ul>
 <li><a href="/news/fibc-jumbo-bag-production-trends">FIBC (Jumbo Bag) Production Trends to Watch in 2026</a></li>
@@ -72,7 +72,7 @@ const content_es = `<p>La industria del envase flexible avanza decididamente hac
 </ul>
 <h2>En conclusi&oacute;n</h2>
 <p>El monomaterial es el rumbo del envase flexible reciclable, y el PPWR concreta el calendario. La ciencia de barreras y materiales sigue mejorando, pero en el lado de la conversi&oacute;n el factor decisivo es la <strong>precisi&oacute;n de temperatura</strong>. Las m&aacute;quinas basadas en control por zonas, retroalimentaci&oacute;n en lazo cerrado y sellado por ultrasonidos permiten a los transformadores procesar las pel&iacute;culas monomaterial de ventana estrecha actuales &mdash; y las a&uacute;n m&aacute;s estrechas que vienen &mdash; sin sacrificar velocidad ni integridad del sellado.</p>
-<p><em><a href="/contact">Hable con el equipo de ingenier&iacute;a de Reylong</a> sobre el procesamiento de pel&iacute;culas monomaterial en la JL-L-2TZP600.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingenier&iacute;a de Reylong</a> sobre el procesamiento de pel&iacute;culas monomaterial en la JL-L-2TZP600.</em></p>
 <h2>Lecturas relacionadas</h2>
 <ul>
 <li><a href="/es/news/fibc-jumbo-bag-production-trends">Tendencias de producci&oacute;n de FIBC (big bags) para 2026</a></li>

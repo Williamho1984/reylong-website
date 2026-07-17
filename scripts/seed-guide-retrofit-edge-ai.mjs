@@ -115,7 +115,7 @@ const content_en = `<p>You do not need a new machine to get AI inspection: a ret
 
 <h2>The short version</h2>
 <p>An edge AI inspection retrofit is cameras, engineered light and an industrial computer bolted to the machine you already own, talking to controls you already have, learning your product from about 50 samples you can collect this week &mdash; with no cloud, no data team and no new machine. Start alert-only, let it earn trust, deepen the integration when it has. The prerequisite is not budget approval; it is knowing your defect history well enough to point the cameras at the right problem.</p>
-<p><em><a href="/contact">Send Rey Long your machine type and defect history</a> for a case-by-case assessment.</em></p>
+<p><em><a href="/contact/">Send Rey Long your machine type and defect history</a> for a case-by-case assessment.</em></p>
 
 <h2>Frequently asked questions</h2>
 <h3>Can AI inspection be added to machines Rey Long did not build?</h3>
@@ -179,7 +179,7 @@ const content_es = `<p>No necesita una m&aacute;quina nueva para tener inspecci&
 
 <h2>En resumen</h2>
 <p>Un retrofit de inspecci&oacute;n edge AI son c&aacute;maras, luz dise&ntilde;ada y un ordenador industrial atornillados a la m&aacute;quina que ya posee, hablando con los controles que ya tiene, aprendiendo su producto de unas 50 muestras que puede recoger esta semana &mdash; sin nube, sin equipo de datos y sin m&aacute;quina nueva. Empiece solo con alertas, deje que se gane la confianza, profundice la integraci&oacute;n cuando lo haya hecho. El prerrequisito no es la aprobaci&oacute;n del presupuesto; es conocer su historial de defectos lo bastante bien como para apuntar las c&aacute;maras al problema correcto.</p>
-<p><em><a href="/es/contact">Env&iacute;e a Rey Long su tipo de m&aacute;quina y su historial de defectos</a> para una evaluaci&oacute;n caso por caso.</em></p>
+<p><em><a href="/contact/">Env&iacute;e a Rey Long su tipo de m&aacute;quina y su historial de defectos</a> para una evaluaci&oacute;n caso por caso.</em></p>
 
 <h2>Preguntas frecuentes</h2>
 <h3>&iquest;Se puede a&ntilde;adir inspecci&oacute;n por IA a m&aacute;quinas que no fabric&oacute; Rey Long?</h3>

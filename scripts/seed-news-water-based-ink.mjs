@@ -46,7 +46,7 @@ const content_en = `<p>Packaging printing is shifting from solvent-based to <str
 </ul>
 <h2>The bottom line</h2>
 <p>Water-based inks are the sustainable direction for packaging printing &mdash; lower emissions, safer operation, food-contact-friendly and aligned with recyclable packaging. They reward presses that give the operator real control over anilox, pressure and ink condition. Choose the press for the inks you will be running tomorrow, not just today.</p>
-<p><em><a href="/contact">Talk to Reylong's engineering team</a> about printing PP woven fabric and flexible packaging with water-based inks.</em></p>
+<p><em><a href="/contact/">Talk to Reylong's engineering team</a> about printing PP woven fabric and flexible packaging with water-based inks.</em></p>
 <h2>Related reading</h2>
 <ul>
 <li><a href="/news/fibc-jumbo-bag-production-trends">FIBC (Jumbo Bag) Production Trends to Watch in 2026</a></li>
@@ -74,7 +74,7 @@ const content_es = `<p>La impresión de envases está pasando de las tintas con 
 </ul>
 <h2>En conclusión</h2>
 <p>Las tintas al agua son la dirección sostenible de la impresión de envases: menos emisiones, operación más segura, aptas para contacto alimentario y alineadas con el envase reciclable. Recompensan a las prensas que dan al operario un control real sobre el anilox, la presión y el estado de la tinta. Elija la prensa para las tintas que imprimirá mañana, no solo hoy.</p>
-<p><em><a href="/contact">Hable con el equipo de ingeniería de Reylong</a> sobre la impresión de tejido de PP y envase flexible con tintas al agua.</em></p>
+<p><em><a href="/contact/">Hable con el equipo de ingeniería de Reylong</a> sobre la impresión de tejido de PP y envase flexible con tintas al agua.</em></p>
 <h2>Lecturas relacionadas</h2>
 <ul>
 <li><a href="/es/news/fibc-jumbo-bag-production-trends">Tendencias de producción de FIBC (big bags) para 2026</a></li>
