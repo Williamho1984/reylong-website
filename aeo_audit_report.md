@@ -78,3 +78,25 @@ Intelligence = (4+4+3+4+4+4)/6 × 20 = **77/100** (deterministic prior: 78 — c
 ## Recommendation
 
 The editorial strategy (diagnostic guides, direct answers, FAQ blocks, hedged real numbers) is already ahead of most industrial-machinery sites; the remaining losses are cheap technical fixes. Fixing llms.txt + RSS alone lifts the foundational score from 87 to ~100. Run the `improve-aeo-geo` skill against this report next — items 1, 2, 3 and 5 are code-level changes it can make directly in the Astro codebase.
+
+---
+
+# Re-audit after fixes — 2026-07-17 (same day)
+
+Fixes shipped (commits `890c453`, `24d1160`): valid llms.txt, /rss.xml + site-wide discovery link, article bylines + visible "Updated" dates + `article:published_time/modified_time` + schema `dateModified` from the new `news.updated_at` column, sitemap lastmod from `updated_at`, carousel `x-init` rewritten without arrow functions (the `>` in the attribute leaked script text to naive parsers).
+
+## Score after
+
+| | Before | After |
+|---|---|---|
+| Foundational (16 checks) | 87/100 (14/16) | **100/100 (16/16)** |
+| Intelligence (6 dimensions) | 77/100 | **83/100** |
+| **Final** | **82 — B+** | **92 — A** |
+
+Intelligence dimension changes, re-scored on the fresh crawl: **Freshness 4→5** (visible "Updated" stamps, modified-time meta, RSS — active maintenance now evident), **Structural Clarity 4→5** (homepage script leak eliminated; extraction is clean), Evidence Density stays 3 (author attribution added, but statistics still lack in-text source links), Answer Readiness 4, Quotability 4, Content Depth 4 unchanged. Deterministic prior agrees: 83/100.
+
+## Remaining opportunities (editorial, not technical)
+
+1. Link statistics to primary sources in-text (Sandia, industry figures) — worth +115% visibility for lower-ranked domains (KDD 2024)
+2. Q&A-style sections / definition-first intros on product pages (Answer-Readiness prior is 52 because product and utility pages don't answer questions)
+3. Consider a stable docs/knowledge section for product facts (the audit's only remaining prioritized fix)
