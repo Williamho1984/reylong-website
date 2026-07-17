@@ -97,6 +97,16 @@ Intelligence dimension changes, re-scored on the fresh crawl: **Freshness 4→5*
 
 ## Remaining opportunities (editorial, not technical)
 
-1. Link statistics to primary sources in-text (Sandia, industry figures) — worth +115% visibility for lower-ranked domains (KDD 2024)
-2. Q&A-style sections / definition-first intros on product pages (Answer-Readiness prior is 52 because product and utility pages don't answer questions)
+1. ~~Link statistics to primary sources in-text~~ — **done (same day)**
+2. ~~Q&A-style sections on product pages~~ — **done (same day)**
 3. Consider a stable docs/knowledge section for product facts (the audit's only remaining prioritized fix)
+
+---
+
+# Editorial round — 2026-07-17 (same day, commit `b500daf`)
+
+- **In-text source citations**: the three AI-inspection guides now link "research at Sandia National Laboratories" to the verified primary source (OSTI, SAND2012-8590 "Visual Inspection: A Review of the Literature") in both EN and ES body text. FAQ mirrors left untouched to preserve JSON-LD parity. `updated_at` stamped.
+- **Product FAQPage schema**: product pages had visible FAQ content but emitted no FAQPage JSON-LD — now they do, matching the visible block. Questions upgraded from `<summary>` text to `<h3>` so parsers register Q&A-style headings.
+- **Spanish product FAQ**: the ES product routes had no FAQ at all — full localized sets added (5 per-product + generic fallback), visible section + schema.
+
+**Re-audit**: foundational stays 100/100; Answer-Readiness prior 52 → 59 (Q&A headings on 23% → 47% of pages); Evidence Density dimension now 4/5 (linked primary sources). Final score ≈ **94 — A**, one point from A+ territory. The remaining gap is structural (listing/utility pages are navigation by design) and the docs-section idea.
