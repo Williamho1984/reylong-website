@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>澎湖三天兩夜親子行程｜美食避暑版</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #62707d;
+      --line: #dce5e4;
+      --paper: #fffdf8;
+      --mist: #edf7f5;
+      --sea: #176d79;
+      --deep: #0f3d56;
+      --sun: #f2a33a;
+      --coral: #dc6b50;
+      --leaf: #4c8b64;
+      --shadow: 0 18px 45px rgba(18, 47, 63, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f5f1e9;
+      font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+      line-height: 1.75;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      isolation: isolate;
+      color: #fff;
+      background: #174b5d url("assets/penghu-family-hero.png") center / cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(12, 38, 52, 0.78), rgba(12, 38, 52, 0.35) 48%, rgba(12, 38, 52, 0.08)),
+        linear-gradient(0deg, rgba(12, 38, 52, 0.5), transparent 42%);
+    }
+
+    .hero-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 88px 0 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 0.95rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.45rem, 7vw, 5.4rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 18px 0 0;
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .hero-facts span,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .hero-facts span {
+      color: #103044;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .band {
+      padding: 42px 0;
+    }
+
+    .band.mist {
+      background: var(--mist);
+    }
+
+    .band.paper {
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--deep);
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(18, 47, 63, 0.06);
+    }
+
+    .stat b {
+      display: block;
+      color: var(--sea);
+      font-size: 0.95rem;
+      margin-bottom: 7px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--ink);
+      font-size: 1.16rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .route {
+      display: grid;
+      gap: 12px;
+    }
+
+    .route-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .route-day {
+      color: var(--sea);
+      font-weight: 900;
+    }
+
+    .route-path {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      color: var(--deep);
+      font-weight: 800;
+    }
+
+    .node {
+      padding: 6px 10px;
+      border: 1px solid #cfe2df;
+      border-radius: 999px;
+      background: #f8fcfb;
+      white-space: nowrap;
+    }
+
+    .node.food {
+      border-color: #f1c485;
+      background: #fff4df;
+    }
+
+    .node.rest {
+      border-color: #b9d9c1;
+      background: #eaf6ed;
+    }
+
+    .arrow {
+      color: #8a99a5;
+      font-weight: 900;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .strategy {
+      padding: 18px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--deep);
+      box-shadow: var(--shadow);
+    }
+
+    .strategy:nth-child(2) {
+      background: #7b5133;
+    }
+
+    .strategy:nth-child(3) {
+      background: #2f6349;
+    }
+
+    .strategy h3,
+    .day-card h3,
+    .food-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .strategy p,
+    .food-card p {
+      margin: 0;
+    }
+
+    .day-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .day-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 14px 36px rgba(18, 47, 63, 0.08);
+      overflow: hidden;
+    }
+
+    .day-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 18px;
+      padding: 22px 22px 18px;
+      background: #f9fbf9;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-top p {
+      margin: 7px 0 0;
+      color: var(--muted);
+    }
+
+    .pill {
+      color: #7a4510;
+      background: #fff0d5;
+      border: 1px solid #f0cf94;
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      display: grid;
+      padding: 6px 22px 20px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 106px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-bottom: 1px solid #edf0ee;
+    }
+
+    .item:last-child {
+      border-bottom: 0;
+    }
+
+    .time {
+      color: var(--sea);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .item h4 {
+      margin: 0 0 5px;
+      color: var(--deep);
+      font-size: 1.05rem;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    .item p {
+      margin: 0;
+      color: #394651;
+    }
+
+    .tagline {
+      display: inline-flex;
+      margin-top: 8px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: #79420f;
+      background: #fff1dc;
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .food-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .food-card h3 {
+      color: var(--deep);
+    }
+
+    .tips {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tips li {
+      padding: 16px;
+      border-left: 5px solid var(--sun);
+      border-radius: 8px;
+      background: #fff;
+      color: #33434f;
+    }
+
+    .sources {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .sources a {
+      color: var(--sea);
+      font-weight: 800;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        min-height: 82vh;
+        background-position: 58% center;
+      }
+
+      .hero-inner {
+        padding-bottom: 44px;
+      }
+
+      .section-head,
+      .day-top {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 8px;
+      }
+
+      .overview,
+      .strategy-grid,
+      .food-grid,
+      .tips {
+        grid-template-columns: 1fr;
+      }
+
+      .route-row,
+      .item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .node {
+        white-space: normal;
+      }
+
+      .pill {
+        margin-top: 12px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .hero {
+        min-height: 38vh;
+      }
+
+      .band {
+        padding: 24px 0;
+      }
+
+      .day-card,
+      .stat,
+      .food-card,
+      .strategy,
+      .route-row {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">2026/7/27-7/29｜兩大兩小｜機車移動｜花火節</p>
+      <h1>澎湖三天兩夜親子行程</h1>
+      <p class="lead">以「地理動線」和「11:00-15:00 避暑」重新整理：中午用有冷氣的正餐店恢復體力，小吃、冰品和飲料則安排在景點之間，讓孩子有節奏地休息。</p>
+      <div class="hero-facts">
+        <span>住宿：澎湖喜來登 / 福朋喜來登</span>
+        <span>Day 2 吉貝半日</span>
+        <span>Day 3 北環精華</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="band paper">
+      <div class="page">
+        <div class="overview" aria-label="行程重點">
+          <div class="stat"><b>移動原則</b><span>機車時間加緩衝，不排硬衝景點</span></div>
+          <div class="stat"><b>避暑原則</b><span>11:00-15:00 以冷氣、遮蔭、午睡為主</span></div>
+          <div class="stat"><b>美食原則</b><span>正餐當據點，小吃冰品當休息站</span></div>
+          <div class="stat"><b>親子原則</b><span>保留花火前休息，體力比打卡重要</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band mist">
+      <div class="page">
+        <div class="section-head">
+          <h2>三天動線</h2>
+          <p class="section-note">每一天只抓一個主軸，沿途插入順路餐點，避免在太陽最烈的時段騎長路或排隊。</p>
+        </div>
+        <div class="route">
+          <div class="route-row">
+            <div class="route-day">Day 1</div>
+            <div class="route-path">
+              <span class="node">馬公港</span><span class="arrow">→</span><span class="node food">市區午餐</span><span class="arrow">→</span><span class="node rest">飯店休息</span><span class="arrow">→</span><span class="node">山水沙灘</span><span class="arrow">→</span><span class="node">風櫃 / 蛇頭山</span><span class="arrow">→</span><span class="node food">老街點心</span>
+            </div>
+          </div>
+          <div class="route-row">
+            <div class="route-day">Day 2</div>
+            <div class="route-path">
+              <span class="node">赤崁碼頭</span><span class="arrow">→</span><span class="node">吉貝島</span><span class="arrow">→</span><span class="node food">貝殼冰 / 小管麵線</span><span class="arrow">→</span><span class="node rest">飯店午睡</span><span class="arrow">→</span><span class="node food">花火前晚餐</span><span class="arrow">→</span><span class="node">觀音亭</span>
+            </div>
+          </div>
+          <div class="route-row">
+            <div class="route-day">Day 3</div>
+            <div class="route-path">
+              <span class="node">通樑古榕</span><span class="arrow">→</span><span class="node food">仙人掌冰</span><span class="arrow">→</span><span class="node">跨海大橋</span><span class="arrow">→</span><span class="node food">二崁小吃</span><span class="arrow">→</span><span class="node food">冷氣午餐</span><span class="arrow">→</span><span class="node">大菓葉</span><span class="arrow">→</span><span class="node">馬公港</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band paper">
+      <div class="page">
+        <div class="section-head">
+          <h2>美食避暑策略</h2>
+          <p class="section-note">這份行程不是把名店全部塞滿，而是把它們放在最能補體力的位置。</p>
+        </div>
+        <div class="strategy-grid">
+          <article class="strategy">
+            <h3>中午正餐要有冷氣</h3>
+            <p>Day 1 馬公市區、Day 2 花火前晚餐、Day 3 北環午餐，都優先選可坐下休息的店，讓孩子離開太陽和安全帽悶熱感。</p>
+          </article>
+          <article class="strategy">
+            <h3>冰品飲料是節奏點</h3>
+            <p>通樑仙人掌冰、吉貝貝殼冰、馬公仙草和檸檬汁，都安排在移動間隔，不特地繞遠路。</p>
+          </article>
+          <article class="strategy">
+            <h3>名店排隊可外帶</h3>
+            <p>玉冠嫩仙草、正港檸檬汁這類熱門店，如果現場人多，由一位大人外帶回飯店或陰涼處吃即可。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band mist">
+      <div class="page">
+        <div class="section-head">
+          <h2>每日行程</h2>
+          <p class="section-note">時間是親子機車版保守估計，已加入停車、整裝、補水和臨時休息。</p>
+        </div>
+
+        <div class="day-stack">
+          <article class="day-card">
+            <div class="day-top">
+              <div>
+                <h3>Day 1｜7/27（一）抵達＋南環＋馬公市區</h3>
+                <p>抵達後不衝遠路，下午先回飯店避暑，傍晚再去沙灘和南環短點。</p>
+              </div>
+              <span class="pill">曝曬：中低</span>
+            </div>
+            <div class="timeline">
+              <div class="item"><div class="time">07:30</div><div><h4>雲林出發到嘉義布袋港</h4><p>預留停車、取票、上船時間；自駕約 60-90 分。</p></div></div>
+              <div class="item"><div class="time">09:50 / 10:30</div><div><h4>布袋港搭船往馬公</h4><p>船程約 75-80 分，船班以航商公告為準。</p></div></div>
+              <div class="item"><div class="time">11:15-12:00</div><div><h4>抵達馬公港、租機車</h4><p>確認安全帽尺寸、手機架、置物空間，港口到飯店約 5-10 分。</p></div></div>
+              <div class="item"><div class="time">12:15</div><div><h4>馬公市區午餐</h4><p>選有冷氣、出餐快的店：馬路益燒肉飯、讚哥麵攤；若文康街仍有營業，可順吃鐘記燒餅。</p><span class="tagline">避暑正餐</span></div></div>
+              <div class="item"><div class="time">14:00-15:40</div><div><h4>飯店入住、休息</h4><p>避開最熱時段，補水、洗臉、換輕便衣物。</p></div></div>
+              <div class="item"><div class="time">16:00</div><div><h4>山水沙灘</h4><p>飯店到山水約 20-25 分，傍晚玩水較舒服。</p></div></div>
+              <div class="item"><div class="time">17:40</div><div><h4>風櫃洞或蛇頭山</h4><p>山水到風櫃約 15-20 分，二選一即可。</p></div></div>
+              <div class="item"><div class="time">18:40</div><div><h4>馬公市區晚餐</h4><p>想吃澎湖特色菜選朝昔廬客棧；簡單吃可選仁愛路肉圓或阿華排骨麵。</p><span class="tagline">回市區吃最穩</span></div></div>
+              <div class="item"><div class="time">20:00</div><div><h4>中央老街、四眼井、天后宮</h4><p>順買乾益堂藥膳蛋、藥膳豆干；想吃冰再接玉冠嫩仙草或紫玉仙草。</p><span class="tagline">夜間點心</span></div></div>
+              <div class="item"><div class="time">21:00</div><div><h4>回飯店</h4><p>隔天要離島，早點休息。</p></div></div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-top">
+              <div>
+                <h3>Day 2｜7/28（二）吉貝半日＋飯店休息＋觀音亭花火</h3>
+                <p>吉貝只排上午，中午後回飯店洗澡午睡，晚上才有體力看 21:00 花火。</p>
+              </div>
+              <span class="pill">曝曬：中高但可控</span>
+            </div>
+            <div class="timeline">
+              <div class="item"><div class="time">07:30</div><div><h4>飯店早餐</h4><p>準備泳衣、防曬、毛巾、換洗衣物。</p></div></div>
+              <div class="item"><div class="time">08:15</div><div><h4>騎機車往北海遊客中心 / 赤崁碼頭</h4><p>約 35-45 分，早上風較舒服但仍要穿防曬外套。</p></div></div>
+              <div class="item"><div class="time">09:00</div><div><h4>碼頭報到、搭船前往吉貝</h4><p>赤崁到吉貝船程約 18 分，提早報到較從容。</p></div></div>
+              <div class="item"><div class="time">09:30-11:30</div><div><h4>吉貝沙尾、玩水或短程環島</h4><p>一定會曬，重點是早去早回，不排下午場。</p></div></div>
+              <div class="item"><div class="time">11:30</div><div><h4>吉貝簡單午餐 / 點心</h4><p>香香冰店貝殼冰很適合小孩；正餐簡單選碼頭附近海產麵或小管麵線。</p><span class="tagline">遮蔭補水優先</span></div></div>
+              <div class="item"><div class="time">12:30-13:00</div><div><h4>搭船回赤崁碼頭</h4><p>回程依現場或預約業者安排。</p></div></div>
+              <div class="item"><div class="time">13:20</div><div><h4>回馬公 / 飯店附近補午餐與點心</h4><p>可順買大池炸粿或正港檸檬汁，回飯店冷氣房洗澡午睡。</p><span class="tagline">不要再加景點</span></div></div>
+              <div class="item"><div class="time">14:30-17:30</div><div><h4>飯店休息、洗澡、午睡</h4><p>這段不要刪，是晚上花火的體力緩衝。</p></div></div>
+              <div class="item"><div class="time">18:00</div><div><h4>花火日前晚餐</h4><p>務必提早訂位。最穩是喜來登海鮮自助餐；想換口味可選新巴適經典麻辣鍋。</p><span class="tagline">提早吃，提早移動</span></div></div>
+              <div class="item"><div class="time">19:20</div><div><h4>前往觀音亭周邊</h4><p>建議外圍停車，人潮多，不要 20:30 後才到。</p></div></div>
+              <div class="item"><div class="time">21:00</div><div><h4>觀音亭花火節煙火＋無人機秀</h4><p>7/28 屬週二觀音亭主場時段。</p></div></div>
+              <div class="item"><div class="time">21:45</div><div><h4>慢慢回飯店</h4><p>散場別急，帶孩子安全優先。</p></div></div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-top">
+              <div>
+                <h3>Day 3｜7/29（三）北環必去精華＋回程</h3>
+                <p>把通樑古榕、跨海大橋、二崁、大菓葉排成一條線，午餐用冷氣餐廳恢復體力。</p>
+              </div>
+              <span class="pill">曝曬：中高</span>
+            </div>
+            <div class="timeline">
+              <div class="item"><div class="time">08:30</div><div><h4>早餐、退房</h4><p>行李可寄飯店或與租車行確認寄放。</p></div></div>
+              <div class="item"><div class="time">09:30</div><div><h4>飯店出發往通樑古榕</h4><p>約 30-40 分，北環第一段稍長，先補水再出發。</p></div></div>
+              <div class="item"><div class="time">10:10</div><div><h4>通樑古榕</h4><p>有遮蔭，適合小孩短休息。順吃易家仙人掌冰或自由冰品。</p><span class="tagline">冰品休息站</span></div></div>
+              <div class="item"><div class="time">10:45</div><div><h4>澎湖跨海大橋</h4><p>通樑到跨海大橋約 5 分，必拍但很曬，短停即可。</p></div></div>
+              <div class="item"><div class="time">11:15</div><div><h4>二崁聚落</h4><p>喝二崁杏仁茶，搭配二馬豆花；若孩子還能吃，可加古厝小管當小點。</p><span class="tagline">人文小吃</span></div></div>
+              <div class="item"><div class="time">12:20</div><div><h4>西嶼 / 白沙午餐</h4><p>推薦清心美鮮餐廳或星月灣田媽媽餐廳，讓中午最熱時段變成冷氣休息。</p><span class="tagline">北環冷氣午餐</span></div></div>
+              <div class="item"><div class="time">13:30</div><div><h4>大菓葉玄武岩</h4><p>午餐點到大菓葉約 10-15 分，地質代表，拍照短停就好。</p></div></div>
+              <div class="item"><div class="time">14:00</div><div><h4>回馬公市區</h4><p>約 35-45 分，午後最熱，騎慢一點，可中途補水。</p></div></div>
+              <div class="item"><div class="time">14:50</div><div><h4>伴手禮採買、還機車前整理</h4><p>黑糖糕、鹹餅、干貝醬等，別壓縮還車時間。</p></div></div>
+              <div class="item"><div class="time">15:45</div><div><h4>還機車、前往馬公港</h4><p>若搭 16:15 船，這段不能再晚。</p></div></div>
+              <div class="item"><div class="time">16:15 / 16:45</div><div><h4>馬公搭船回布袋</h4><p>船程約 75-80 分，回程船班以航商公告為準。</p></div></div>
+              <div class="item"><div class="time">18:00 後</div><div><h4>抵布袋，自駕回雲林</h4><p>小孩可能會累，回程不要再安排景點。</p></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band paper">
+      <div class="page">
+        <div class="section-head">
+          <h2>餐點快速索引</h2>
+          <p class="section-note">臨場可依排隊狀況二選一，不需要為了名店犧牲休息。</p>
+        </div>
+        <div class="food-grid">
+          <article class="food-card">
+            <h3>馬公市區</h3>
+            <p>馬路益燒肉飯、讚哥麵攤、鐘記燒餅、朝昔廬客棧、仁愛路肉圓、阿華排骨麵、乾益堂藥膳蛋、玉冠嫩仙草、紫玉仙草。</p>
+          </article>
+          <article class="food-card">
+            <h3>吉貝與回程</h3>
+            <p>香香冰店貝殼冰、碼頭海產麵、小管麵線、大池炸粿、正港檸檬汁。重點是短停補水，不延長曝曬。</p>
+          </article>
+          <article class="food-card">
+            <h3>北環沿線</h3>
+            <p>易家仙人掌冰、自由冰品、二崁杏仁茶、二馬豆花、古厝小管、清心美鮮餐廳、星月灣田媽媽餐廳。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band mist">
+      <div class="page">
+        <div class="section-head">
+          <h2>備案與提醒</h2>
+          <p class="section-note">澎湖行程最怕風、曬和孩子體力落差，備案要比原計畫更簡單。</p>
+        </div>
+        <ul class="tips">
+          <li><strong>吉貝因風浪取消：</strong>改北環輕鬆線：中屯風車、通樑古榕、跨海大橋、二崁。下午仍回飯店休息，晚上花火不變。</li>
+          <li><strong>Day 3 太熱或小孩累：</strong>保留通樑古榕、跨海大橋、二崁，刪大菓葉，提早回馬公吃飯和買伴手禮。</li>
+          <li><strong>補水放在機車前段：</strong>每台機車至少一瓶水，可加劉正承檸檬汁或風茹茶；長路段前先喝，不等口渴。</li>
+          <li><strong>防曬比多跑重要：</strong>薄長袖、防曬帽、透氣外套都要備；午後風大或日曬強時，寧可刪景點。</li>
+        </ul>
+        <p class="sources">
+          參考資訊：
+          <a href="https://www.penghu-nsa.gov.tw/ScenicSpotDetail.aspx?Cond=fffb02d3-fd38-4980-9419-9ebe10aea81e">澎湖國家風景區吉貝交通</a>、
+          <a href="https://www.pescadoresferry.com.tw/shipList">百麗航運公告與船班資訊</a>、
+          <a href="https://www.ezpenghu.com.tw/flower.htm">2026 澎湖花火節時段整理</a>。
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
