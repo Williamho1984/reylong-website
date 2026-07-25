@@ -38,3 +38,8 @@ pnpm-debug.log*
 # 本地狀態與超大媒體（GitHub 無法承載）
 .wrangler/
 三封機/
+
+# Internal business documents — quotations, supplier sourcing data. Repo is public;
+# this must never be pushed (reveals supplier identity and real pricing).
+output/
+tmp/
