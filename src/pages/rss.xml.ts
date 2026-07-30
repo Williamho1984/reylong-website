@@ -60,6 +60,13 @@ export const GET: APIRoute = async () => {
     headers: {
       'Content-Type': 'application/rss+xml; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
+      // The feed is a syndication resource, not a page. Without this it stays
+      // eligible for indexing and shows up under "Crawled - currently not
+      // indexed" in Search Console. A meta robots tag is impossible in XML, so
+      // Google's documented mechanism for non-HTML resources is this header.
+      // `follow` is implicit and deliberate: Googlebot can still use the feed
+      // to discover new articles, it just won't index the feed itself.
+      'X-Robots-Tag': 'noindex',
     },
   })
 }
