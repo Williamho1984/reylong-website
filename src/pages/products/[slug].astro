@@ -9,6 +9,7 @@ import InquiryForm from '../../components/ui/InquiryForm.astro'
 import TechArticleSection from '../../components/ui/TechArticleSection.astro'
 import { getProductBySlug, getProductMedia } from '../../lib/db/products'
 import { metaDescription } from '../../lib/meta'
+import { productSeoDescription } from '../../lib/product-seo'
 
 const { slug } = Astro.params
 if (!slug) return Astro.redirect('/products')
@@ -79,7 +80,7 @@ const faqItems: FAQItem[] = productFAQ[slug] ?? [
 
 <BaseLayout
   title={`${product.name_en} — Reylong`}
-  description={metaDescription(product.description_en)}
+  description={productSeoDescription(slug, 'en', metaDescription(product.description_en))}
   ogImage={mainImageUrl}
   alternateHref={esPageUrl}
 >
