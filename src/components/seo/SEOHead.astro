@@ -1,4 +1,6 @@
 ---
+import { seoTitle } from '../../lib/meta'
+
 interface Props {
   title: string
   description: string
@@ -24,12 +26,7 @@ const resolvedOgImage = ogImage && ogImage.startsWith('http')
     ? new URL(ogImage ?? '/og-default.jpg', Astro.site).toString()
     : ogImage ?? '/og-default.jpg'
 
-// Keep the <title> within the ~60-char SERP display limit, trimmed at a word
-// boundary so it stays coherent (the on-page H1/headline keeps the full text).
-const brandedTitle = title.includes('Reylong') ? title : `${title} | Reylong`
-const fullTitle = brandedTitle.length <= 60
-  ? brandedTitle
-  : (brandedTitle.slice(0, 60).replace(/\s+\S*$/, '') || brandedTitle.slice(0, 60))
+const fullTitle = seoTitle(title)
 
 const pathname = Astro.url.pathname
 const isEsPage = pathname === '/es' || pathname.startsWith('/es/')
