@@ -31,6 +31,7 @@ const t = isEs
     }
 
 const productsHref = isEs ? '/es/products' : '/products'
+const eventsHref = isEs ? '/es/events' : '/events'
 ---
 
 <footer class="bg-gray-900 text-gray-300 mt-20">
@@ -57,7 +58,7 @@ const productsHref = isEs ? '/es/products' : '/products'
         <ul class="space-y-1 text-sm">
           <li><a href="/about/" class="hover:text-white transition-colors">{t.about}</a></li>
           <li><a href="/case-studies" class="hover:text-white transition-colors">{t.caseStudies}</a></li>
-          <li><a href="/events" class="hover:text-white transition-colors">{t.events}</a></li>
+          <li><a href={eventsHref} class="hover:text-white transition-colors">{t.events}</a></li>
           <li><a href="/contact/" class="hover:text-white transition-colors">{t.contact}</a></li>
         </ul>
       </div>

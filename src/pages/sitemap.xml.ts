@@ -15,6 +15,7 @@ const staticRoutes = [
   { url: '/es',           priority: '0.9', changefreq: 'weekly'  },
   { url: '/es/products',  priority: '0.8', changefreq: 'weekly'  },
   { url: '/es/news',      priority: '0.6', changefreq: 'weekly'  },
+  { url: '/es/events',    priority: '0.5', changefreq: 'weekly'  },
   // Prerendered pages canonicalise with a trailing slash (like /about/, /faq/); the SSR Spanish
   // routes (/es, /es/products) do not. Keep this matching the canonical or hreflang stops being
   // reciprocal — that was the one Ahrefs Error last time.
