@@ -1,5 +1,6 @@
 ---
 import type { Event } from '../../lib/db/events'
+import { eventNewsHref } from '../../lib/db/events'
 
 interface Props {
   event: Event
@@ -8,6 +9,7 @@ interface Props {
 
 const { event, lang = 'en' } = Astro.props
 const title = lang === 'es' ? event.title_es : event.title_en
+const newsHref = eventNewsHref(event, lang)
 const locale = lang === 'es' ? 'es-ES' : 'en-US'
 const startDateDisplay = new Date(event.date_start + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 const endDateDisplay = new Date(event.date_end + 'T00:00:00').toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
@@ -21,7 +23,11 @@ const [month, day] = startDateDisplay.split(' ')
     <div class="text-2xl font-bold leading-none">{day}</div>
   </div>
   <div>
-    <h3 class="font-semibold">{title}</h3>
+    <h3 class="font-semibold">
+      {newsHref
+        ? <a href={newsHref} class="hover:text-brand-blue hover:underline">{title}</a>
+        : title}
+    </h3>
     <p class="text-sm text-gray-500">{event.location}</p>
     {event.booth_number && <p class="text-sm text-brand-blue">Booth: {event.booth_number}</p>}
     <p class="text-xs text-gray-400 mt-0.5">{startDateLocalized} – {endDateDisplay}</p>
