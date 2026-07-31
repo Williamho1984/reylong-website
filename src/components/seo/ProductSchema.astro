@@ -49,6 +49,12 @@ const techArticleSchema = product.tech_article?.title_en ? {
   headline: product.tech_article.title_en,
   description: product.tech_article.summary_en,
   url: `${pageUrl}#technical-overview`,
+  // image is required for an Article rich result; reuse the product photo the
+  // article sits beside rather than leaving the block invalid.
+  ...(imageUrl ? { image: imageUrl } : {}),
+  // The article has no publication date of its own, but the row it lives on
+  // carries a real modification time — assert only that.
+  ...(product.updated_at ? { dateModified: new Date(product.updated_at).toISOString() } : {}),
   author: {
     '@type': 'Organization',
     name: 'Reylong Machinery Co., Ltd.',

@@ -7,6 +7,19 @@ import { defineMiddleware } from 'astro:middleware'
 // request for the slash form ever does reach the Worker.
 const PRERENDERED_PATHS = new Set(['/about/', '/faq/', '/contact/', '/es/about/'])
 
+// Every SSR route was shipping with no Cache-Control at all, so no edge or
+// browser cache ever held a page and each request re-ran the Worker and
+// re-queried Supabase. That is what a crawler measures as a slow page.
+//
+// max-age=0 keeps browsers revalidating, so a CMS edit is never stuck behind
+// a visitor's local cache; s-maxage lets shared caches serve a hot copy for a
+// few minutes; stale-while-revalidate means the refresh happens in the
+// background instead of making someone wait for it.
+const HTML_CACHE = 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400'
+
+// Form and chat endpoints must never be cached or shared between visitors.
+const NO_STORE = 'private, no-store'
+
 const SECURITY_HEADERS: Record<string, string> = {
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
@@ -51,6 +64,12 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
   const headers = new Headers(response.headers)
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     headers.set(key, value)
+  }
+
+  // Only fill in a policy where the route did not set one itself — sitemap.xml
+  // and rss.xml each pick their own and must keep it.
+  if (!headers.has('Cache-Control')) {
+    headers.set('Cache-Control', pathname.startsWith('/api/') ? NO_STORE : HTML_CACHE)
   }
   return new Response(response.body, {
     status: response.status,

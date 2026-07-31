@@ -32,6 +32,10 @@ const t = isEs
 
 const productsHref = isEs ? '/es/products' : '/products'
 const eventsHref = isEs ? '/es/events' : '/events'
+// Trailing slash on purpose: both About pages are prerendered and 308 to the
+// slash form, so linking without it would point every visitor at a redirect.
+// Case studies and contact have no Spanish route yet, so they stay English.
+const aboutHref = isEs ? '/es/about/' : '/about/'
 ---
 
 <footer class="bg-gray-900 text-gray-300 mt-20">
@@ -56,7 +60,7 @@ const eventsHref = isEs ? '/es/events' : '/events'
       <div>
         <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">{t.companyHeading}</h3>
         <ul class="space-y-1 text-sm">
-          <li><a href="/about/" class="hover:text-white transition-colors">{t.about}</a></li>
+          <li><a href={aboutHref} class="hover:text-white transition-colors">{t.about}</a></li>
           <li><a href="/case-studies" class="hover:text-white transition-colors">{t.caseStudies}</a></li>
           <li><a href={eventsHref} class="hover:text-white transition-colors">{t.events}</a></li>
           <li><a href="/contact/" class="hover:text-white transition-colors">{t.contact}</a></li>

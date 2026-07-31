@@ -10,21 +10,27 @@ interface Props {
   alternateHref?: string
 }
 
+// /og-default.jpg was never shipped, so every page without its own image was
+// advertising a 404 to every social crawler. factory.png is already the
+// homepage carousel image, so pointing at it makes no claim the site does not
+// already make.
+const DEFAULT_OG_IMAGE = '/factory.png'
+
 const {
   title,
   description,
   canonicalURL = Astro.site
     ? new URL(Astro.url.pathname, Astro.site).toString()
     : Astro.url.pathname,
-  ogImage = '/og-default.jpg',
+  ogImage = DEFAULT_OG_IMAGE,
   alternateHref,
 } = Astro.props
 
 const resolvedOgImage = ogImage && ogImage.startsWith('http')
   ? ogImage
   : Astro.site
-    ? new URL(ogImage ?? '/og-default.jpg', Astro.site).toString()
-    : ogImage ?? '/og-default.jpg'
+    ? new URL(ogImage ?? DEFAULT_OG_IMAGE, Astro.site).toString()
+    : ogImage ?? DEFAULT_OG_IMAGE
 
 const fullTitle = seoTitle(title)
 
