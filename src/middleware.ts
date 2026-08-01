@@ -20,6 +20,36 @@ const HTML_CACHE = 'public, max-age=0, s-maxage=300, stale-while-revalidate=8640
 // Form and chat endpoints must never be cached or shared between visitors.
 const NO_STORE = 'private, no-store'
 
+// Sending the header above turned out not to be enough: reylong.com resolves
+// outside Cloudflare, so there is no zone to attach a Cache Rule to, and
+// Cloudflare does not cache HTML by default. Responses came back with no
+// cf-cache-status at all and a cold TTFB of ~1.1s, because every request
+// re-ran the Worker and re-queried Supabase.
+//
+// The Cache API is available to the Worker itself regardless of zone config,
+// so hold the HTML here. It honours s-maxage from the header above, giving
+// the same 5-minute window a shared cache would have used.
+type EdgeCache = {
+  match(request: Request): Promise<Response | undefined>
+  put(request: Request, response: Response): Promise<void>
+}
+
+type CloudflareLocals = {
+  runtime?: { ctx?: { waitUntil?: (promise: Promise<unknown>) => void } }
+}
+
+function edgeCache(): EdgeCache | null {
+  // Absent when running under `astro dev` (plain Node), so this degrades to a
+  // straight pass-through locally.
+  return (globalThis as { caches?: { default?: EdgeCache } }).caches?.default ?? null
+}
+
+// Query strings are excluded so a crawler appending ?utm_source=… cannot fill
+// the cache with duplicates of the same page under different keys.
+function isCacheable(request: Request, url: URL): boolean {
+  return request.method === 'GET' && !url.search && !url.pathname.startsWith('/api/')
+}
+
 const SECURITY_HEADERS: Record<string, string> = {
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
@@ -60,6 +90,25 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
     return _ctx.redirect(target.toString(), 308)
   }
 
+  const cacheable = isCacheable(_ctx.request, _ctx.url)
+  const cache = cacheable ? edgeCache() : null
+  // Key on the URL alone rather than the inbound Request, so request headers
+  // never fragment the cache.
+  const cacheKey = cacheable ? new Request(_ctx.url.toString(), { method: 'GET' }) : null
+
+  if (cache && cacheKey) {
+    const hit = await cache.match(cacheKey)
+    if (hit) {
+      const hitHeaders = new Headers(hit.headers)
+      hitHeaders.set('X-Cache', 'HIT')
+      return new Response(hit.body, {
+        status: hit.status,
+        statusText: hit.statusText,
+        headers: hitHeaders
+      })
+    }
+  }
+
   const response = await next()
   const headers = new Headers(response.headers)
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
@@ -71,9 +120,27 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
   if (!headers.has('Cache-Control')) {
     headers.set('Cache-Control', pathname.startsWith('/api/') ? NO_STORE : HTML_CACHE)
   }
-  return new Response(response.body, {
+  headers.set('X-Cache', cache ? 'MISS' : 'BYPASS')
+
+  const finalResponse = new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
     headers
   })
+
+  // Store only clean 200s. A Set-Cookie would make the entry visitor-specific
+  // and the Cache API rejects it outright, so skip those rather than throw.
+  if (cache && cacheKey && response.status === 200 && !headers.has('Set-Cookie')) {
+    const store = cache.put(cacheKey, finalResponse.clone())
+    const waitUntil = (_ctx.locals as CloudflareLocals)?.runtime?.ctx?.waitUntil
+    if (waitUntil) {
+      waitUntil(store)
+    } else {
+      // No background-task hook (local dev): swallow failures rather than let
+      // a caching problem take down the response the visitor is waiting for.
+      await store.catch(() => {})
+    }
+  }
+
+  return finalResponse
 })
