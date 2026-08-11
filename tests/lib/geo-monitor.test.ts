@@ -16,6 +16,7 @@ import {
 const repo = resolve(fileURLToPath(new URL('../..', import.meta.url)))
 const newRoundScript = join(repo, 'scripts/geo-monitor-new-round.mjs')
 const summaryScript = join(repo, 'scripts/geo-monitor-summary.mjs')
+const worklistScript = join(repo, 'scripts/geo-monitor-worklist.mjs')
 let tempDir: string
 
 beforeEach(() => {
@@ -110,6 +111,60 @@ describe('geo-monitor new round CLI', () => {
     const forced = run(newRoundScript, ['2099-01-protection', '--prompts', prompts, '--output', output, '--force'])
     expect(forced.status).toBe(0)
     expect(readFileSync(output, 'utf8')).toMatch(/^run_month,run_date,engine,/)
+  })
+})
+
+describe('geo-monitor worklist CLI', () => {
+  function buildRound() {
+    const prompts = join(tempDir, 'prompts.csv')
+    const round = join(tempDir, 'round.csv')
+    writePrompts(prompts)
+    const created = run(newRoundScript, ['2099-01-worklist', '--prompts', prompts, '--output', round])
+    expect(created.status).toBe(0)
+    return { prompts, round }
+  }
+
+  it('points at the real CSV line numbers, grouped four engines per prompt', () => {
+    const { prompts, round } = buildRound()
+    const output = join(tempDir, 'worklist.md')
+    const result = run(worklistScript, ['2099-01-worklist', '--input', round, '--prompts', prompts, '--output', output])
+    expect(result.status).toBe(0)
+
+    const worklist = readFileSync(output, 'utf8')
+    const cited = [...worklist.matchAll(/^\| (\d+) \| (\w+) \|/gm)].map(match => [Number(match[1]), match[2]])
+    // Two prompts x four engines, occupying CSV lines 2..9 in engine order.
+    expect(cited).toEqual([
+      [2, 'chatgpt'], [3, 'perplexity'], [4, 'gemini'], [5, 'ai_overview'],
+      [6, 'chatgpt'], [7, 'perplexity'], [8, 'gemini'], [9, 'ai_overview'],
+    ])
+
+    // A row number is only useful if it really is the line to edit.
+    const csv = readFileSync(round, 'utf8').split('\n')
+    for (const [lineNumber, engine] of cited) expect(csv[lineNumber - 1]).toContain(`,${engine},`)
+  })
+
+  it('keeps EN and ES in separate sections and warns about not_stated', () => {
+    const { prompts, round } = buildRound()
+    const output = join(tempDir, 'worklist.md')
+    run(worklistScript, ['2099-01-worklist', '--input', round, '--prompts', prompts, '--output', output])
+
+    const worklist = readFileSync(output, 'utf8')
+    expect(worklist).toMatch(/^# EN — 1 題/m)
+    expect(worklist).toMatch(/^# ES — 1 題/m)
+    expect(worklist.indexOf('# EN —')).toBeLessThan(worklist.indexOf('# ES —'))
+    expect(worklist).toContain('not_stated')
+    // The prompt text has to survive verbatim; a tester pastes it into the engine.
+    expect(worklist).toContain('English question')
+    expect(worklist).toContain('Spanish question')
+  })
+
+  it('regenerates over itself without --force, holding no hand-entered data', () => {
+    const { prompts, round } = buildRound()
+    const output = join(tempDir, 'worklist.md')
+    run(worklistScript, ['2099-01-worklist', '--input', round, '--prompts', prompts, '--output', output])
+    const again = run(worklistScript, ['2099-01-worklist', '--input', round, '--prompts', prompts, '--output', output])
+    expect(again.status).toBe(0)
+    expect(readFileSync(output, 'utf8')).toContain('# GEO 引用量測工作單')
   })
 })
 
