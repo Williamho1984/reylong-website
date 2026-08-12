@@ -27,7 +27,7 @@ afterEach(() => {
   rmSync(tempDir, { recursive: true, force: true })
 })
 
-function validRecord(overrides: Record<string, string> = {}) {
+function validRecord(overrides: Record<string, string> = {}): Record<string, string> {
   return {
     run_month: '2099-01-test', run_date: '2099-01-02', engine: 'chatgpt',
     prompt_id: 'abc123', lang: 'en', track: 'verify', cluster: 'machine', prompt: 'Question?',
@@ -131,7 +131,8 @@ describe('geo-monitor worklist CLI', () => {
     expect(result.status).toBe(0)
 
     const worklist = readFileSync(output, 'utf8')
-    const cited = [...worklist.matchAll(/^\| (\d+) \| (\w+) \|/gm)].map(match => [Number(match[1]), match[2]])
+    const cited = [...worklist.matchAll(/^\| (\d+) \| (\w+) \|/gm)]
+      .map(match => [Number(match[1]), match[2]] as [number, string])
     // Two prompts x four engines, occupying CSV lines 2..9 in engine order.
     expect(cited).toEqual([
       [2, 'chatgpt'], [3, 'perplexity'], [4, 'gemini'], [5, 'ai_overview'],

@@ -1,4 +1,5 @@
 import { defineMiddleware } from 'astro:middleware'
+import { identifyCrawler, recordCrawlerHit } from './lib/ai-crawlers'
 
 // These routes are prerendered (export const prerender = true) and shipped as
 // static files; Cloudflare Pages' asset layer already enforces the trailing
@@ -35,7 +36,12 @@ type EdgeCache = {
 }
 
 type CloudflareLocals = {
-  runtime?: { ctx?: { waitUntil?: (promise: Promise<unknown>) => void } }
+  runtime?: {
+    ctx?: { waitUntil?: (promise: Promise<unknown>) => void }
+    env?: { SUPABASE_URL?: string; SUPABASE_ANON_KEY?: string }
+    // Populated by the Cloudflare runtime; absent under `astro dev`.
+    cf?: { verifiedBot?: boolean }
+  }
 }
 
 function edgeCache(): EdgeCache | null {
@@ -90,6 +96,39 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
     return _ctx.redirect(target.toString(), 308)
   }
 
+  // Identified before the cache is consulted, because a crawler served from the
+  // edge cache never reaches the code below and would otherwise go uncounted —
+  // and a well-crawled page is exactly the one most likely to be cache-warm.
+  //
+  // Prerendered routes are skipped outright. Cloudflare's asset layer serves them
+  // without ever entering this middleware, so a crawler reading /faq/ — 82 FAQ
+  // answers, plausibly the most quotable page on the site — cannot be counted here
+  // at all. Reading the header anyway would only add a build-time warning, since
+  // these pages are also rendered at build time where request headers do not exist.
+  const locals = _ctx.locals as CloudflareLocals
+  const loggable = !PRERENDERED_PATHS.has(pathname)
+  const crawler = loggable ? identifyCrawler(_ctx.request.headers.get('user-agent')) : null
+  const logHit = (status: number, cacheStatus: string): void => {
+    if (!crawler) return
+    const write = recordCrawlerHit(locals?.runtime?.env ?? {}, {
+      bot: crawler.bot,
+      kind: crawler.kind,
+      path: pathname,
+      status,
+      cache: cacheStatus,
+      verified: locals?.runtime?.cf?.verifiedBot ?? null,
+      userAgent: _ctx.request.headers.get('user-agent') ?? '',
+    })
+    // Without a background hook (local dev) the write is left to settle on its
+    // own: logging must never be on the path a response waits for.
+    const waitUntil = locals?.runtime?.ctx?.waitUntil
+    if (waitUntil) {
+      waitUntil(write)
+    } else {
+      write.catch(() => {})
+    }
+  }
+
   const cacheable = isCacheable(_ctx.request, _ctx.url)
   const cache = cacheable ? edgeCache() : null
   // Key on the URL alone rather than the inbound Request, so request headers
@@ -101,6 +140,7 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
     if (hit) {
       const hitHeaders = new Headers(hit.headers)
       hitHeaders.set('X-Cache', 'HIT')
+      logHit(hit.status, 'HIT')
       return new Response(hit.body, {
         status: hit.status,
         statusText: hit.statusText,
@@ -127,6 +167,8 @@ export const onRequest = defineMiddleware(async (_ctx, next) => {
     statusText: response.statusText,
     headers
   })
+
+  logHit(response.status, cache ? 'MISS' : 'BYPASS')
 
   // Store only clean 200s. A Set-Cookie would make the entry visitor-specific
   // and the Cache API rejects it outright, so skip those rather than throw.
