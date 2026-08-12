@@ -1,16 +1,16 @@
 label,kind,prompt_id,run,engine,prompt,brand_mentioned,reylong_cited,all_cited_domains,notes
-2026-08,branded,12180b,1,perplexity,does rey long have CE certification for its machines,,,,
-2026-08,branded,12180b,2,perplexity,does rey long have CE certification for its machines,,,,
-2026-08,branded,12180b,3,perplexity,does rey long have CE certification for its machines,,,,
-2026-08,branded,12180b,4,perplexity,does rey long have CE certification for its machines,,,,
-2026-08,branded,12180b,5,perplexity,does rey long have CE certification for its machines,,,,
-2026-08,shortlist,1012b0,1,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
-2026-08,shortlist,1012b0,2,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
-2026-08,shortlist,1012b0,3,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
-2026-08,shortlist,1012b0,4,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
-2026-08,shortlist,1012b0,5,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
-2026-08,definition,0941c8,1,perplexity,how does an eddy current separator work in plastic recycling,,,,
-2026-08,definition,0941c8,2,perplexity,how does an eddy current separator work in plastic recycling,,,,
-2026-08,definition,0941c8,3,perplexity,how does an eddy current separator work in plastic recycling,,,,
-2026-08,definition,0941c8,4,perplexity,how does an eddy current separator work in plastic recycling,,,,
-2026-08,definition,0941c8,5,perplexity,how does an eddy current separator work in plastic recycling,,,,
+2026-08,branded,12180b,1,perplexity,does rey long have CE certification for its machines,yes,,,答案正確引述 FAQ「do not currently carry CE marking」；來源清單未記錄
+2026-08,branded,12180b,2,perplexity,does rey long have CE certification for its machines,yes,,,同上，措辭幾乎一致
+2026-08,branded,12180b,3,perplexity,does rey long have CE certification for its machines,yes,,,同上
+2026-08,branded,12180b,4,perplexity,does rey long have CE certification for its machines,yes,,,同上
+2026-08,branded,12180b,5,perplexity,does rey long have CE certification for its machines,yes,,,答案出現「12180B」當成機型，那是本表的 prompt_id — 疑似整列被貼進查詢框，此次受污染
+2026-08,shortlist,1012b0,1,perplexity,what is the best machine for pp woven bag printing cutting and sewing,yes,,,Reylong JLPTCSM-1300W 列為第一推薦；8 項規格與 DB 相符；≤0.3mm 套印精度與 Panasonic 伺服為跨機種誤植
+2026-08,shortlist,1012b0,2,perplexity,what is the best machine for pp woven bag printing cutting and sewing,yes,,,同樣第一推薦
+2026-08,shortlist,1012b0,3,perplexity,what is the best machine for pp woven bag printing cutting and sewing,no,no,,完全未提及；列 Qianfeng／Yongxu／HS Bag
+2026-08,shortlist,1012b0,4,perplexity,what is the best machine for pp woven bag printing cutting and sewing,no,no,,完全未提及；只給通用選型建議
+2026-08,shortlist,1012b0,5,perplexity,what is the best machine for pp woven bag printing cutting and sewing,no,no,,完全未提及；列 TON KEY／BOTHEVEN／Yongxu／HS／Starlinger（原貼在 definition 第 1 列）
+2026-08,definition,0941c8,1,perplexity,how does an eddy current separator work in plastic recycling,,,,尚未執行
+2026-08,definition,0941c8,2,perplexity,how does an eddy current separator work in plastic recycling,,,,尚未執行
+2026-08,definition,0941c8,3,perplexity,how does an eddy current separator work in plastic recycling,,,,尚未執行
+2026-08,definition,0941c8,4,perplexity,how does an eddy current separator work in plastic recycling,,,,尚未執行
+2026-08,definition,0941c8,5,perplexity,how does an eddy current separator work in plastic recycling,,,,尚未執行

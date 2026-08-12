@@ -111,12 +111,16 @@ let anyBrandFlip = false
 
 for (const [promptId, group] of groups) {
   const sets = group.map(domainsOf)
+  // With no source lists recorded there is nothing to compare, and every pair of
+  // empty sets scores a perfect 1.00 — a stability figure invented out of missing
+  // data, which is worse than reporting none at all.
+  const hasDomains = sets.some(set => set.size > 0)
   const pairs = []
   for (let i = 0; i < sets.length; i++) {
     for (let j = i + 1; j < sets.length; j++) pairs.push(jaccard(sets[i], sets[j]))
   }
   const mean = pairs.length ? pairs.reduce((sum, value) => sum + value, 0) / pairs.length : 1
-  similarities.push(mean)
+  if (hasDomains) similarities.push(mean)
 
   const mentioned = group.filter(record => record.brand_mentioned === 'yes').length
   const cited = group.filter(record => record.reylong_cited === 'yes').length
@@ -142,15 +146,25 @@ for (const [promptId, group] of groups) {
   console.log(`${group[0].kind}  \`${promptId}\`  ${group.length} 次`)
   console.log(`  Reylong 被提到      ${mentioned}/${group.length}${flipped ? '   ← 同一題答案會翻面' : ''}`)
   console.log(`  Reylong 被引用      ${cited}/${group.length}`)
-  console.log(`  最多幾次同一份清單  ${agreed}/${group.length}（共出現 ${shapes.size} 種不同的來源組合）`)
-  console.log(`  每次都出現的網域    ${everywhere.length} 個`)
-  console.log(`  只出現過一次的網域  ${once} 個`)
-  console.log(`  兩兩相似度平均      ${mean.toFixed(2)}`)
+  if (hasDomains) {
+    console.log(`  最多幾次同一份清單  ${agreed}/${group.length}（共出現 ${shapes.size} 種不同的來源組合）`)
+    console.log(`  每次都出現的網域    ${everywhere.length} 個`)
+    console.log(`  只出現過一次的網域  ${once} 個`)
+    console.log(`  兩兩相似度平均      ${mean.toFixed(2)}`)
+  } else {
+    console.log('  來源清單未記錄      無法計算 churn（all_cited_domains 全空）')
+  }
   console.log('')
 }
 
-const overall = similarities.reduce((sum, value) => sum + value, 0) / similarities.length
-console.log(`整體來源穩定度  ${overall.toFixed(2)}（1.00 = 每次都一模一樣，0.00 = 每次完全不同）\n`)
+const overall = similarities.length
+  ? similarities.reduce((sum, value) => sum + value, 0) / similarities.length
+  : null
+if (overall === null) {
+  console.log('整體來源穩定度  無法計算（沒有任何一題記錄了來源清單）\n')
+} else {
+  console.log(`整體來源穩定度  ${overall.toFixed(2)}（1.00 = 每次都一模一樣，0.00 = 每次完全不同）\n`)
+}
 
 // Thresholds are judgement calls for reading this instrument, not established
 // statistics — three prompts at five runs cannot support an inference test. They
@@ -159,6 +173,9 @@ if (anyBrandFlip) {
   console.log('判讀：同一題在沒有任何內容變動的情況下就會翻面。')
   console.log('  → 單格（一題一引擎）的月度變化不可解讀，只能看 27 題聚合')
   console.log('  → 手動輪次改季度；月度跑不出高於雜訊的訊號，不值得那個人工')
+} else if (overall === null) {
+  console.log('判讀：品牌出現與否在各題內都一致，但沒有來源清單可判斷 churn 程度。')
+  console.log('  → 補記 all_cited_domains 後再跑一次才能決定頻率')
 } else if (overall >= 0.8) {
   console.log('判讀：來源清單相當穩定。')
   console.log('  → 單格變化有一定參考價值，月度頻率說得過去')

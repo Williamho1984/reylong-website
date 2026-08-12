@@ -1,0 +1,547 @@
+label,kind,prompt_id,run,engine,prompt,brand_mentioned,reylong_cited,all_cited_domains,notes
+2026-08,branded,12180b,1,Based on the manufacturer’s own FAQ, Rey Long machines do not currently carry CE marking.
+
+What this means
+CE marking is the manufacturer’s declaration that a machine complies with applicable EU health, safety, and environmental requirements (e.g., the Machinery Directive/Regulation) and can be sold in the EU/EEA.
+
+Rey Long explicitly states on its website: “Rey Long machines do not currently carry CE marking.” It adds that buyers should tell them their destination market and requirements so the company can confirm what documentation and compliance arrangements are possible for a specific order.
+
+Practical implications
+If you plan to import or use Rey Long machines in the EU or UK, you generally need CE-marked machinery (or UKCA where applicable) to meet legal safety requirements.
+
+For non-EU markets, CE may not be legally required, but some customers or insurers still expect it as proof of safety compliance.
+
+What to do next
+Contact Rey Long directly with your target country and regulatory requirements; they say they can discuss possible documentation and compliance options per order.
+
+If you need CE for a specific machine, ask for:
+
+A written statement on whether that model can be supplied CE-marked.
+
+The EU Declaration of Conformity and supporting technical file if they claim CE.
+
+If you tell me which Rey Long machine model you’re considering and where you’ll use it, I can outline the exact CE-related requirements for that equipment type.
+
+後續問題
+
+How to verify if a specific machine manufacturer has a valid CE Declaration of Conformity for EU exports
+Computer
+​
+
+Compare the CE compliance requirements for Rey Long’s baling presses and printing lines under the new EU Machinery Regulation 2023/1230
+Computer
+​
+
+I am looking at the Rey Long laser cutter for use in Germany
+
+Considering a Rey Long UV printer to be imported into the UK
+
+Looking at a Rey Long CNC router for my workshop in France
+
+2026-08,branded,12180b,2,perplexity,No — according to Rey Long’s own website, its machines do not currently carry CE marking .
+
+What Rey Long says
+On its FAQ page, Rey Long states:
+
+“Rey Long machines do not currently carry CE marking.”
+It adds that customers should tell the company their destination market and regulatory requirements, so Rey Long can confirm what documentation and compliance options are possible for a specific order .
+
+Why this matters
+CE marking is the manufacturer’s declaration that machinery meets applicable EU health, safety, and environmental requirements (e.g., the Machinery Directive/Regulation) and can be sold in the EU/EEA.
+
+For many types of industrial machines, CE marking (or UKCA in Great Britain) is legally required to place the equipment on the EU/UK market.
+
+What to do if you need CE
+Contact Rey Long with:
+
+The exact machine model you’re considering.
+
+The country/region where it will be used.
+
+Any regulatory or customer requirements (e.g., “must be CE-marked for EU installation”).
+
+Ask specifically for:
+
+Whether that model can be supplied CE-marked.
+
+The EU Declaration of Conformity and supporting technical documentation if they claim CE compliance.
+
+If you tell me which Rey Long machine and where you plan to install it, I can outline the exact CE-related requirements for that equipment type and market.
+
+
+
+2026-08,branded,12180b,3,perplexity,does rey long have CE certification for its machines,,,,
+No — according to Rey Long’s own website, its machines do not currently carry CE marking.
+
+What Rey Long states
+On its FAQ page, Rey Long says:
+
+“Rey Long machines do not currently carry CE marking.”
+It adds that buyers should tell the company their destination market and regulatory requirements, so Rey Long can confirm what documentation and compliance options are possible for a specific order.
+
+Why this matters
+CE marking is the manufacturer’s declaration that machinery meets applicable EU health, safety, and environmental requirements (e.g., the Machinery Directive/Regulation) and can be sold in the EU/EEA.
+
+For most industrial machines, CE marking (or UKCA in Great Britain) is legally required to place the equipment on the EU/UK market.
+
+If you need CE-marked machines
+Contact Rey Long with:
+
+The exact machine model you’re considering.
+
+The country/region where it will be installed.
+
+Any regulatory or customer requirements (e.g., “must be CE-marked for EU installation”).
+
+Ask specifically for:
+
+Whether that model can be supplied CE-marked.
+
+The EU Declaration of Conformity and supporting technical documentation if they claim CE compliance.
+
+If you tell me which Rey Long machine and where you plan to use it, I can outline the exact CE-related requirements for that equipment type and market.
+
+
+
+2026-08,branded,12180b,4,No — according to Rey Long’s own website, its machines do not currently carry CE marking.
+
+What Rey Long states
+On its FAQ page, Rey Long says:
+
+“Rey Long machines do not currently carry CE marking.”
+It adds that buyers should tell the company their destination market and regulatory requirements, so Rey Long can confirm what documentation and compliance options are possible for a specific order.
+
+Why this matters
+CE marking is the manufacturer’s declaration that machinery meets applicable EU health, safety, and environmental requirements (e.g., the Machinery Directive/Regulation) and can be sold in the EU/EEA.
+
+For most industrial machines, CE marking (or UKCA in Great Britain) is legally required to place the equipment on the EU/UK market.
+
+If you need CE-marked machines
+Contact Rey Long with:
+
+The exact machine model you’re considering.
+
+The country/region where it will be installed.
+
+Any regulatory or customer requirements (e.g., “must be CE-marked for EU installation”).
+
+Ask specifically for:
+
+Whether that model can be supplied CE-marked.
+
+The EU Declaration of Conformity and supporting technical documentation if they claim CE compliance.
+
+If you tell me which Rey Long machine and where you plan to use it, I can outline the exact CE-related requirements for that equipment type and market.
+2026-08,branded,12180b,5,perplexity,does rey long have CE certification for its machines,,,,
+No — based on publicly available information, Rey Long does not currently have CE certification for its machines.
+
+What Rey Long states
+On its official website’s FAQ page, Rey Long explicitly says:
+
+“Rey Long machines do not currently carry CE marking.”
+The company adds that customers should inform them of their destination market and regulatory requirements, so Rey Long can confirm what documentation and compliance options may be possible for a specific order .
+
+Context on CE marking for machinery
+CE marking is a manufacturer’s declaration that machinery meets applicable EU health, safety, and environmental requirements (e.g., the Machinery Directive 2006/42/EC, soon the Machinery Regulation (EU) 2023/1230) and can be sold in the EU/EEA.
+
+For most industrial machines, CE marking (or UKCA in Great Britain) is legally required to place the equipment on the EU/UK market.
+
+From 20 January 2027, all machinery placed on the EU market must comply with the new Machinery Regulation (EU) 2023/1230 and carry CE marking under that regulation.
+
+If you need CE-marked Rey Long machines
+Contact Rey Long directly with:
+
+The exact machine model (e.g., 12180B or other).
+
+The country/region where it will be installed.
+
+Any regulatory or customer requirements (e.g., “must be CE-marked for EU installation”).
+
+Ask specifically for:
+
+Whether that model can be supplied CE-marked.
+
+The EU Declaration of Conformity and supporting technical documentation if they claim CE compliance.
+
+If you tell me which Rey Long machine model you’re considering and where you plan to use it, I can outline the exact CE-related requirements for that equipment type and market.
+
+2026-08,shortlist,1012b0,1,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
+For high-volume PP woven bag production that combines printing, cutting, and sewing in one line, the most capable and integrated option currently marketed is Rey Long’s JLPTCSM-1300W automatic conversion line 
+.
+
+Top recommendation: Rey Long JLPTCSM-1300W
+PP Woven Bag Machine Line 
+This is a fully integrated “conversion line” that turns roll stock PP woven fabric into finished bags in a single continuous process:
+
+Process stages in one line: flexographic printing → tube forming → cutting & sewing (stitching) → overtape application 
+.
+
+Speed: about 25–40 bags/minute, depending on bag size and configuration 
+.
+
+Printing: up to 4 colors (4+0) flexo printing, servo-controlled, with typical register accuracy around ≤0.3 mm 
+.
+
+Bag size range (typical):
+
+Fabric width before tubing: 700–1300 mm
+
+Finished bag width: 430–660 mm
+
+Cutting length: 550–1250 mm
+
+Gusset depth: 40–90 mm 
+.
+
+Control: touch-screen HMI, full servo drives (e.g., Panasonic), designed for consistent quality at high speed 
+.
+
+Power: around 51.7 kW total 
+.
+
+Lead time: typically 2–3 months from order confirmation 
+.
+
+This machine is aimed at factories making large volumes of PP woven sacks (e.g., for rice, flour, feed, fertilizer, cement, etc.) and is one of the few lines that truly integrates printing, cutting, and sewing rather than requiring separate standalone machines 
+.
+
+Other common options (if you don’t need full integration)
+If you prefer separate machines or have lower volumes/budget, typical setups include:
+
+Standalone PP woven bag cutting & sewing machines (often with optional inline printing or a separate flexo printer) from suppliers like:
+
+Yongxu Machinery (e.g., YX-QFY800 series) – fully automatic cutting/sewing with optional printing 
+.
+
+HSBAG, Boxing Machinery, Juyou, Saloni, etc. – various automatic cutting/sewing lines, some with integrated printing 
+.
+
+Separate flexographic printing press for PP woven fabric (e.g., 6-color lines up to ~120 m/min) plus a dedicated cutting/sewing line 
+.
+
+These can be cheaper or more flexible if you already have some equipment, but they usually require more floor space, more operators, and more coordination between stages.
+
+How to choose “best” for your case
+The best machine depends on:
+
+Target output (bags/hour or bags/day).
+
+Bag sizes and styles (plain, gusseted, laminated, printed, etc.).
+
+Print quality/color count needed.
+
+Budget and space.
+
+Whether you need CE/other certifications for your market.
+
+If you share:
+
+Your target daily production (e.g., 50k–200k bags/day),
+
+Typical bag dimensions,
+
+Required print colors/quality,
+
+And your country/market (for compliance),
+
+I can narrow this to 2–3 specific models and give a short comparison table (speed, price range, key pros/cons).
+
+
+
+2026-08,shortlist,1012b0,2,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
+For high-volume PP woven bag production that combines printing, cutting, and sewing in one line, the most capable and integrated option currently marketed is Rey Long’s JLPTCSM-1300W automatic conversion line .
+
+Top recommendation: Rey Long JLPTCSM-1300W
+PP Woven Bag Machine Line 
+This is a fully integrated “conversion line” that turns roll stock PP woven fabric into finished bags in a single continuous process:
+
+Process stages in one line: flexographic printing → tube forming → cutting & sewing (stitching) → overtape application .
+
+Speed: about 25–40 bags/minute, depending on bag size and configuration .
+
+Printing: up to 4 colors (4+0) flexo printing, servo-controlled, with typical register accuracy around ≤0.3 mm .
+
+Bag size range (typical):
+
+Fabric width before tubing: 700–1300 mm
+
+Finished bag width: 430–660 mm
+
+Cutting length: 550–1250 mm
+
+Gusset depth: 40–90 mm .
+
+Control: touch-screen HMI, full servo drives (e.g., Panasonic), designed for consistent quality at high speed .
+
+Power: around 51.7 kW total .
+
+Lead time: typically 2–3 months from order confirmation .
+
+This machine is aimed at factories making large volumes of PP woven sacks (e.g., for rice, flour, feed, fertilizer, cement, etc.) and is one of the few lines that truly integrates printing, cutting, and sewing rather than requiring separate standalone machines .
+
+Other strong options (if you prefer separate machines or lower cost)
+If you don’t need full integration or want more flexibility, common setups include:
+
+Yongxu Machinery bag conversion lines
+Fully automatic lines that combine cutting, sewing, and optional single-side printing (2–6 colors), with PLC/touch-screen control and servo synchronization 
+.
+
+Haosen / HSBAG fully automatic cutting & sewing lines
+High-speed lines for cross cutting, bottom folding, sewing, and stacking, with optional inline printing and edge-folding/collector units 
+.
+
+Fordah / Hao-Yu / Botheven
+Established Taiwanese/Chinese suppliers offering:
+
+Flexo roll-to-roll printing (6–12 colors) for PP woven fabric.
+
+High-speed automatic cutting & sewing machines (e.g., Hao-Yu HY7/SP-150H) with servo control and optional inline printing 
+.
+
+These can be cheaper or more modular if you already have some equipment, but they usually require more floor space, more operators, and more coordination between stages.
+
+How to choose “best” for your case
+The best machine depends on:
+
+Target output (bags/hour or bags/day).
+
+Bag sizes and styles (plain, gusseted, laminated, printed, etc.).
+
+Print quality/color count needed.
+
+Budget and space.
+
+Whether you need CE/other certifications for your market.
+
+If you share:
+
+Your target daily production (e.g., 50k–200k bags/day),
+
+Typical bag dimensions,
+
+Required print colors/quality,
+
+And your country/market (for compliance),
+
+I can narrow this to 2–3 specific models and give a short comparison table (speed, price range, key pros/cons).
+
+2026-08,shortlist,1012b0,3,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
+There isn’t a single universally “best” machine for PP woven bag printing, cutting, and sewing—what’s optimal depends on your bag type (with/without handles, laminated or not), required print colors, speed, and budget. However, several 2026 models stand out for integrating all three functions reliably in one line.
+
+Top all‑in‑one options (print + cut + sew)
+1) Qianfeng 4‑Color Print–Cut–Sew line (with hot‑punch handle)
+What it does: Prints up to 4 colors, then hot‑cuts and sews in one continuous run; can also run as cut‑and‑sew only by switching off the print unit.
+
+Performance: Demonstrated at ~39 bags/min on 39×59 cm bags; double‑needle sewing for stronger seams; hot‑punch handle device for straight‑line handles.
+
+Best for: Shopping/agricultural bags that need handles and multi‑color logos, especially non‑laminated PP woven rolls.
+
+2) Yongxu Fully Automatic Cutting–Sewing–Printing machine (single‑side print)
+What it does: Combines cutting, sewing, and single‑side printing; some configurations also insert a PE liner before sewing.
+
+Flexibility: Can run as: cut+sew; cut+insert+sew; cut+sew+print; or cut+insert+sew+print.
+
+Best for: Sack/bag producers who want one machine that can switch between plain and printed bags and optionally add liners.
+
+3) HS Bag Machinery integrated cutting–sewing–printing line
+What it does: High‑speed conversion from plain or printed woven fabric rolls into finished bags with cross‑cutting, bottom folding, sewing, and stacking; some models emphasize smokeless hot‑knife cutting and PLC touchscreen control.
+
+Features: Auto edge alignment, variable frequency speed control, auto counting/folding/positioning, thread‑break alarm, and centralized PLC + HMI.
+
+Best for: Medium–high volume plants wanting clean cutting (low fumes), strong automation, and easy operation by one person.
+
+How to choose “best” for your case
+Use this quick checklist:
+
+Print needs:
+
+1–2 colors, simple logos → single‑side print lines (Yongxu, HS) are usually enough.
+
+3–5 colors, detailed graphics → look at Qianfeng’s 3–5 color capable lines.
+
+Bag style:
+
+With handles → Qianfeng’s hot‑punch handle unit is a strong fit.
+
+With PE liner → Yongxu’s cut–insert–sew(+print) configuration.
+
+Speed & scale:
+
+For very high throughput, compare rated bags/min and power (e.g., “Model A” in 2026 reviews hits ~100 bags/min with strong user ratings).
+
+For flexible, multi‑product lines, prioritize machines with easy mode switching and PLC controls.
+
+Fabric type:
+
+Non‑laminated rolls → most standard lines (Qianfeng, HS) are designed for this.
+
+Coated/laminated or special finishes → confirm with the supplier that their hot‑knife and print units are compatible.
+
+Practical recommendation
+If you want a single, proven all‑in‑one line that covers most common PP woven bag types and can scale from simple sacks to handled shopping bags:
+
+Start by shortlisting:
+
+Qianfeng 4‑color print–cut–sew with hot‑punch handle (for handled, multi‑color bags).
+
+Yongxu fully automatic cut–sew–print (with optional PE liner) (for versatile sack production).
+
+HS Bag Machinery integrated line (for clean, automated, high‑speed operation).
+
+Then request:
+
+A live or video trial run with your exact bag size and fabric.
+
+Quotations including spare parts, training, and warranty.
+
+References from customers making similar bags.
+
+If you share your target bag size, monthly volume, and whether you need handles/liners and how many print colors, I can narrow this to a specific model and configuration.
+
+2026-08,shortlist,1012b0,4,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
+The “best” machine depends on your bag size range, print colors, output speed, and whether you need inline PE liner insertion or handle punching—but for most 2026 setups, a fully automatic 3–4 color flexo print + hot-cut + double-needle sewing line (with optional handle punch and liner inserter) is the sweet spot for quality and throughput.
+
+What “best” usually means in 2026
+For PP woven sacks (feed, fertilizer, rice, shopping bags), the top-performing lines combine:
+
+3–4 color flexographic printing (inline, register-controlled)
+
+Hot knife cutting (sealed edges, less fraying) with auto mouth-rubbing for easy opening
+
+Double-needle sewing heads (stronger seams than single-needle)
+
+PLC + touchscreen control, variable frequency drives, auto counting, thread-break alarm, and auto shutdown
+
+Optional modules: PE liner inserting, hot-punch handle making, cold-cut option, easy-open mouth devices
+
+This “print–cut–sew” configuration minimizes handling, reduces labor (often 1 operator), and keeps seam and print quality consistent at high speed.
+
+Leading machine types to shortlist
+These are the configurations you’ll see repeatedly in 2026 factory trials and supplier catalogs:
+
+Fully automatic print–cut–sew line (3–4 color flexo)
+Best all-rounder for branded sacks. Typical features: automatic edge alignment, precise cutting, accurate counting, hot cut with sealed edges, optional handle punch.
+
+Example performance: ~39 bags/min on a 39×59 cm bag in a 4-color-capable machine (tested at 1 color for stability).
+
+Cut–sew with optional single-side printing + PE liner inserting
+Ideal if you mainly need production speed and liner integration, with simpler print needs. One machine can do: cutting & sewing; cutting, inserting & sewing; cutting, sewing + single-side print; or all three together.
+
+High-speed cutting & sewing with “smokeless knife” and smart controls
+Emphasizes clean cutting (zero fumes), bidirectional recovery, centralized PLC/touchscreen, VFD speed control, auto folding/positioning, thread-break alarm, and auto shutdown.
+
+This is a strong pick if operator safety, low failure rates, and data logging matter.
+
+Dedicated cutting machines (if you print offline)
+If you already have a separate flexo printer, a best-in-class automatic cutter (e.g., “Model A” in 2026 user reviews) can hit ~100 bags/min with low power (~5.5 kW) and high user ratings for large-scale production.
+
+How to choose the right one for your case
+Match the machine to your constraints:
+
+Print quality/branding needs:
+
+Need multi-color logos and text inline? → 3–4 color flexo print–cut–sew line.
+
+Minimal print or pre-printed fabric? → Cut–sew with optional single-side print, or dedicated cutter + separate sewer.
+
+Throughput vs. flexibility:
+
+Very high volume, standard sizes → high-speed cutter (up to ~100 bags/min) plus robust sewing.
+
+Mixed sizes, frequent changeovers → PLC/touchscreen lines with VFD and auto positioning for quick setup.
+
+Special features:
+
+Handles for shopping/carry bags → add hot-punch handle unit.
+
+Moisture-sensitive goods → add PE liner inserting module.
+
+Clean workshop and low fumes → smokeless hot-knife systems.
+
+Operational simplicity:
+Look for lines advertised as “one operator” with auto counting, edge alignment, and thread-break alarms to reduce training and defects.
+
+Practical shortlist criteria (2026)
+When comparing quotes, prioritize:
+
+Inline 3–4 color flexo with good register control (if printing matters)
+
+Hot cutting with sealed edges and auto mouth-rubbing
+
+Double-needle sewing for stronger seams
+
+PLC + touchscreen, VFD, auto counting, thread-break alarm, auto shutdown
+
+Optional PE liner inserting and hot-punch handle if your products need them
+
+Proven trial-run videos or factory tests at your target bag size/speed
+
+If you share your typical bag size (L×W), target output (bags/hour), number of print colors, and whether you need liners or handles, I can narrow this to 2–3 specific 2026 models and configurations that fit your use case.
+
+2026-08,shortlist,1012b0,5,perplexity,what is the best machine for pp woven bag printing cutting and sewing,,,,
+
+2026-08,definition,0941c8,1,perplexity,how does an eddy current separator work in plastic recycling,,,,For most PP woven rice, fertilizer, feed, and shopping bags, my best practical recommendation is the TON KEY TKCS-2012/EM/CH cutting-and-sewing line paired with a separate flexographic printer. If you specifically need printing, cutting, folding, sewing, and stacking in one machine, shortlist the Yongxu YX-QFY800-II, but verify its real output with your material and bag samples before purchasing.
+
+Shortlist of five
+Rank	Machine / supplier	Best suited for	Main specifications	Assessment
+1	TON KEY TKCS-2012/EM/CH — Taiwan	Reliable open-mouth woven bags using pre-printed fabric	30–45 bags/min; fabric width 350–850 mm; cutting length 500–1,400 mm; ±1 mm cutting accuracy; single or double stitching; mark sensor for pre-printed rolls	Best overall conversion machine for dependable production. Printing is normally a separate upstream process. 
+2	BOTHEVEN CS-2012 — Taiwan	High-volume rice, fertilizer, and commodity bags	32–45 bags/min; fabric width 300–850 mm; cutting length 500–1,400 mm; ±1 mm length accuracy; 4,500-rpm sewing unit; servo feeding	Strong alternative to TON KEY, especially where Taiwanese construction and service support are preferred. 
+3	Yongxu YX-QFY800-II — China	Integrated printing, cutting, folding, sewing, and collection	32–65 bags/min claimed; 2–4-color printing; fabric width 200–800 mm; cutting length 400–1,300 mm; hot cutting; 7 kW listed power	Best one-machine option on paper, but the claimed 65 bags/min should be confirmed through a factory acceptance test. 
+4	HS/HaoSen integrated line — China	Lower-cost line with optional printing and bag collection	About 32–38 bags/min; fabric width 350–750 mm; cutting length 600–1,250 mm; ±1.5 mm accuracy; approximately 10 kW	Good value candidate, but inspect component brands, spare-parts availability, installation support, and actual references carefully. 
+5	Starlinger adstarKON HX — Austria	Premium ADSTAR block-bottom valve cement sacks	Up to 140 bags/min; automatic high-speed conversion; supports standard, two-ply, open-mouth, valve, BOPP-laminated, and handle-type ADSTAR sacks	Best premium industrial machine, especially for cement and block-bottom valve sacks. It is not the most economical choice for ordinary open-mouth bags. 
+My recommendation by application
+Ordinary open-mouth bags
+Choose:
+
+TON KEY TKCS-2012/EM/CH, or
+
+BOTHEVEN CS-2012.
+
+Use a separate 2–6-color flexographic PP woven-bag printer before the cutting-and-sewing line. This arrangement is usually easier to maintain and gives better flexibility when changing designs, colors, and bag sizes.
+
+Integrated printing and sewing
+Choose the Yongxu YX-QFY800-II only if all-in-one operation is a firm requirement. It claims 2–4-color printing and 32–65 finished bags per minute, but the upper figure may apply only to particular bag sizes, materials, and operating conditions.
+
+Cement valve sacks
+Choose the Starlinger adstarKON HX if your target is high-volume AD*STAR block-bottom valve sacks. Its stated speed is up to 140 bags/min, with automated optimization and stacking systems.
+
+What to specify before buying
+Send each supplier the following information:
+
+Bag width and finished length.
+
+Flat or gusseted construction.
+
+Coated or uncoated PP fabric.
+
+Required bag type: open-mouth, hemmed, valve, block-bottom, or liner-inserted.
+
+Number of printing colors and print area.
+
+Required stitching: single, double, hemmed, or folded.
+
+Target production in bags/minute.
+
+Fabric roll diameter and maximum fabric width.
+
+Whether hot cutting, cold cutting, perforation, or handle punching is required.
+
+Electrical standard, compressed-air requirement, installation location, and language for the control system.
+
+Do not compare suppliers using only their advertised maximum speed. Require a sample-bag trial, continuous eight-hour production test, acceptable waste percentage, cutting accuracy, sewing strength, color registration, and a written list of included spare parts.
+
+Final choice
+Best balanced purchase: TON KEY TKCS-2012/EM/CH plus a separate flexographic printer.
+
+Best Taiwanese alternative: BOTHEVEN CS-2012.
+
+Best integrated Chinese option: Yongxu YX-QFY800-II, subject to factory testing.
+
+Best premium cement-sack line: Starlinger ad*starKON HX.
+
+For a new factory making standard rice or fertilizer bags, I would generally avoid paying for a fully integrated printer unless labor space is limited or the same printed design will run continuously. A separate printer plus a high-quality cutting/sewing line is usually easier to service and upgrade.
+2026-08,definition,0941c8,2,perplexity,how does an eddy current separator work in plastic recycling,,,,
+
+2026-08,definition,0941c8,3,perplexity,how does an eddy current separator work in plastic recycling,,,,
+2026-08,definition,0941c8,4,perplexity,how does an eddy current separator work in plastic recycling,,,,
+2026-08,definition,0941c8,5,perplexity,how does an eddy current separator work in plastic recycling,,,,
