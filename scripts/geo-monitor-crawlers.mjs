@@ -123,11 +123,20 @@ function report(hits) {
   }
 
   console.log('\n依爬蟲')
+  let corroborated = 0
   for (const [bot, count] of tally(hits, 'bot')) {
     const verified = hits.filter(hit => hit.bot === bot && hit.verified === true).length
+    corroborated += verified
     // Without Cloudflare's flag a User-Agent is just a string someone sent, so say
     // how much of each count is actually corroborated rather than implying it all is.
     console.log(`  ${bot.padEnd(20)}${String(count).padStart(5)} 次${verified ? `（已驗證 ${verified}）` : ''}`)
+  }
+  // Measured against production this is always the case, because verified-bot is a
+  // zone-level signal and the domain resolves outside Cloudflare. Said out loud so
+  // nobody reads these counts as confirmed visits, or wastes time debugging a null.
+  if (!corroborated) {
+    console.log('\n  ※ 沒有任何一次經過 Cloudflare 驗證（本站 DNS 不在 Cloudflare，拿不到 verified-bot 訊號）。')
+    console.log('    User-Agent 可偽造，以上數字一律視為上限，不是「確認來過」。')
   }
 
   console.log('\n最常被抓的頁面')

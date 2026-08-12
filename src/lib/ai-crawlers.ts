@@ -23,9 +23,15 @@
 //    coverage while measuring ordinary search crawling.
 //
 // 2. A User-Agent is a string anyone can send. Nothing here proves the request came
-//    from the company it names, so every count is an upper bound. Cloudflare's
-//    verified-bot flag is recorded alongside when the runtime exposes it, which is
-//    what separates a genuine crawl from someone curling with a borrowed name.
+//    from the company it names, so every count is an upper bound. The `verified`
+//    column exists for Cloudflare's verified-bot flag, but measured against
+//    production it always arrives undefined and is therefore always stored as null:
+//    verified-bot is a zone-level signal and reylong.com resolves outside
+//    Cloudflare, the same reason zone Cache Rules were unusable and the Cache API
+//    had to be used directly in middleware.ts. The column is kept because it would
+//    start populating if the domain ever moved onto Cloudflare, but nothing today
+//    corroborates a single one of these counts. Treat every number as an upper
+//    bound, not as evidence a named crawler really visited.
 export type CrawlerKind = 'user' | 'search' | 'training'
 
 export interface Crawler {
