@@ -168,6 +168,69 @@ describe('geo-monitor worklist CLI', () => {
   })
 })
 
+describe('geo-monitor noise test CLI', () => {
+  const noiseScript = join(repo, 'scripts/geo-monitor-noise.mjs')
+  const NOISE_HEADER = 'label,kind,prompt_id,run,engine,prompt,brand_mentioned,reylong_cited,all_cited_domains,notes'
+
+  function writeNoise(path: string, runs: Array<[string, string, string]>) {
+    const lines = [NOISE_HEADER, ...runs.map(([kind, brand, domains], index) =>
+      ['t', kind, `id-${kind}`, index + 1, 'perplexity', 'q', brand, brand, domains, ''].join(','))]
+    writeFileSync(path, `${lines.join('\n')}\n`)
+  }
+
+  it('--init emits five runs of each bracketed prompt and will not clobber a filled sheet', () => {
+    const output = join(tempDir, 'noise.csv')
+    const created = run(noiseScript, ['--init', '2099-01', '--output', output])
+    expect(created.status).toBe(0)
+
+    const sheet = readFileSync(output, 'utf8').trim().split('\n')
+    expect(sheet).toHaveLength(16) // header + 3 prompts x 5 runs
+    for (const kind of ['branded', 'shortlist', 'definition']) {
+      expect(sheet.filter(row => row.includes(`,${kind},`))).toHaveLength(5)
+    }
+
+    const again = run(noiseScript, ['--init', '2099-01', '--output', output])
+    expect(again.status).toBe(1)
+    expect(again.stderr).toContain('refusing to overwrite')
+  })
+
+  it('scores identical source lists as perfectly stable', () => {
+    const output = join(tempDir, 'stable.csv')
+    writeNoise(output, Array.from({ length: 5 }, () => ['branded', 'no', 'wikipedia.org|iso.org'] as [string, string, string]))
+    const result = run(noiseScript, ['t', '--output', output])
+    expect(result.status).toBe(0)
+    expect(result.stdout).toContain('最多幾次同一份清單  5/5')
+    expect(result.stdout).toContain('兩兩相似度平均      1.00')
+    // Five consistent "no"s is a stable answer, not a flip.
+    expect(result.stdout).not.toContain('會翻面')
+  })
+
+  it('flags a prompt whose answer flips while nothing about the site changed', () => {
+    const output = join(tempDir, 'churn.csv')
+    writeNoise(output, [
+      ['shortlist', 'no', 'alibaba.com'],
+      ['shortlist', 'yes', 'indiamart.com'],
+      ['shortlist', 'no', 'globalsources.com'],
+      ['shortlist', 'yes', 'tradewheel.com'],
+      ['shortlist', 'no', 'made-in-china.com'],
+    ])
+    const result = run(noiseScript, ['t', '--output', output])
+    expect(result.stdout).toContain('會翻面')
+    expect(result.stdout).toContain('Reylong 被提到      2/5')
+    expect(result.stdout).toContain('單格（一題一引擎）的月度變化不可解讀')
+    // Five disjoint lists share nothing at all.
+    expect(result.stdout).toContain('兩兩相似度平均      0.00')
+  })
+
+  it('refuses to interpret a sheet nobody has filled in yet', () => {
+    const output = join(tempDir, 'blank.csv')
+    run(noiseScript, ['--init', '2099-01', '--output', output])
+    const result = run(noiseScript, ['2099-01', '--output', output])
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain('還沒有任何結果')
+  })
+})
+
 describe('geo-monitor summary CLI', () => {
   it('counts a filled fixture correctly in separate EN and ES blocks', () => {
     const fixture = join(tempDir, 'filled.csv')
