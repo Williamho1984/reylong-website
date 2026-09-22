@@ -1,4 +1,14 @@
 // Seed news article: "Edge AI for Packaging Lines: Real-Time Vision Inspection and Predictive Maintenance"
+//
+// FACT BOUNDARY (added 2026-08-13 after an audit):
+//   - Removed: "industry deployments commonly report unplanned-downtime reductions of 25–50%"
+//     and "positive ROI within 6–12 months". Both were attributed only to "industry deployments" /
+//     "los despliegues del sector" — no named, checkable source. An ROI claim with no source is
+//     the highest-risk kind of number on the whole site. Do not restore them without a named,
+//     linkable publication.
+//   - Rey Long numbers are DB SPECIFICATIONS and application-dependent design targets. Never
+//     phrase them as achieved customer results ("in our deployments", "customers see").
+//   - No closed-loop colour registration claims.
 // News is SSR -> appears live immediately, no redeploy. Sitemap auto-includes the slug.
 // Idempotent: updates if slug exists, otherwise inserts.
 // Run: node scripts/seed-news-edge-ai.mjs
@@ -32,7 +42,7 @@ const content_en = `<p>Artificial intelligence is moving out of the data center 
 <p>Traditional quality control relies on human spot-checks or sampling. A deep-learning vision system inspects <em>every</em> unit at full line speed, catching microscopic defects &mdash; print misregistration, contamination, seal flaws and print errors &mdash; that are invisible to the human eye and impossible to catch by sampling alone. On high-speed lines, edge-enabled cameras can flag defective items at well over a thousand units per minute, so a fault is caught and rejected the moment it appears instead of being discovered in a finished pallet.</p>
 <figure><img src="${IMG_LINE}" alt="Smart automated production line with edge sensors and servo modules" /><figcaption>Edge AI runs on or beside the line, analysing machine signals in real time.</figcaption></figure>
 <h2>Predictive maintenance: fixing problems before they stop the line</h2>
-<p>Instead of waiting for a breakdown, edge AI continuously analyses signals from the machine &mdash; vibration, temperature, motor current &mdash; to detect the early signatures of bearing wear, thermal drift or imbalance. Maintenance is scheduled <em>before</em> failure, not after. Industry deployments commonly report unplanned-downtime reductions in the range of 25&ndash;50%, with quality-inspection and predictive-maintenance projects typically reaching positive ROI within 6&ndash;12 months &mdash; though results depend heavily on the line's level of automation and process variability.</p>
+<p>Instead of waiting for a breakdown, edge AI continuously analyses signals from the machine &mdash; vibration, temperature, motor current &mdash; to detect the early signatures of bearing wear, thermal drift or imbalance. Maintenance is scheduled <em>before</em> failure, not after. We are not going to put a payback figure on that here: the honest answer depends on your line's level of automation, its process variability and what an hour of unplanned stoppage actually costs you &mdash; three things you know and we do not. What the approach changes is the shape of the problem, moving a stoppage from an event that interrupts a shift to one that is scheduled into it.</p>
 <h2>Why "edge", and why it matters on a packaging line</h2>
 <p>Safety interlocks and line-speed inspection require sub-5-millisecond responses that a cloud round trip cannot deliver:</p>
 <table>
@@ -60,7 +70,7 @@ const content_es = `<p>La inteligencia artificial está saliendo del centro de d
 <p>El control de calidad tradicional depende de inspecciones humanas por muestreo. Un sistema de visión con aprendizaje profundo inspecciona <em>cada</em> unidad a plena velocidad de línea, detectando defectos microscópicos &mdash; errores de registro de impresión, contaminación, fallos de sellado y errores de impresión &mdash; invisibles para el ojo humano e imposibles de captar solo por muestreo. En líneas de alta velocidad, las cámaras en el borde pueden señalar productos defectuosos a más de mil unidades por minuto, de modo que un fallo se detecta y se rechaza en el momento en que aparece, en lugar de descubrirse en un palé terminado.</p>
 <figure><img src="${IMG_LINE}" alt="Línea de producción automatizada inteligente con sensores en el borde y módulos servo" /><figcaption>La IA en el borde se ejecuta en la línea o junto a ella, analizando las señales de la máquina en tiempo real.</figcaption></figure>
 <h2>Mantenimiento predictivo: resolver problemas antes de que detengan la línea</h2>
-<p>En lugar de esperar una avería, la IA en el borde analiza continuamente las señales de la máquina &mdash; vibración, temperatura, corriente del motor &mdash; para detectar las primeras señales de desgaste de rodamientos, deriva térmica o desequilibrio. El mantenimiento se programa <em>antes</em> del fallo, no después. Los despliegues del sector suelen reportar reducciones del tiempo de inactividad no planificado en el rango del 25&ndash;50%, y los proyectos de inspección de calidad y mantenimiento predictivo suelen alcanzar un ROI positivo en 6&ndash;12 meses &mdash; aunque los resultados dependen en gran medida del nivel de automatización de la línea y de la variabilidad del proceso.</p>
+<p>En lugar de esperar una avería, la IA en el borde analiza continuamente las señales de la máquina &mdash; vibración, temperatura, corriente del motor &mdash; para detectar las primeras señales de desgaste de rodamientos, deriva térmica o desequilibrio. El mantenimiento se programa <em>antes</em> del fallo, no después. No vamos a poner aquí una cifra de amortización: la respuesta honesta depende del nivel de automatización de su línea, de la variabilidad de su proceso y de lo que le cuesta realmente una hora de parada no planificada &mdash; tres cosas que usted conoce y nosotros no. Lo que cambia el enfoque es la forma del problema: una parada deja de ser un suceso que interrumpe el turno y pasa a ser algo que se programa dentro de él.</p>
 <h2>Por qué el "borde" y por qué importa en una línea de envasado</h2>
 <p>Los enclavamientos de seguridad y la inspección a velocidad de línea requieren respuestas de menos de 5 milisegundos que un viaje a la nube no puede ofrecer:</p>
 <table>

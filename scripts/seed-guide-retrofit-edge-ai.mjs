@@ -10,6 +10,22 @@
 //     speed and sealing temperature (DB fact) — tension/temperature, NOT colour registration.
 //   - No closed-loop colour registration claims, ever.
 //
+//   *** CORRECTED 2026-08-13 — two separate violations were live here ***
+//   1. CUSTOMER-RESULTS CLAIM. The body attributed the 1-per-2 -> 1-per-4 supervision ratio to
+//      "Rey Long deployments" / "las implementaciones de Rey Long". That reads as a customer
+//      case study and we are NOT permitted to claim customer results. The ratio is a DB
+//      SPECIFICATION. Write "the system is specified for" / "by specification", never
+//      "in Rey Long deployments", "we achieved", or anything implying installed-base outcomes.
+//   2. FALSE CITATION. The body cited "research at Sandia National Laboratories puts human miss
+//      rates at 20–30%", linking osti.gov/biblio/1055636. That document is SAND2012-8590,
+//      "Visual inspection: a review of the literature" — a REVIEW of 212 third-party papers,
+//      not a Sandia finding. Never link it as evidence of a finding.
+//      The only citable Sandia study is Judi E. See, "Visual Inspection Reliability for
+//      Precision Manufactured Parts", 2015-12-01: inspectors correctly rejected 85% of
+//      defective items and incorrectly rejected 35% of acceptable parts (82 inspectors,
+//      140 precision machined parts, 8 defect types — NOT packaging; label it as an analogy).
+//      https://www.sandia.gov/research/publications/details/visual-inspection-reliability-for-precision-manufactured-parts-2015-12-01/
+//
 // The visible FAQ block at the end of the body mirrors the `faq` column exactly.
 //
 // Idempotent. Run: node scripts/seed-guide-retrofit-edge-ai.mjs
@@ -100,7 +116,7 @@ const content_en = `<p>You do not need a new machine to get AI inspection: a ret
 <p>What you explicitly do not need: an internet connection to the line, a data science team, or thousands of labelled defect images. The few-shot approach exists precisely because factories do not have training datasets lying around.</p>
 
 <h2>What changes for operators</h2>
-<p>The working change is that operators stop staring and start responding. The system watches every bag; the operator answers alerts, judges edge cases and runs changeovers. In Rey Long deployments this shifts the supervision ratio from one operator per two machines toward <strong>one per four</strong> &mdash; a staffing change, not a staffing cut, and one that moves people from the task documented to fatigue them (<a href="https://www.osti.gov/biblio/1055636">research at Sandia National Laboratories</a> puts human miss rates at 20&ndash;30% on sustained visual inspection) to the tasks that use their judgement. The comparison is laid out honestly in <a href="/news/manual-vs-ai-inspection-woven-bag-lines">the manual-vs-AI guide</a>.</p>
+<p>The working change is that operators stop staring and start responding. The system watches every bag; the operator answers alerts, judges edge cases and runs changeovers. The system is specified to shift the supervision ratio from one operator per two machines toward <strong>one per four</strong> &mdash; a staffing change, not a staffing cut, and one that moves people off the task they are least suited to. A <a href="https://www.sandia.gov/research/publications/details/visual-inspection-reliability-for-precision-manufactured-parts-2015-12-01/">Sandia National Laboratories study of visual inspection reliability</a> found inspectors correctly rejected 85% of defective items and incorrectly rejected 35% of acceptable ones &mdash; sustained manual inspection loses on both sides at once. That study was on precision machined parts rather than packaging, so read it as an analogy for a bag line, not a measurement of one. The comparison is laid out honestly in <a href="/news/manual-vs-ai-inspection-woven-bag-lines">the manual-vs-AI guide</a>.</p>
 
 <h2>A bonus that shares the hardware: running recycled material</h2>
 <p>The same edge platform carries a second capability that has nothing to do with cameras: recycled (PCR) resin brings unstable melt flow and tensile strength, which surfaces as breaks and dimension drift at speed. The AI tension-control loop senses the micro-variations that instability produces and adjusts line speed and sealing temperature on the fly to keep bags inside their strength spec. For factories moving to higher recycled content &mdash; which increasingly means everyone &mdash; this is often the capability that justifies the project on its own.</p>
@@ -164,7 +180,7 @@ const content_es = `<p>No necesita una m&aacute;quina nueva para tener inspecci&
 <p>Lo que expl&iacute;citamente no necesita: conexi&oacute;n a internet en la l&iacute;nea, un equipo de ciencia de datos ni miles de im&aacute;genes de defectos etiquetadas. El enfoque few-shot existe precisamente porque las f&aacute;bricas no tienen datasets de entrenamiento guardados en un caj&oacute;n.</p>
 
 <h2>Qu&eacute; cambia para los operarios</h2>
-<p>El cambio de trabajo es que los operarios dejan de mirar y empiezan a responder. El sistema vigila cada saco; el operario atiende alertas, juzga casos l&iacute;mite y ejecuta cambios de formato. En las implementaciones de Rey Long esto desplaza la proporci&oacute;n de supervisi&oacute;n de un operario por cada dos m&aacute;quinas hacia <strong>uno por cada cuatro</strong> &mdash; un cambio de asignaci&oacute;n, no un recorte, que saca a las personas de la tarea documentadamente fatigante (la <a href="https://www.osti.gov/biblio/1055636">investigaci&oacute;n de Sandia National Laboratories</a> sit&uacute;a los fallos humanos en el 20&ndash;30% en inspecci&oacute;n visual sostenida) y las lleva a las tareas que usan su criterio. La comparaci&oacute;n se expone con honestidad en <a href="/es/news/manual-vs-ai-inspection-woven-bag-lines">la gu&iacute;a manual vs IA</a>.</p>
+<p>El cambio de trabajo es que los operarios dejan de mirar y empiezan a responder. El sistema vigila cada saco; el operario atiende alertas, juzga casos l&iacute;mite y ejecuta cambios de formato. El sistema est&aacute; especificado para desplazar la proporci&oacute;n de supervisi&oacute;n de un operario por cada dos m&aacute;quinas hacia <strong>uno por cada cuatro</strong> &mdash; un cambio de asignaci&oacute;n, no un recorte, que saca a las personas de la tarea para la que menos sirven. Un <a href="https://www.sandia.gov/research/publications/details/visual-inspection-reliability-for-precision-manufactured-parts-2015-12-01/">estudio de Sandia National Laboratories sobre fiabilidad de la inspecci&oacute;n visual</a> hall&oacute; que los inspectores rechazaron correctamente el 85% de las piezas defectuosas y por error el 35% de las aceptables &mdash; la inspecci&oacute;n manual sostenida pierde por los dos lados a la vez. Ese estudio trata de piezas mecanizadas de precisi&oacute;n y no de envases, as&iacute; que conviene leerlo como analog&iacute;a para una l&iacute;nea de sacos, no como una medici&oacute;n de ella. La comparaci&oacute;n se expone con honestidad en <a href="/es/news/manual-vs-ai-inspection-woven-bag-lines">la gu&iacute;a manual vs IA</a>.</p>
 
 <h2>Un extra que comparte el hardware: procesar material reciclado</h2>
 <p>La misma plataforma edge lleva una segunda capacidad que no tiene nada que ver con c&aacute;maras: la resina reciclada (PCR) trae un &iacute;ndice de fluidez y una resistencia a la tracci&oacute;n inestables, que afloran como roturas y deriva dimensional a velocidad. El lazo de control de tensi&oacute;n por IA percibe las microvariaciones que produce esa inestabilidad y ajusta sobre la marcha la velocidad de l&iacute;nea y la temperatura de sellado para mantener los sacos dentro de su especificaci&oacute;n de resistencia. Para las f&aacute;bricas que avanzan hacia mayor contenido reciclado &mdash; que cada vez son todas &mdash;, esta suele ser la capacidad que justifica el proyecto por s&iacute; sola.</p>

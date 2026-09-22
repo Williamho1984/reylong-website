@@ -1,4 +1,19 @@
 // Seed news article: "FIBC (Jumbo Bag) Production Trends to Watch in 2026"
+//
+// FACT BOUNDARY (added 2026-08-13 after an audit):
+//   - REMOVED and must not return without a named, linkable primary source:
+//       * "worth around US$6.6 billion in 2025"
+//       * "polypropylene accounting for roughly 78% of all demand"
+//     Neither had any attribution or link. Worse, both conflict with what is actually
+//     published: market estimates for 2025 range from ~US$8.8bn (Straits Research) to
+//     ~US$13.6bn (Research and Markets), and another source puts PP at over 95% of FIBC
+//     raw material, not 78%. The estimates disagree mainly because firms draw the boundary
+//     of "FIBC" differently — which is exactly why the source has to be named.
+//   - The standard to follow here is the one used in seed-news-pouch-flexible-packaging-trends.mjs
+//     and seed-news-non-ferrous-recycling-trends.mjs: cite PRIMARY sources directly, link them,
+//     and record in this comment block which number came from where.
+//   - Standards named in the body (ISO 21898, FSSC 22000, BRC) are fine — they are verifiable
+//     standards, not statistics.
 // Cover = Reylong's own PP woven bag convention line. SSR -> live immediately.
 // Run: node scripts/seed-news-fibc.mjs
 import { readFileSync } from 'node:fs'
@@ -17,7 +32,7 @@ const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY)
 const SLUG = 'fibc-jumbo-bag-production-trends'
 const COVER = 'https://lqgrvkhrbsgbatzhzgvy.supabase.co/storage/v1/object/public/product-media/automatic-printing-tubing-cutting-sewing-line/cover.jpg'
 
-const content_en = `<p>Flexible Intermediate Bulk Containers (FIBCs) &mdash; the large woven "jumbo bags" or "bulk bags" used to ship sand, grain, chemicals, minerals and powders &mdash; are a quietly growing market. The woven-PP FIBC segment was worth around US$6.6 billion in 2025 and is on track for steady mid-single-digit annual growth, with polypropylene accounting for roughly 78% of all demand. For anyone producing woven bags, a handful of clear trends are reshaping what buyers ask for.</p>
+const content_en = `<p>Flexible Intermediate Bulk Containers (FIBCs) &mdash; the large woven "jumbo bags" or "bulk bags" used to ship sand, grain, chemicals, minerals and powders &mdash; are a quietly growing market. We are not going to put a market-size figure on that here: the published estimates disagree with each other by roughly a factor of two, largely because different firms draw the boundary of "FIBC" in different places. The direction is not in dispute, and neither is the material &mdash; the format is overwhelmingly woven polypropylene. For anyone producing woven bags, a handful of clear trends are reshaping what buyers ask for.</p>
 <figure><img src="https://lqgrvkhrbsgbatzhzgvy.supabase.co/storage/v1/object/public/product-media/news/fibc/fibc-bag.jpg" alt="A standard FIBC bulk bag (jumbo bag) in woven polypropylene with four lifting loops" /><figcaption>A standard FIBC bulk bag &mdash; woven polypropylene with four lifting loops, the format these trends are reshaping.</figcaption></figure>
 <h2>1. Recyclability and mono-material design</h2>
 <p>The biggest shift is toward recyclable, near-mono-material FIBCs built predominantly from a single polymer family (polypropylene) to simplify end-of-life recycling. It is not yet mainstream, but customer specifications requiring recyclable or recycled content are increasingly filtering down to the bulk-bag level &mdash; especially in food, consumer goods and chemical distribution.</p>
@@ -36,7 +51,7 @@ const content_en = `<p>Flexible Intermediate Bulk Containers (FIBCs) &mdash; the
 <li><a href="/news/water-based-inks-flexographic-printing-sustainable-packaging">Water-Based Inks: The Sustainable Future of Flexographic Packaging Printing</a></li>
 </ul>`
 
-const content_es = `<p>Los contenedores flexibles para graneles (FIBC) &mdash;las grandes "big bags" o sacas de tejido empleadas para transportar arena, grano, productos químicos, minerales y polvos&mdash; son un mercado en crecimiento silencioso. El segmento de FIBC de PP tejido rondaba los 6.600 millones de dólares en 2025 y avanza con un crecimiento anual sostenido de un dígito medio, con el polipropileno representando alrededor del 78% de la demanda. Para quien fabrica sacas tejidas, varias tendencias claras están redefiniendo lo que piden los compradores.</p>
+const content_es = `<p>Los contenedores flexibles para graneles (FIBC) &mdash;las grandes "big bags" o sacas de tejido empleadas para transportar arena, grano, productos químicos, minerales y polvos&mdash; son un mercado en crecimiento silencioso. No vamos a dar aquí una cifra de tamaño de mercado: las estimaciones publicadas difieren entre sí en torno a un factor de dos, sobre todo porque cada firma traza el límite de lo que es un "FIBC" en un sitio distinto. La dirección no está en discusión, y el material tampoco &mdash; el formato es abrumadoramente polipropileno tejido. Para quien fabrica sacas tejidas, varias tendencias claras están redefiniendo lo que piden los compradores.</p>
 <figure><img src="https://lqgrvkhrbsgbatzhzgvy.supabase.co/storage/v1/object/public/product-media/news/fibc/fibc-bag.jpg" alt="Una saca FIBC estándar (big bag) de polipropileno tejido con cuatro asas de izado" /><figcaption>Una saca FIBC estándar &mdash; polipropileno tejido con cuatro asas de izado, el formato que estas tendencias están redefiniendo.</figcaption></figure>
 <h2>1. Reciclabilidad y diseño monomaterial</h2>
 <p>El mayor cambio es hacia FIBC reciclables y casi monomaterial, fabricados predominantemente con una sola familia de polímeros (polipropileno) para simplificar el reciclaje al final de su vida útil. Aún no es mayoritario, pero las especificaciones de los clientes que exigen contenido reciclable o reciclado llegan cada vez más al nivel de la saca a granel, sobre todo en alimentación, bienes de consumo y distribución química.</p>
