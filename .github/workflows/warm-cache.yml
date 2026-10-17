@@ -1,0 +1,24 @@
+name: Warm cache
+
+# Re-requests every sitemap URL every 4 minutes so the Worker's 5-minute edge cache
+# (src/middleware.ts) never fully expires on a long-tail page. Ahrefs crawls weekly, so
+# without this, a rarely-visited page is almost always the "first visitor" since the cache
+# last expired — that forces a cold Supabase connection on top of crawl-distance latency and
+# was inflating Ahrefs' "Slow page" count even though real-visitor Core Web Vitals were clean.
+# Does not change content freshness: a DB edit is still live within 5 minutes, same as before.
+on:
+  schedule:
+    - cron: '*/4 * * * *'
+  workflow_dispatch:
+
+jobs:
+  warm-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: node scripts/warm-cache.mjs
