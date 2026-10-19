@@ -1,19 +1,28 @@
 name: Warm cache
 
-# Re-requests every sitemap URL every 4 minutes so the Worker's 5-minute edge cache
+# Re-requests every sitemap URL every ~4 minutes so the Worker's 5-minute edge cache
 # (src/middleware.ts) never fully expires on a long-tail page. Ahrefs crawls weekly, so
 # without this, a rarely-visited page is almost always the "first visitor" since the cache
 # last expired — that forces a cold Supabase connection on top of crawl-distance latency and
 # was inflating Ahrefs' "Slow page" count even though real-visitor Core Web Vitals were clean.
 # Does not change content freshness: a DB edit is still live within 5 minutes, same as before.
+#
+# This used to be `schedule: cron: '*/4 * * * *'` with one warm-cache.mjs run per trigger.
+# Checked the actual run history after a day and a half live: GitHub fired it every 2-4.5
+# hours, not every 4 minutes — high-frequency `schedule` triggers are not reliable on GitHub
+# Actions, regardless of the cron expression. So instead of depending on GitHub to trigger
+# often, one job loops internally for ~5.5 hours doing its own 4-minute cycle, and the
+# `schedule` entry below is only a safety-net restart in case a loop dies or GitHub happens
+# to fire late. Public repo, so Actions minutes are free either way.
 on:
   schedule:
-    - cron: '*/4 * * * *'
+    - cron: '0 */5 * * *'
   workflow_dispatch:
 
 jobs:
   warm-cache:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -21,4 +30,12 @@ jobs:
         with:
           node-version: 22
 
-      - run: node scripts/warm-cache.mjs
+      # Loops for ~5h40m so consecutive runs overlap even if the next scheduled restart
+      # above is itself delayed — 340 minutes leaves a 10-minute margin under the 350-minute
+      # job timeout for the final iteration plus cleanup.
+      - run: |
+          end=$(( $(date +%s) + 340 * 60 ))
+          while [ "$(date +%s)" -lt "$end" ]; do
+            node scripts/warm-cache.mjs || true
+            sleep 240
+          done
