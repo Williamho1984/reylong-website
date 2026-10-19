@@ -18,6 +18,12 @@
 // Cloudflare-side outage should show up here, not take the monitor down with it.
 const SITE = process.env.WARM_CACHE_SITE ?? 'https://www.reylong.com'
 const CONCURRENCY = 6
+// Node's fetch has no default timeout. The first run of this script inside the looping
+// GitHub Actions job hung for 2.5+ hours with zero output — one unresponsive request stalled
+// its worker forever, and Promise.all never resolved, so the loop never reached its next
+// iteration. Every request gets its own deadline so a single bad URL can only ever cost this
+// many seconds, never the rest of the run.
+const REQUEST_TIMEOUT_MS = 15_000
 
 export function parseSitemapUrls(xml) {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1])
@@ -31,7 +37,10 @@ export async function warmAll(urls, fetchImpl = fetch, concurrency = CONCURRENCY
       const url = urls[next++]
       const t0 = Date.now()
       try {
-        const res = await fetchImpl(url, { headers: { 'User-Agent': 'reylong-cache-warmer' } })
+        const res = await fetchImpl(url, {
+          headers: { 'User-Agent': 'reylong-cache-warmer' },
+          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        })
         results.push({ url, ok: res.ok, status: res.status, ms: Date.now() - t0 })
       } catch (err) {
         results.push({ url, ok: false, status: 0, ms: Date.now() - t0, error: err.message })
@@ -43,7 +52,7 @@ export async function warmAll(urls, fetchImpl = fetch, concurrency = CONCURRENCY
 }
 
 async function main() {
-  const sitemapRes = await fetch(`${SITE}/sitemap.xml`)
+  const sitemapRes = await fetch(`${SITE}/sitemap.xml`, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) })
   if (!sitemapRes.ok) {
     console.error(`sitemap fetch failed: HTTP ${sitemapRes.status}`)
     process.exitCode = 1

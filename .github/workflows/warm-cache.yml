@@ -33,9 +33,15 @@ jobs:
       # Loops for ~5h40m so consecutive runs overlap even if the next scheduled restart
       # above is itself delayed — 340 minutes leaves a 10-minute margin under the 350-minute
       # job timeout for the final iteration plus cleanup.
+      #
+      # `timeout 60` is a second line of defense on top of the per-request abort signal
+      # inside warm-cache.mjs itself: the first live run hung for 2.5+ hours with zero
+      # output because one request never resolved. Belt and suspenders — if some future
+      # edge case defeats the in-script timeout too, the shell-level one still guarantees
+      # the loop keeps moving instead of silently stalling for the rest of the job.
       - run: |
           end=$(( $(date +%s) + 340 * 60 ))
           while [ "$(date +%s)" -lt "$end" ]; do
-            node scripts/warm-cache.mjs || true
+            timeout 60 node scripts/warm-cache.mjs || true
             sleep 240
           done

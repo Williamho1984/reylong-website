@@ -55,6 +55,17 @@ describe('warmAll', () => {
     expect(results[0].error).toBe('network down')
   })
 
+  it('gives every request its own abort signal — nothing should be able to hang forever', async () => {
+    // The real bug this guards against: the first production run hung for 2.5+ hours with
+    // zero output because one unresponsive URL blocked its worker's Promise.all forever,
+    // which stalled the entire warm-then-sleep loop on every subsequent cycle too.
+    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, status: 200 })
+    await warmAll(['https://a.test/'], fetchImpl, 1)
+
+    const [, options] = fetchImpl.mock.calls[0]
+    expect(options.signal).toBeInstanceOf(AbortSignal)
+  })
+
   it('never runs more concurrent requests than URLs remain', async () => {
     let inFlight = 0
     let maxInFlight = 0
