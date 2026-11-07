@@ -11,28 +11,62 @@ name: Warm cache
 # Checked the actual run history after a day and a half live: GitHub fired it every 2-4.5
 # hours, not every 4 minutes — high-frequency `schedule` triggers are not reliable on GitHub
 # Actions, regardless of the cron expression. So instead of depending on GitHub to trigger
-# often, one job loops internally for ~5.5 hours doing its own 4-minute cycle, and the
-# `schedule` entry below is only a safety-net restart in case a loop dies or GitHub happens
-# to fire late. Public repo, so Actions minutes are free either way.
+# often, one job loops internally for ~5.5 hours doing its own 4-minute cycle.
+#
+# 2026-11-07: Ahrefs' Slow page count jumped again (1 -> 40) even though every run in the
+# history was green. Measured actual run start times: each job's internal loop runs ~340
+# minutes and then ends, but the next run — left to the `schedule: cron '0 */5 * * *'` below —
+# only started 59 to 192 minutes later, not within the 300-minute cron interval. Same platform
+# unreliability as the */4-minute case above, just at a different frequency: a ~300-minute
+# schedule trigger is not guaranteed to fire within ~300 minutes either. That gap is a real
+# cache-cold window every single cycle, not an occasional miss — live latency measured during
+# this investigation was 34-474ms site-wide, confirming the architecture is fine and the only
+# problem is these gaps.
+#
+# Fix: stop depending on `schedule` for continuity. The first step below asks GitHub to queue
+# another run of this same workflow immediately, before this run does anything else — so the
+# successor is already waiting in the queue for the next ~5h40m, not dispatched only after this
+# run finishes (which would recreate the same crash-before-relay risk the old design had).
+# `concurrency` below makes that queued run wait for this one to actually finish rather than
+# running in parallel, so the relay hands off with zero gap. `schedule` stays only as a
+# dead-man's-switch in case the self-queue step itself ever fails. Public repo, so Actions
+# minutes are free either way.
 on:
   schedule:
     - cron: '0 */5 * * *'
   workflow_dispatch:
+
+permissions:
+  actions: write
+
+concurrency:
+  group: warm-cache-loop
+  cancel-in-progress: false
 
 jobs:
   warm-cache:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
+      # Queued first, before anything that could fail, so the relay survives even if this
+      # run itself crashes partway through. `continue-on-error` so a transient dispatch
+      # failure doesn't skip this run's own warming — worst case then is just one relay link
+      # falling back to the `schedule` safety net above.
+      - name: Queue the next relay run
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run warm-cache.yml --repo ${{ github.repository }}
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      # Loops for ~5h40m so consecutive runs overlap even if the next scheduled restart
-      # above is itself delayed — 340 minutes leaves a 10-minute margin under the 350-minute
-      # job timeout for the final iteration plus cleanup.
+      # Loops for ~5h40m — 340 minutes leaves a 10-minute margin under the 350-minute job
+      # timeout for the final iteration plus cleanup, and under that the relay queued above
+      # takes over immediately.
       #
       # `timeout 60` is a second line of defense on top of the per-request abort signal
       # inside warm-cache.mjs itself: the first live run hung for 2.5+ hours with zero
